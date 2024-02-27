@@ -1,1 +1,1 @@
-print("yHIS WORKS beans")  
+print("yHIS WORKS beans 200000")  
