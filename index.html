@@ -20,10 +20,7 @@
             }
 
             .container {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                margin: auto;
                 padding: 80px 80px 40px 80px;
                 border-radius: 25px;
                 border: 2px solid #AAAAAA;
@@ -58,10 +55,8 @@
             }
 
             .signup-link {
-                margin-top: 20px;
-                font-size: 14px;
+                margin-top: 40px;
                 text-align: center;
-                padding-top:20px;
                 font-size: 20px;
             }
 
@@ -78,11 +73,23 @@
                     width: 60%;
                     padding: 40px;
                 }
+
+                .container label {
+                    font-size: 16px;
+                }
             }
 
             @media screen and (max-width: 600px) {
-                .button {
+                button {
                     font-size: 20px;
+                }
+
+                .container h1 {
+                    font-size: 36px;
+                }
+
+                .signup-link {
+                    font-size: 16px;
                 }
             }
         </style>
