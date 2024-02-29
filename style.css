@@ -1,7 +1,19 @@
 body {
-    font-family: varela round, sans-serif;
+    font-family: varela round, sans-serif !important;
     font-size: 20px;
     color: black;
     background-color: #F1EAE6;
     margin: 0;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background: #4971FF;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    font-family: varela round, sans-serif !important;
 }
