@@ -76,29 +76,42 @@
             .form-group {
                 margin-bottom: 20px;
             }
-
-            @media screen and (max-width: 1000px) {
-                .container {
-                    width: 60%;
-                }
-            }
         </style>
     </head>
     <body>
         <div class="banner"></div>
         <div class="container">
-            <h1><b>Login</b></h1>
+            <h1><b>Sign Up</b></h1>
             <form action="login.php" method="post">
                 <div class="form-group">
-                    <label for="username">Email or Username</label>
+                    <label for="username">Email</label>
+                    <input type="text" name="email" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="username"> Re-Enter Email</label>
+                    <input type="text" name="reEmail" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="username"> Username</label>
                     <input type="text" name="username" id="username" class="form-control" required>
+                    <p><b>Username must:</b></p>
+                    <p>* Contain 5-20 characters</p>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control" required>
+                    <p><b>Password must:</b></p>
+                    <p>* Contain 8-30 characters</p>
+                    <p>* Contain both lower and upper case</p>
+                    <p>* Contain atleast 1 number</p>
+                    <p>* Contain atleast 1 special character</p>
+                </div>
+                <div class="form-group">
+                    <label for="username"> Re-Enter Password</label>
+                    <input type="text" name="rePassword" id="username" class="form-control" required>
                 </div>
                 <button type="submit" class="btn-primary">Login</button>
-                <div class="signup-link">Not a member? <a href="signup.html">Sign up</a></div>
+                <div class="signup-link">Already a member? <a href="index.html">Login</a></div>
             </form>
         </div>
     </body>
