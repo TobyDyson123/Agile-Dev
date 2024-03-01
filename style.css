@@ -17,3 +17,7 @@ body {
     width: 100%;
     font-family: varela round, sans-serif !important;
 }
+
+.btn-primary:hover {
+    color: lightgrey;
+}
