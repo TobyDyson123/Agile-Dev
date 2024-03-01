@@ -21,3 +21,76 @@ body {
 .btn-primary:hover {
     color: lightgrey;
 }
+
+.title {
+    width: 100%;
+    background: url('backgroundNice.png') repeat center center/cover;
+    background-size: 350px;
+    padding: 6vh 0;
+    text-align: center;
+    border-bottom: 1px solid #797979;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 70px;
+}
+
+.sidebar {
+    height: 100vh;
+    /* width: 300px; */
+    width: 21%;
+    position: fixed;
+    background-color: #7552F2;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1; /* Take up available space */
+}
+
+.sidebar-content a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    padding:20px;
+    margin-left:20px;
+    margin-right:20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.sidebar a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar a:hover:not(.active), .logout-section a:hover {
+    background-color: rgba(85,56,168,0.5);
+}
+
+.logout-section {
+    padding-bottom: 20px;
+    flex-grow: 0; /* Do not grow */
+}
+
+.content {
+    margin-left: 20vw;;
+    min-height: 100vh;
+}
+
+.sidebar-content .active {
+    background-color: #5538A8;
+}

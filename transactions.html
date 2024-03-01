@@ -1,122 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <style>
-          .banner {
-                position: absolute;
-                width: 100%;
-                height: 50%;
-                top: 0;
-                background: #7552F2;
-                transform: skewY(5deg);
-                transform-origin: top right;
-                z-index: -1;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome CDN -->
+    <style>
+        .history-container {
+            width: 90%;
+            padding: 30px;
+            margin: 30px auto;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
 
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-            }
+        .transactions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-            .container {
-                padding: 80px 80px 40px 80px;
-                border-radius: 25px;
-                border: 2px solid #AAAAAA;
-                -webkit-box-shadow: 6px 5px 12px 3px rgba(0,0,0,0.3);
-                -moz-box-shadow: 6px 5px 12px 3px rgba(0,0,0,0.3);
-                box-shadow: 6px 5px 12px 3px rgba(0,0,0,0.3);
-                background: #FAFAFA;
-                width: 600px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-bottom: 10%;
-                margin-top: 10%;
-            }
-            
-            .container input {
-                width: 100%;
-                padding: 10px;
-                margin: 10px 0;
-                border-radius: 5px;
-                border: 1px solid #AAAAAA;
-                box-sizing: border-box;
-                margin-top: 0;
-            }
+        .transaction-item {
+            /* background-color: #BDCAF2; */
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-            .container h1 {
-                margin: 0;
-                margin-bottom: 30px;
-                text-align: center;
-            }
+        .transaction-item h3 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
 
-            form {
-                width: 100%;
-            }
+        .transaction-item p {
+            margin: 0;
+            font-size: 18px;
+        }
 
-            .signup-link {
-                margin-top: 20px;
-                font-size: 14px;
-                text-align: center;
-                padding-top:20px;
-                font-size: 20px;
-            }
+        .transaction-item .amount {
+            position: absolute;
+            right: 50px;
+            bottom: 50%;
+            transform: translateY(50%);
+        }
 
-            button {
-                font-size: 25px;
-                color: red;
-            }
+        .transaction-icon {
+            background-color: blue;
+            padding: 20px;
+            border-radius: 50%;
+            width: 50px; 
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
+        }
 
-            .form-group {
-                margin-bottom: 20px;
-            }
-            
-        </style>
-    </head>
-    <body>
-        <div class="banner"></div>
-        <div class="container">
-            <h1><b>Will be transactions</b></h1>
-            <form action="login.php" method="post">
-                <div class="form-group">
-                    <label for="username">Email</label>
-                    <input type="text" name="email" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="username"> Re-Enter Email</label>
-                    <input type="text" name="reEmail" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="username"> Username</label>
-                    <input type="text" name="username" id="username" class="form-control" required>
-                    <p><b>Username must:</b></p>
-                    <p>* Contain 5-20 characters</br></br></p>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                    <p><b>Password must:</b></p>
-                    <p>* Contain 8-30 characters</p>
-                    <p>* Contain both lower and upper case</p>
-                    <p>* Contain atleast 1 number</p>
-                    <p>* Contain atleast 1 special character</br></br></p>
-                </div>
-                <div class="form-group">
-                    <label for="rePassword"> Re-Enter Password</label>
-                    <input type="text" name="rePassword" id="rePassword" class="form-control" required>
-                </div>
-                <button type="submit" class="btn-primary">Login</button>
-                <div class="signup-link">Already a member? <a href="index.html">Login</a></div>
-            </form>
+        .transaction-icon i {
+            color: white;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+            <a href="#" class="active"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            <a href="#"><i class="fas fa-chart-bar"></i> Insights</a>
+            <a href="#"><i class="fas fa-bell"></i> Reminders</a>
         </div>
-    </body>
+        <div class="logout-section">
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="title">
+            <h1>Transactions</h1>
+        </div>
+        <div class="content-container">
+            <div class="history-container">
+                <h2>Transaction History</h2>
+                <div class="transactions">
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Utilities</h3>
+                            <p>Comment</p>
+                            <span class="amount">+£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Leisure</h3>
+                            <p>Comment</p>
+                            <span class="amount">-£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-subway"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Transporation</h3>
+                            <p>Comment</p>
+                            <span class="amount">+£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Subscriptions</h3>
+                            <p>Comment</p>
+                            <span class="amount">-£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Shopping</h3>
+                            <p>Comment</p>
+                            <span class="amount">+£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Debt</h3>
+                            <p>Comment</p>
+                            <span class="amount">-£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Entertainment</h3>
+                            <p>Comment</p>
+                            <span class="amount">+£5.00</span>
+                        </div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h3>Custom Category</h3>
+                            <p>Comment</p>
+                            <span class="amount">+£5.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+</body>
 </html>
