@@ -39,8 +39,8 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                margin-bottom: 10%;
-                margin-top: 10%;
+                margin-bottom: 10vh;
+                margin-top: 10vh;
             }
             
             .container input {
@@ -79,7 +79,35 @@
             .form-group {
                 margin-bottom: 20px;
             }
+
+            @media screen and (max-width: 1000px) {
+                .container {
+                    width: 60%;
+                    padding: 40px;
+                }
+
+                .container label {
+                    font-size: 16px;
+                }
+
+                .container p {
+                    font-size: 16px;
+                }
+            }
             
+            @media screen and (max-width: 600px) {
+                button {
+                    font-size: 20px;
+                }
+
+                .container h1 {
+                    font-size: 36px;
+                }
+
+                .signup-link {
+                    font-size: 16px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -114,7 +142,7 @@
                     <label for="rePassword"> Re-Enter Password</label>
                     <input type="text" name="rePassword" id="rePassword" class="form-control" required>
                 </div>
-                <button type="submit" class="btn-primary">Login</button>
+                <button type="submit" class="btn-primary">Sign up</button>
                 <div class="signup-link">Already a member? <a href="index.html">Login</a></div>
             </form>
         </div>
