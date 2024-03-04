@@ -208,6 +208,7 @@
 
             #apply-filter {
                 font-size: 20px;
+                font-weight: bold;
             }
 
             #reset-filters {
@@ -342,21 +343,21 @@
             <div class="filter-container">
                 <span id="close-filter">&times;</span>
                 <h2>Filters</h2>
-                <div class="filter-form">
+                <form action="transactions.php" method="get" class="filter-form">
                     <div class="filter-group">
                         <label>By Transaction Direction <button id="reset-filters" type="button">Reset Filters</button></label>
                         <div class="toggle-container">
                             <span class="toggle-label" style="margin-right: 10px;">In</span>
-                            <label class="switch">
-                                <input type="checkbox">
+                            <label class="switch" for="type">
+                                <input type="toggle" name="type">
                                 <span class="slider round"></span>
                             </label>
                             <span class="toggle-label" style="margin-left: 10px;">Out</span>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <label>By Category</label>
-                        <select id="category-filter">
+                        <label for="category">By Category</label>
+                        <select id="category-filter" name="category">
                             <!-- Dynamically populated options -->
                             <?php foreach($categories as $category): ?>
                                 <option value="<?php echo htmlspecialchars($category['title']); ?>">
@@ -366,8 +367,8 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>By Month</label>
-                        <select id="month-filter">
+                        <label for="month">By Month</label>
+                        <select name="month" id="month-filter">
                             <option>January</option>
                             <option>February</option>
                             <option>March</option>
@@ -382,8 +383,8 @@
                             <option>December</option>
                         </select>
                     </div>
-                    <button id="apply-filter" class="btn-primary" type="button">Filter</button>
-                </div>
+                    <button type="submit" id="apply-filter" class="btn-primary" type="button">Apply Filters</button>
+                </form>
             </div>
         </div>
 
