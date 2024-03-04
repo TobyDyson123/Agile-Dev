@@ -22,7 +22,8 @@ CREATE TABLE User (
 CREATE TABLE Category (
     categoryID INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    colour VARCHAR(255) NOT NULL
+    colour VARCHAR(255) NOT NULL,
+    icon VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE CustomCategory (
@@ -74,3 +75,28 @@ CREATE TABLE TransactionNotes (
 );
 
 INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass', 'test@email.com');
+
+INSERT INTO Category (title, colour, icon) VALUES ('Utilities', '#F38F98', 'fas fa-lightbulb');
+INSERT INTO Category (title, colour, icon) VALUES ('Leisure', '#9D8A8B', 'fas fa-smile');
+INSERT INTO Category (title, colour, icon) VALUES ('Transporation', '#9980F2', 'fas fa-subway');
+INSERT INTO Category (title, colour, icon) VALUES ('Subscriptions', '#8FD0F2', 'fas fa-sync');
+INSERT INTO Category (title, colour, icon) VALUES ('Shopping', '#54D19F', 'fas fa-shopping-cart');
+INSERT INTO Category (title, colour, icon) VALUES ('Debt', '#B354D1', 'fas fa-credit-card');
+INSERT INTO Category (title, colour, icon) VALUES ('Entertainment', '#F0BE68', 'fas fa-film');
+
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 1, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 2, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 3, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 4, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 5, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 6, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 7, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 1, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 2, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 3, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 4, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 5, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 6, "Comment", 'in', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 7, "Comment", 'out', 5.00);
+
+INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');
