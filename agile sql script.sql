@@ -72,3 +72,5 @@ CREATE TABLE TransactionNotes (
     isOn BOOLEAN NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
+
+INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass', 'test@email.com');
