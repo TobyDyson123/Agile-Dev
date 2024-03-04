@@ -14,18 +14,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form
-    $myusername = mysqli_real_escape_string($conn, $_GET['username']);
-    $mypassword = $_GET['password']; // Note: In a secure application, use POST instead.
+    $myusername = mysqli_real_escape_string($conn, $_POST['username']);
+    $mypassword = $_POST['password']; // Password as plain text; in development only.
 
-    $sql = "SELECT userID, password FROM your_table_name WHERE username = '$myusername'";
+    $sql = "SELECT userID, password FROM User WHERE username = '$myusername'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
         // output data of each row
         $row = $result->fetch_assoc();
-        if (password_verify($mypassword, $row['password'])) {
+        if ($mypassword == $row['password']) { // Directly comparing the plaintext passwords.
             // Password is correct, so start a new session
             $_SESSION['login_user'] = $myusername; // store the username
             $_SESSION['userID'] = $row['userID']; // store the userID
