@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-04T13:17:29.215Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="LkPqeafhtboafYuZtOhl" version="23.1.8" type="device">
+<mxfile host="app.diagrams.net" modified="2024-03-04T13:25:30.715Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="SWdhC4IzoOnL5OrpII7X" version="23.1.8" type="device">
   <diagram name="Page-1" id="wEBW8owSnB6sSajoJD6v">
     <mxGraphModel dx="1615" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -107,7 +107,7 @@
         <mxCell id="aH8ZkH3Hv7XbcANuXXBe-36" value="+ userID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aH8ZkH3Hv7XbcANuXXBe-35">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="aH8ZkH3Hv7XbcANuXXBe-37" value="+ choice" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aH8ZkH3Hv7XbcANuXXBe-35">
+        <mxCell id="aH8ZkH3Hv7XbcANuXXBe-37" value="+ isOn" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aH8ZkH3Hv7XbcANuXXBe-35">
           <mxGeometry y="90" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="aH8ZkH3Hv7XbcANuXXBe-41" value="+ monthlyBudget" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aH8ZkH3Hv7XbcANuXXBe-35">

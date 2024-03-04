@@ -39,7 +39,7 @@ CREATE TABLE Transaction (
     categoryID INT,
     customCategoryID INT,
     comment TEXT,
-    type ENUM('credit', 'debit') NOT NULL,
+    type ENUM('in', 'out') NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID),
     FOREIGN KEY (categoryID) REFERENCES Category(categoryID),
@@ -61,7 +61,7 @@ CREATE TABLE SpendingGoals (
 CREATE TABLE BudgetReminder (
     budgetReminderID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
-    choice ENUM('daily', 'weekly', 'monthly') NOT NULL,
+	isOn BOOLEAN NOT NULL,
     monthlyBudget DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
