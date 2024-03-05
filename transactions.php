@@ -349,7 +349,7 @@
                         <div class="toggle-container">
                             <span class="toggle-label" style="margin-right: 10px;">In</span>
                             <label class="switch" for="type">
-                                <input type="toggle" name="type">
+                                <input type="checkbox" name="type">
                                 <span class="slider round"></span>
                             </label>
                             <span class="toggle-label" style="margin-left: 10px;">Out</span>
