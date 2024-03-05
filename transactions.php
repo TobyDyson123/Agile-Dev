@@ -64,7 +64,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title>Transactions</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
@@ -348,10 +348,13 @@
                         <label>By Transaction Direction <button id="reset-filters" type="button">Reset Filters</button></label>
                         <div class="toggle-container">
                             <span class="toggle-label" style="margin-right: 10px;">In</span>
-                            <label class="switch" for="type">
-                                <input type="checkbox" name="type">
-                                <span class="slider round"></span>
-                            </label>
+                            <div class="toggle-container">
+                                <label class="switch">
+                                    <input type="checkbox" id="type-toggle" class="type-toggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <input type="hidden" id="type" name="type" value="in"> <!-- Hidden field to hold the actual value -->
                             <span class="toggle-label" style="margin-left: 10px;">Out</span>
                         </div>
                     </div>
@@ -404,6 +407,34 @@
 
             // Event listener for the close button
             document.getElementById('close-filter').addEventListener('click', closeFilter);
+
+            // Function to update the hidden input based on the toggle state
+            document.addEventListener('DOMContentLoaded', function() {
+                var checkbox = document.getElementById('type-toggle');
+                var hiddenInput = document.getElementById('type');
+
+                checkbox.addEventListener('change', function() {
+                    if(this.checked) {
+                        hiddenInput.value = 'out';
+                    } else {
+                        hiddenInput.value = 'in';
+                    }
+                });
+            });
+
+            document.getElementById('reset-filters').addEventListener('click', function() {
+                // Reset the form fields to their default values
+                document.querySelector('.filter-form').reset();
+
+                // Reset the hidden input for the transaction type
+                document.getElementById('type').value = 'in';
+
+                // Ensure the toggle reflects the 'out' state
+                document.getElementById('type-toggle').checked = false;
+
+                // Manually change the window's location to the current page without query parameters
+                window.location.href = window.location.href.split('?')[0];
+            });
         </script>
 
 
