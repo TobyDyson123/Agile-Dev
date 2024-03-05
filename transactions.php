@@ -225,73 +225,22 @@
                 font-family: valera round, sans-serif;
             }
 
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-
-            .switch input { 
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #00FF49;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            input:checked + .slider {
-                background-color: #FF0000;
-            }
-
-            input:focus + .slider {
-                box-shadow: 0 0 1px #2196F3;
-            }
-
-            input:checked + .slider:before {
-                -webkit-transform: translateX(26px);
-                -ms-transform: translateX(26px);
-                transform: translateX(26px);
-            }
-
-            .slider.round {
-                border-radius: 34px;
-            }
-
-            .slider.round:before {
-                border-radius: 50%;
-            }
-
-            .toggle-container {
+            .toggle-buttons {
                 display: flex;
-                align-items: center;
+                gap: 10px;
             }
-            
-            .toggle-label {
-                margin-bottom: 10px;
-                font-weight: bold;
+
+            .toggle-button {
+                padding: 10px 20px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+                cursor: pointer;
+            }
+
+            .toggle-button.active {
+                background-color: #007BFF;
+                color: #fff;
+                border-color: #007BFF;
             }
         </style>
     </head>
@@ -346,17 +295,13 @@
                 <form action="transactions.php" method="get" class="filter-form">
                     <div class="filter-group">
                         <label>By Transaction Direction <button id="reset-filters" type="button">Reset Filters</button></label>
-                        <div class="toggle-container">
-                            <span class="toggle-label" style="margin-right: 10px;">In</span>
-                            <div class="toggle-container">
-                                <label class="switch">
-                                    <input type="checkbox" id="type-toggle" class="type-toggle">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <input type="hidden" id="type" name="type" value="in"> <!-- Hidden field to hold the actual value -->
-                            <span class="toggle-label" style="margin-left: 10px;">Out</span>
+                        <div class="toggle-buttons">
+                            <button type="button" id="any-button" class="toggle-button active" data-type="any">Any</button>
+                            <button type="button" id="in-button" class="toggle-button" data-type="in">In</button>
+                            <button type="button" id="out-button" class="toggle-button" data-type="out">Out</button>
                         </div>
+                        <!-- Hidden input to store the transaction type -->
+                        <input type="hidden" id="transaction-type" name="transactionType" value="any">
                     </div>
                     <div class="filter-group">
                         <label for="category">By Category</label>
@@ -408,35 +353,31 @@
             // Event listener for the close button
             document.getElementById('close-filter').addEventListener('click', closeFilter);
 
-            // Function to update the hidden input based on the toggle state
-            document.addEventListener('DOMContentLoaded', function() {
-                var checkbox = document.getElementById('type-toggle');
-                var hiddenInput = document.getElementById('type');
+            // Handle toggle button clicks
+            var toggleButtons = document.querySelectorAll('.toggle-button');
+            var hiddenInput = document.getElementById('transaction-type');
 
-                checkbox.addEventListener('change', function() {
-                    if(this.checked) {
-                        hiddenInput.value = 'out';
-                    } else {
-                        hiddenInput.value = 'in';
-                    }
+            toggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    toggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                    hiddenInput.value = button.getAttribute('data-type');
                 });
             });
 
+            // Event listener for the reset button
             document.getElementById('reset-filters').addEventListener('click', function() {
                 // Reset the form fields to their default values
                 document.querySelector('.filter-form').reset();
-
-                // Reset the hidden input for the transaction type
-                document.getElementById('type').value = 'in';
-
-                // Ensure the toggle reflects the 'out' state
-                document.getElementById('type-toggle').checked = false;
+                
+                // Reset the toggle buttons
+                toggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                document.getElementById('any-button').classList.add('active');
+                hiddenInput.value = 'any';
 
                 // Manually change the window's location to the current page without query parameters
                 window.location.href = window.location.href.split('?')[0];
             });
         </script>
-
-
     </body>
     </html>

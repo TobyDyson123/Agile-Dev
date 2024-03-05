@@ -41,13 +41,12 @@ body {
     /* width: 300px; */
     width: 21%;
     position: fixed;
-    /* background-color: #7552F2; */
-    background-color: #000000;
+    background-color: #7552F2;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 10px solid #797979;
+    border-right: 1px solid #797979;
 }
 
 .sidebar-content {
