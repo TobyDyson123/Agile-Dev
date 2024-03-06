@@ -187,7 +187,7 @@
                 width: 100%; 
                 height: 100%; 
                 background: rgba(0,0,0,0.5); 
-                z-index: 1000;
+                z-index: 9999;
             }
 
             .filter-container {
@@ -284,6 +284,21 @@
                 #edit-transaction span {
                     display: none;
                 }
+
+                .filter-form {
+                    margin-top: 60px;
+                }
+
+                #reset-filters {
+                    left: -10px;
+                    right: unset;
+                    top: -50px;
+                }
+
+                .filter-container {
+                    width: 60%;
+                    padding: 40px;
+                }
             }
 
             @media screen and (max-width: 768px) {
@@ -361,7 +376,7 @@
             <div class="content-container">
                 <div class="main-content">
                     <div class="transaction-container">
-                        <button class="btn-primary "id="edit-transaction"><span>Manage Transactions</span><i class="fas fa-wrench"></i></button>
+                        <button href="manage-transactions.php" class="btn-primary "id="edit-transaction"><span>Manage Transactions</span><i class="fas fa-wrench"></i></button>
                         <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
                         <div class="transactions">
                             <?php if (count($transactions) > 0): ?>
