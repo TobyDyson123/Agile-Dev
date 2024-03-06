@@ -45,9 +45,20 @@
         $params[] = $categoryFilter;
     }
 
+    // Define the current year and month
+    $currentYear = date('Y');
+    $currentMonth = date('n'); // Numeric representation of the current month (1-12)
+
     if (!empty($monthFilter) && $monthFilter != 'All') {
-        $sql .= " AND MONTH(Transaction.date) = ?";
-        $params[] = date('n', strtotime($monthFilter . " 1"));
+        $selectedMonthNum = date('n', strtotime($monthFilter . " 1")); // Numeric representation of the selected month
+
+        // Determine the year for the query
+        $queryYear = $selectedMonthNum <= $currentMonth ? $currentYear : $currentYear - 1;
+
+        // Append the month and year condition to the SQL query
+        $sql .= " AND MONTH(Transaction.date) = ? AND YEAR(Transaction.date) = ?";
+        $params[] = $selectedMonthNum;
+        $params[] = $queryYear;
     }
 
     $stmt = $conn->prepare($sql);
