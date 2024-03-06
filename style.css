@@ -99,7 +99,7 @@ body {
 }
 
 .main-content {
-    width: 90%;
+    width: 85%;
     padding: 30px;
     margin: 30px auto;
     border-radius: 25px;
@@ -111,5 +111,35 @@ body {
 @media screen and (max-width: 1500px) {
     .content {
         margin-left: 300px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .sidebar a {
+        display: flex;
+        justify-content: center; /* Center the icon */
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 15px;
+    }
+
+    .sidebar a i {
+        margin-right: 0; /* Remove space between icon and text */
+    }
+
+    .sidebar a span {
+        display: none;
+    }
+
+    .sidebar {
+        width: 75px;
+    }
+
+    .content {
+        margin-left: 75px;
+    }
+
+    .sidebar-content a:not(:last-child) {
+        margin-bottom: 20px;
     }
 }

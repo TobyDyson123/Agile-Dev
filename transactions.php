@@ -112,6 +112,10 @@
                 gap: 20px;
             }
 
+            .main-content {
+                padding-left: 50px;
+            }
+
             .transaction-item {
                 /* background-color: #BDCAF2; */
                 position: relative;
@@ -273,13 +277,13 @@
 
         <div class="sidebar">
             <div class="sidebar-content">
-                <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
-                <a href="#" class="active"><i class="fas fa-exchange-alt"></i> Transactions</a>
-                <a href="#"><i class="fas fa-chart-bar"></i> Insights</a>
-                <a href="#"><i class="fas fa-bell"></i> Reminders</a>
+                <a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+                <a href="#" class="active"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
+                <a href="#"><i class="fas fa-chart-bar"></i> <span>Insights</span></a>
+                <a href="#"><i class="fas fa-bell"></i> <span>Reminders</span></a>
             </div>
             <div class="logout-section">
-                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
             </div>
         </div>
 
