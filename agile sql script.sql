@@ -42,6 +42,7 @@ CREATE TABLE Transaction (
     comment TEXT,
     type ENUM('in', 'out') NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
+    date DATE NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID),
     FOREIGN KEY (categoryID) REFERENCES Category(categoryID),
     FOREIGN KEY (customCategoryID) REFERENCES CustomCategory(customCategoryID)
@@ -84,19 +85,19 @@ INSERT INTO Category (title, colour, icon) VALUES ('Shopping', '#54D19F', 'fas f
 INSERT INTO Category (title, colour, icon) VALUES ('Debt', '#B354D1', 'fas fa-credit-card');
 INSERT INTO Category (title, colour, icon) VALUES ('Entertainment', '#F0BE68', 'fas fa-film');
 
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 1, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 2, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 3, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 4, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 5, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 6, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 7, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 1, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 2, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 3, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 4, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 5, "Comment", 'out', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 6, "Comment", 'in', 5.00);
-INSERT INTO Transaction (userID, categoryID, comment, type, amount) VALUES (1, 7, "Comment", 'out', 5.00);
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 5.00, '2024-01-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'out', 5.00, '2023-01-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'in', 5.00, '2024-02-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 4, "Comment", 'out', 5.00, '2023-02-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'in', 5.00, '2024-03-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'out', 5.00, '2023-03-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 7, "Comment", 'in', 5.00, '2023-12-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 5.00, '2023-11-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'in', 5.00, '2023-10-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'out', 5.00, '2023-09-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 4, "Comment", 'in', 5.00, '2023-08-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'out', 5.00, '2023-07-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'in', 5.00, '2023-06-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 7, "Comment", 'out', 5.00, '2023-05-01');
 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');

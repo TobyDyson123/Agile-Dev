@@ -22,13 +22,37 @@
 
     // Get transactions for the logged in user
     $userId = $_SESSION["userID"];
+    $transactionType = isset($_GET['transactionType']) ? $_GET['transactionType'] : '';
+    $categoryFilter = isset($_GET['category']) ? $_GET['category'] : '';
+    $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
+
+    // Start building the SQL query
     $sql = "SELECT Transaction.*, Category.title, Category.colour, Category.icon
             FROM Transaction 
             LEFT JOIN Category ON Transaction.categoryID = Category.categoryID
             WHERE Transaction.userID = ?";
 
+    // Initialize parameters array with the userID
+    $params = array($userId);
+
+    if (!empty($transactionType) && in_array($transactionType, ['in', 'out'])) {
+        $sql .= " AND Transaction.type = ?";
+        $params[] = $transactionType;
+    }
+
+    if (!empty($categoryFilter) && $categoryFilter != 'All') {
+        $sql .= " AND Category.title = ?";
+        $params[] = $categoryFilter;
+    }
+
+    if (!empty($monthFilter) && $monthFilter != 'All') {
+        $sql .= " AND MONTH(Transaction.date) = ?";
+        $params[] = date('n', strtotime($monthFilter . " 1"));
+    }
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
+    $types = str_repeat("s", count($params)); // s for string types
+    $stmt->bind_param($types, ...$params);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -273,7 +297,7 @@
                                     <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
                                 </div>
                                 <div class="transaction-details">
-                                    <h3><?php echo htmlspecialchars($transaction['title']); ?></h3>
+                                    <h3><?php echo htmlspecialchars($transaction['title']); echo htmlspecialchars($transaction['date']);?></h3>
                                     <p><?php echo htmlspecialchars($transaction['comment']); ?></p>
                                     <span class="amount" style="color: <?php echo $transaction['type'] == 'in' ? '#00960F' : '#890901'; ?>">
                                         <?php echo $transaction['type'] == 'in' ? '+' : '-'; ?>£<?php echo htmlspecialchars(number_format($transaction['amount'], 2)); ?>
@@ -306,6 +330,7 @@
                     <div class="filter-group">
                         <label for="category">By Category</label>
                         <select id="category-filter" name="category">
+                            <option>All</option>
                             <!-- Dynamically populated options -->
                             <?php foreach($categories as $category): ?>
                                 <option value="<?php echo htmlspecialchars($category['title']); ?>">
@@ -317,6 +342,7 @@
                     <div class="filter-group">
                         <label for="month">By Month</label>
                         <select name="month" id="month-filter">
+                            <option>All</option>
                             <option>January</option>
                             <option>February</option>
                             <option>March</option>
@@ -340,6 +366,7 @@
             // Function to open the filter overlay
             function openFilter() {
                 document.getElementById('filter-overlay').style.display = 'block';
+                loadFilterState();
             }
 
             // Function to close the filter overlay
@@ -347,13 +374,47 @@
                 document.getElementById('filter-overlay').style.display = 'none';
             }
 
-            // Event listener for the filter icon
-            document.getElementById('filter').addEventListener('click', openFilter);
+            // Save the current state of the filter to local storage
+            function saveFilterState() {
+                const transactionType = document.getElementById('transaction-type').value;
+                const category = document.getElementById('category-filter').value;
+                const month = document.getElementById('month-filter').value;
+                
+                localStorage.setItem('transactionType', transactionType);
+                localStorage.setItem('category', category);
+                localStorage.setItem('month', month);
+            }
 
-            // Event listener for the close button
+            // Load the filter state from local storage
+            function loadFilterState() {
+                const savedTransactionType = localStorage.getItem('transactionType');
+                const savedCategory = localStorage.getItem('category');
+                const savedMonth = localStorage.getItem('month');
+
+                if (savedTransactionType) {
+                    document.getElementById('transaction-type').value = savedTransactionType;
+                    document.querySelectorAll('.toggle-button').forEach(button => {
+                        if (button.getAttribute('data-type') === savedTransactionType) {
+                            button.classList.add('active');
+                        } else {
+                            button.classList.remove('active');
+                        }
+                    });
+                }
+
+                if (savedCategory) {
+                    document.getElementById('category-filter').value = savedCategory;
+                }
+
+                if (savedMonth) {
+                    document.getElementById('month-filter').value = savedMonth;
+                }
+            }
+
+            document.getElementById('filter').addEventListener('click', openFilter);
             document.getElementById('close-filter').addEventListener('click', closeFilter);
 
-            // Handle toggle button clicks
+            // Update toggle buttons and hidden input on click
             var toggleButtons = document.querySelectorAll('.toggle-button');
             var hiddenInput = document.getElementById('transaction-type');
 
@@ -362,22 +423,28 @@
                     toggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
                     button.classList.add('active');
                     hiddenInput.value = button.getAttribute('data-type');
+                    saveFilterState();
                 });
             });
 
-            // Event listener for the reset button
+            // Reset button functionality
             document.getElementById('reset-filters').addEventListener('click', function() {
-                // Reset the form fields to their default values
                 document.querySelector('.filter-form').reset();
-                
-                // Reset the toggle buttons
                 toggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
                 document.getElementById('any-button').classList.add('active');
                 hiddenInput.value = 'any';
-
-                // Manually change the window's location to the current page without query parameters
+                localStorage.removeItem('transactionType');
+                localStorage.removeItem('category');
+                localStorage.removeItem('month');
                 window.location.href = window.location.href.split('?')[0];
             });
+
+            // Add event listener for changes in the category and month filters
+            document.getElementById('category-filter').addEventListener('change', saveFilterState);
+            document.getElementById('month-filter').addEventListener('change', saveFilterState);
+
+            // Load the filter state when the page loads
+            window.onload = loadFilterState;
         </script>
     </body>
     </html>
