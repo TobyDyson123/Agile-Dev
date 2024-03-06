@@ -291,21 +291,24 @@
                     <button class="btn-primary "id="edit-transaction">Edit Transaction</button>
                     <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
                     <div class="transactions">
-                        <?php foreach($transactions as $transaction): ?>
-                            <div class="transaction-item">
-                                <div class="transaction-icon" style="background-color: <?php echo htmlspecialchars($transaction['colour']); ?>">
-                                    <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
+                        <?php if (count($transactions) > 0): ?>
+                            <?php foreach ($transactions as $transaction): ?>
+                                <div class="transaction-item">
+                                    <div class="transaction-icon" style="background-color: <?php echo htmlspecialchars($transaction['colour']); ?>">
+                                        <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h3><?php echo htmlspecialchars($transaction['title']) . htmlspecialchars($transaction['date']); ?></h3>
+                                        <p><?php echo htmlspecialchars($transaction['comment']); ?></p>
+                                        <span class="amount" style="color: <?php echo $transaction['type'] == 'in' ? '#00960F' : '#890901'; ?>">
+                                            <?php echo $transaction['type'] == 'in' ? '+' : '-'; ?>£<?php echo htmlspecialchars(number_format($transaction['amount'], 2)); ?>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="transaction-details">
-                                    <h3><?php echo htmlspecialchars($transaction['title']); echo htmlspecialchars($transaction['date']);?></h3>
-                                    <p><?php echo htmlspecialchars($transaction['comment']); ?></p>
-                                    <span class="amount" style="color: <?php echo $transaction['type'] == 'in' ? '#00960F' : '#890901'; ?>">
-                                        <?php echo $transaction['type'] == 'in' ? '+' : '-'; ?>£<?php echo htmlspecialchars(number_format($transaction['amount'], 2)); ?>
-                                    </span>
-
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p style="color: red;">There are no transactions to display. Please consider making a transaction :D</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>  
@@ -320,12 +323,12 @@
                     <div class="filter-group">
                         <label>By Transaction Direction <button id="reset-filters" type="button">Reset Filters</button></label>
                         <div class="toggle-buttons">
-                            <button type="button" id="any-button" class="toggle-button active" data-type="any">Any</button>
+                            <button type="button" id="all-button" class="toggle-button active" data-type="all">All</button>
                             <button type="button" id="in-button" class="toggle-button" data-type="in">In</button>
                             <button type="button" id="out-button" class="toggle-button" data-type="out">Out</button>
                         </div>
                         <!-- Hidden input to store the transaction type -->
-                        <input type="hidden" id="transaction-type" name="transactionType" value="any">
+                        <input type="hidden" id="transaction-type" name="transactionType" value="all">
                     </div>
                     <div class="filter-group">
                         <label for="category">By Category</label>
@@ -431,8 +434,8 @@
             document.getElementById('reset-filters').addEventListener('click', function() {
                 document.querySelector('.filter-form').reset();
                 toggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
-                document.getElementById('any-button').classList.add('active');
-                hiddenInput.value = 'any';
+                document.getElementById('all-button').classList.add('active');
+                hiddenInput.value = 'all';
                 localStorage.removeItem('transactionType');
                 localStorage.removeItem('category');
                 localStorage.removeItem('month');
