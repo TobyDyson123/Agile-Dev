@@ -175,6 +175,10 @@
                 font-weight: bold;
             }
 
+            #edit-transaction i {
+                display: none;
+            }
+
             #filter-overlay {
                 display: none; 
                 position: fixed; 
@@ -271,11 +275,74 @@
                 color: #fff;
                 border-color: #007BFF;
             }
+
+            @media screen and (max-width: 900px) {
+                #edit-transaction i {
+                    display: block;
+                }
+
+                #edit-transaction span {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                .transaction-container h2 {
+                    font-size: 24px;
+                }
+
+                #edit-transaction {
+                    top: 15px;
+                    right: 20px;
+                    padding: 10px 30px;
+                }
+
+                .transaction-icon {
+                    width: 30px; 
+                    height: 30px;
+                }
+
+                .transaction-icon i {
+                    font-size: 35px;
+                }
+
+                .transaction-details h3 {
+                    font-size: 20px;
+                }
+
+                .transaction-details p {
+                    font-size: 16px;
+                }
+
+                .transaction-icon {
+                    margin-right: 30px;
+                }
+
+                .transaction-item .amount {
+                    right: 10px;
+                    font-size: 16px;
+                }
+
+                #filter {
+                    margin-left: 10px;
+                
+                }
+
+                .main-content {
+                    padding: 20px;
+                }
+            }
         </style>
     </head>
     <body>
+        <button class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </button>
 
         <div class="sidebar">
+            <button class="close-sidebar">
+                <i class="fas fa-times"></i>
+            </button>
             <div class="sidebar-content">
                 <a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
                 <a href="#" class="active"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
@@ -293,27 +360,29 @@
             </div>
             <div class="content-container">
                 <div class="main-content">
-                    <button class="btn-primary "id="edit-transaction">Edit Transaction</button>
-                    <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
-                    <div class="transactions">
-                        <?php if (count($transactions) > 0): ?>
-                            <?php foreach ($transactions as $transaction): ?>
-                                <div class="transaction-item">
-                                    <div class="transaction-icon" style="background-color: <?php echo htmlspecialchars($transaction['colour']); ?>">
-                                        <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
+                    <div class="transaction-container">
+                        <button class="btn-primary "id="edit-transaction"><span>Manage Transactions</span><i class="fas fa-wrench"></i></button>
+                        <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
+                        <div class="transactions">
+                            <?php if (count($transactions) > 0): ?>
+                                <?php foreach ($transactions as $transaction): ?>
+                                    <div class="transaction-item">
+                                        <div class="transaction-icon" style="background-color: <?php echo htmlspecialchars($transaction['colour']); ?>">
+                                            <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <h3><?php echo htmlspecialchars($transaction['title']);?></h3>
+                                            <p><?php echo htmlspecialchars($transaction['comment']); ?></p>
+                                            <span class="amount" style="color: <?php echo $transaction['type'] == 'in' ? '#00960F' : '#890901'; ?>">
+                                                <?php echo $transaction['type'] == 'in' ? '+' : '-'; ?>£<?php echo htmlspecialchars(number_format($transaction['amount'], 2)); ?>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="transaction-details">
-                                        <h3><?php echo htmlspecialchars($transaction['title']) . htmlspecialchars($transaction['date']); ?></h3>
-                                        <p><?php echo htmlspecialchars($transaction['comment']); ?></p>
-                                        <span class="amount" style="color: <?php echo $transaction['type'] == 'in' ? '#00960F' : '#890901'; ?>">
-                                            <?php echo $transaction['type'] == 'in' ? '+' : '-'; ?>£<?php echo htmlspecialchars(number_format($transaction['amount'], 2)); ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p style="color: red;">There are no transactions to display. Please consider making a transaction :D</p>
-                        <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p style="color: red;">There are no transactions to display. Please consider making a transaction :D</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>  
@@ -454,5 +523,6 @@
             // Load the filter state when the page loads
             window.onload = loadFilterState;
         </script>
+        <script src="script.js"></script>
     </body>
     </html>
