@@ -94,3 +94,13 @@ body {
 .sidebar-content .active {
     background-color: #5538A8;
 }
+
+.main-content {
+    width: 90%;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: white;
+    position: relative;
+}

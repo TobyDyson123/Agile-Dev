@@ -79,7 +79,7 @@ INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass
 
 INSERT INTO Category (title, colour, icon) VALUES ('Utilities', '#F38F98', 'fas fa-lightbulb');
 INSERT INTO Category (title, colour, icon) VALUES ('Leisure', '#9D8A8B', 'fas fa-smile');
-INSERT INTO Category (title, colour, icon) VALUES ('Transporation', '#9980F2', 'fas fa-subway');
+INSERT INTO Category (title, colour, icon) VALUES ('Transport', '#9980F2', 'fas fa-subway');
 INSERT INTO Category (title, colour, icon) VALUES ('Subscriptions', '#8FD0F2', 'fas fa-sync');
 INSERT INTO Category (title, colour, icon) VALUES ('Shopping', '#54D19F', 'fas fa-shopping-cart');
 INSERT INTO Category (title, colour, icon) VALUES ('Debt', '#B354D1', 'fas fa-credit-card');

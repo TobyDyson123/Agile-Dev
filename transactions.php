@@ -106,16 +106,6 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome CDN -->
         <style>
-            .history-container {
-                width: 90%;
-                padding: 30px;
-                margin: 30px auto;
-                border-radius: 25px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                background-color: white;
-                position: relative;
-            }
-
             .transactions {
                 display: flex;
                 flex-direction: column;
@@ -298,7 +288,7 @@
                 <h1>Transactions</h1>
             </div>
             <div class="content-container">
-                <div class="history-container">
+                <div class="main-content">
                     <button class="btn-primary "id="edit-transaction">Edit Transaction</button>
                     <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
                     <div class="transactions">
