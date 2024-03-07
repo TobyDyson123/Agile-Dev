@@ -237,6 +237,7 @@
                 border-radius: 5px;
                 border: 1px solid #ccc;
                 font-size: 20px;
+                font-family: varela round, sans-serif !important;
             }
 
             #apply-filter {
@@ -256,24 +257,6 @@
                 top: -10px;
                 font-weight: bold;
                 font-family: valera round, sans-serif;
-            }
-
-            .toggle-buttons {
-                display: flex;
-                gap: 10px;
-            }
-
-            .toggle-button {
-                padding: 10px 20px;
-                border: 1px solid #ccc;
-                background-color: #fff;
-                cursor: pointer;
-            }
-
-            .toggle-button.active {
-                background-color: #007BFF;
-                color: #fff;
-                border-color: #007BFF;
             }
 
             @media screen and (max-width: 900px) {
