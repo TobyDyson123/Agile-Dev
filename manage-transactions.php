@@ -123,7 +123,7 @@
                 /* border: red 1px solid; */
                 color: white;
                 padding: 5px 0;
-                transition: background-color 0.2s ease;
+                transition: background-color 0.15s ease;
             }
 
             .transaction-option.active {
