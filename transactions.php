@@ -359,10 +359,10 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="sidebar-content">
-                <a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
-                <a href="#" class="active"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
-                <a href="#"><i class="fas fa-chart-bar"></i> <span>Insights</span></a>
-                <a href="#"><i class="fas fa-bell"></i> <span>Reminders</span></a>
+                <a href="profile.php"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+                <a href="transactions.php" class="active"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
+                <a href="insights.php"><i class="fas fa-chart-bar"></i> <span>Insights</span></a>
+                <a href="reminders.php"><i class="fas fa-bell"></i> <span>Reminders</span></a>
             </div>
             <div class="logout-section">
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
@@ -376,7 +376,7 @@
             <div class="content-container">
                 <div class="main-content">
                     <div class="transaction-container">
-                        <button href="manage-transactions.php" class="btn-primary "id="edit-transaction"><span>Manage Transactions</span><i class="fas fa-wrench"></i></button>
+                        <a style="text-decoration: none;" href="manage-transactions.php" class="btn-primary "id="edit-transaction"><span>Manage Transactions</span><i class="fas fa-wrench"></i></a>
                         <h2>Transaction History <i id="filter" class="fas fa-sliders-h"></i></h2>
                         <div class="transactions">
                             <?php if (count($transactions) > 0): ?>

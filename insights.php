@@ -19,7 +19,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    
     $conn->close();
     ?>
 
@@ -60,7 +60,7 @@
 
         <div class="content">
             <div class="title">
-                <h1>Transactions</h1>
+                <h1>Insights</h1>
             </div>
             <div class="content-container">
                 <div class="main-content">
