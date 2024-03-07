@@ -185,9 +185,9 @@ body {
 }
 
 .toggle-button.active {
-    background-color: #007BFF;
+    background-color: #4971FF;
     color: #fff;
-    border-color: #007BFF;
+    border-color: #4971FF;
 }
 
 @media screen and (max-width: 1500px) {

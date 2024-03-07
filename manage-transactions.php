@@ -39,6 +39,33 @@
     }
 
     $stmt->close();
+
+    // SQL query to select all transactions
+    $sql = "SELECT t.type, IF(t.categoryID IS NOT NULL, c.title, cc.title) AS category, t.comment, t.amount, t.date FROM Transaction as t LEFT JOIN Category AS c ON c.categoryID = t.categoryID LEFT JOIN CustomCategory AS cc ON cc.customCategoryID = t.customCategoryID WHERE t.userID = ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["userID"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Start building the table
+    $table = '<table>';
+    $table .= '<tr><th>Type</th><th>Category</th><th>Comment</th><th>Amount</th><th>Date</th></tr>';
+
+    // Fetch each row and add it to the table
+    while ($row = $result->fetch_assoc()) {
+        $table .= '<tr>';
+        $table .= '<td>' . htmlspecialchars($row['type']) . '</td>';
+        $table .= '<td>' . htmlspecialchars($row['category']) . '</td>';
+        $table .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
+        $table .= '<td>' . htmlspecialchars($row['amount']) . '</td>';
+        $table .= '<td>' . htmlspecialchars($row['date']) . '</td>';
+        $table .= '</tr>';
+    }
+
+    // Finish the table
+    $table .= '</table>';
+
+    $stmt->close();
     $conn->close();
     ?>
 
@@ -130,6 +157,38 @@
                 background-color: #fff;
                 color: #444;
             }
+
+            .filter-section {
+                display: flex;
+                align-items: center;
+                margin-bottom: 50px; 
+            }
+
+            .filter-section label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .filter-section select {
+                margin-right: 20px; 
+                padding: 5px;
+                width: 100%; 
+                font-size: 20px;
+            }
+
+            #filterButton {
+                padding: 10px 50px;
+            }
+
+            .filter-group {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+
+            .filter-group:not(:last-child) {
+                margin-right: 20px;
+            }
         </style>
     </head>
     <body>
@@ -209,19 +268,20 @@
                     <!-- Delete Transaction -->
                     <div class="manage-option-container" id="deleteTransactionContainer">
                         <h2>Delete Transaction</h2>
-                        <form action="delete-transaction.php" method="post">
-                        <div class="form-group">
-                                <label>Transaction Type</label>
-                                <div class="toggle-buttons">
-                                    <button type="button" id="in-button" class="toggle-button active" data-type="in">In</button>
-                                    <button type="button" id="out-button" class="toggle-button" data-type="out">Out</button>
-                                </div>
-                                <!-- Hidden input to store the transaction type -->
-                                <input type="hidden" id="transaction-type" name="transactionType" value="in" required>
+                        <form action="" method="get" class="filter-section">
+                            <div class="filter-group">
+                                <label for="transactionType">Transaction Type</label>
+                                <select id="transactionType">
+                                    <option value="all">All</option>
+                                    <option value="in">In</option>
+                                    <option value="out">Out</option>
+                                </select>
                             </div>
-                            <div class="form-group">
+                                    
+                            <div class="filter-group">
                                 <label for="category">Category</label>
-                                <select id="category" name="category" required>
+                                <select id="category">
+                                    <option>All</option>
                                     <!-- Dynamically populated options -->
                                     <?php foreach($categories as $category): ?>
                                         <option value="<?php echo htmlspecialchars($category['title']); ?>">
@@ -231,36 +291,50 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="amount">Amount</label>
-                                <input type="number" id="amount" name="amount" required>
+                            <div class="filter-group">
+                                <label for="month">Month</label>
+                                <select id="month">
+                                    <option>All</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="comment">Comment</label>
-                                <input type="text" id="comment" name="comment">
-                            </div>
-
-                            <button type="submit" class="btn-primary">Add Transaction</button>
+                            <button type="button" class="btn-primary" id="filterButton">Filter</button>
+                        </form>
+                        <h3>Transactions</h3>
+                        <form action="delete-transaction.php" method="post">
+                            <?php echo $table; ?>
                         </form>
                     </div>
 
                     <!-- Edit Transaction -->
                     <div class="manage-option-container" id="editTransactionContainer">
                         <h2>Edit Transaction</h2>
-                        <form action="edit-transaction.php" method="post">
-                        <div class="form-group">
-                                <label>Transaction Type</label>
-                                <div class="toggle-buttons">
-                                    <button type="button" id="in-button" class="toggle-button active" data-type="in">In</button>
-                                    <button type="button" id="out-button" class="toggle-button" data-type="out">Out</button>
-                                </div>
-                                <!-- Hidden input to store the transaction type -->
-                                <input type="hidden" id="transaction-type" name="transactionType" value="in" required>
+                        <form action="" method="get" class="filter-section">
+                            <div class="filter-group">
+                                <label for="transactionType">Transaction Type</label>
+                                <select id="transactionType">
+                                    <option value="all">All</option>
+                                    <option value="in">In</option>
+                                    <option value="out">Out</option>
+                                </select>
                             </div>
-                            <div class="form-group">
+                                    
+                            <div class="filter-group">
                                 <label for="category">Category</label>
-                                <select id="category" name="category" required>
+                                <select id="category">
+                                    <option>All</option>
                                     <!-- Dynamically populated options -->
                                     <?php foreach($categories as $category): ?>
                                         <option value="<?php echo htmlspecialchars($category['title']); ?>">
@@ -270,24 +344,37 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="amount">Amount</label>
-                                <input type="number" id="amount" name="amount" required>
+                            <div class="filter-group">
+                                <label for="month">Month</label>
+                                <select id="month">
+                                    <option>All</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="comment">Comment</label>
-                                <input type="text" id="comment" name="comment">
-                            </div>
-
-                            <button type="submit" class="btn-primary">Add Transaction</button>
+                            <button type="button" class="btn-primary" id="filterButton">Filter</button>
+                        </form>
+                        <h3>Transactions</h3>
+                        <form action="edit-transaction.php" method="post">
+                        
                         </form>
                     </div>
                 </div>
             </div>  
         </div>
         <script>
-            // Update toggle buttons and hidden input on click
+            // Update toggle buttons and hidden input on click (add transaction)
             var toggleButtons = document.querySelectorAll('.toggle-button');
             var hiddenInput = document.getElementById('transaction-type');
 

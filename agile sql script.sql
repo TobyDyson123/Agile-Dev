@@ -1,5 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS agile;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 USE agile;
 
 -- Drop tables if they already exist
@@ -99,5 +101,6 @@ INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'out', 5.00, '2023-07-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'in', 5.00, '2023-06-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 7, "Comment", 'out', 5.00, '2023-05-01');
+INSERT INTO Transaction (userID, customCategoryID, comment, type, amount, date) VALUES (1, 1, "Sausage Roll", 'in', 5.00, '2023-04-01');
 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');
