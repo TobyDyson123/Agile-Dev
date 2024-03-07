@@ -1,59 +1,57 @@
+
+
 <?php
     session_start(); // Start the session.
 
-    // Check if the user is logged in, if not then redirect to login page
     if(!isset($_SESSION["userID"])){
         header("location: index.html");
         exit;
     }
 
-    $dbHost = 'localhost'; // or your database host
-    $dbUsername = 'root'; // or your database username
-    $dbPassword = ''; // or your database password
-    $dbName = 'agile'; // your database name
-
+    $dbHost = 'localhost';
+    $dbUsername = 'root';
+    $dbPassword = '';
+    $dbName = 'agile';
     $userId = $_SESSION["userID"];
 
-    // Create connection
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare the SQL query to fetch categories and custom categories
-    $sqlCategories = "
-        SELECT title FROM Category
-        UNION ALL
-        SELECT title FROM CustomCategory WHERE userID = ?
-    ";
+    if (isset($_POST['delete_transactions']) && !empty($_POST['transaction_ids'])) {
+        $transactionIds = $_POST['transaction_ids'];
+        $placeholders = implode(',', array_fill(0, count($transactionIds), '?'));
+        $types = str_repeat('i', count($transactionIds));
+        $sql = "DELETE FROM Transaction WHERE transactionID IN ($placeholders) AND userID = ?";
+        $stmt = $conn->prepare($sql);
+        $params = array_merge($transactionIds, array($userId));
+        $stmt->bind_param($types . 'i', ...$params);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    $sqlCategories = "SELECT title FROM Category UNION ALL SELECT title FROM CustomCategory WHERE userID = ?";
     $stmt = $conn->prepare($sqlCategories);
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $resultCategories = $stmt->get_result();
-
     $categories = [];
     while($row = $resultCategories->fetch_assoc()) {
         $categories[] = $row;
     }
-
     $stmt->close();
 
-    // SQL query to select all transactions
-    $sql = "SELECT t.type, IF(t.categoryID IS NOT NULL, c.title, cc.title) AS category, t.comment, t.amount, t.date FROM Transaction as t LEFT JOIN Category AS c ON c.categoryID = t.categoryID LEFT JOIN CustomCategory AS cc ON cc.customCategoryID = t.customCategoryID WHERE t.userID = ?;";
+    $sql = "SELECT t.transactionID, t.type, IF(t.categoryID IS NOT NULL, c.title, cc.title) AS category, t.comment, t.amount, t.date FROM Transaction as t LEFT JOIN Category AS c ON c.categoryID = t.categoryID LEFT JOIN CustomCategory AS cc ON cc.customCategoryID = t.customCategoryID WHERE t.userID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $_SESSION["userID"]);
+    $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    // Start building the table
-    $table = '<table>';
-    $table .= '<tr><th>Type</th><th>Category</th><th>Comment</th><th>Amount</th><th>Date</th></tr>';
-
-    // Fetch each row and add it to the table
+    $table = '<table><tr><th>Select</th><th>Type</th><th>Category</th><th>Comment</th><th>Amount</th><th>Date</th></tr>';
     while ($row = $result->fetch_assoc()) {
         $table .= '<tr>';
+        $table .= '<td><input type="checkbox" name="transaction_ids[]" value="' . htmlspecialchars($row['transactionID']) . '"></td>';
         $table .= '<td>' . htmlspecialchars($row['type']) . '</td>';
         $table .= '<td>' . htmlspecialchars($row['category']) . '</td>';
         $table .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
@@ -61,13 +59,10 @@
         $table .= '<td>' . htmlspecialchars($row['date']) . '</td>';
         $table .= '</tr>';
     }
-
-    // Finish the table
     $table .= '</table>';
-
     $stmt->close();
     $conn->close();
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -133,7 +128,7 @@
             .transaction-options {
                 position: relative;
                 border-radius: 20px;
-                width: 450px; /* Width of the entire switch */
+                width: 450px; 
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -305,7 +300,6 @@
                                 <label for="category">Category</label>
                                 <select id="category">
                                     <option>All</option>
-                                    <!-- Dynamically populated options -->
                                     <?php foreach($categories as $category): ?>
                                         <option value="<?php echo htmlspecialchars($category['title']); ?>">
                                             <?php echo htmlspecialchars($category['title']); ?>
@@ -336,9 +330,12 @@
                             <button type="button" class="btn-primary" id="filterButton">Filter</button>
                         </form>
                         <h3>Transactions</h3>
-                        <form action="delete-transaction.php" method="post">
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                        <button type="submit" class="btn btn-danger" name="delete_transactions">Delete Selected</button>
+                            <input type="checkbox" id="select_all_outside" /><label for="select_all_outside">Select All</label> 
                             <?php echo $table; ?>
-                        </form>
+                           
+                        </form>                       
                     </div>
 
                     <!-- Edit Transaction -->
@@ -358,7 +355,6 @@
                                 <label for="category">Category</label>
                                 <select id="category">
                                     <option>All</option>
-                                    <!-- Dynamically populated options -->
                                     <?php foreach($categories as $category): ?>
                                         <option value="<?php echo htmlspecialchars($category['title']); ?>">
                                             <?php echo htmlspecialchars($category['title']); ?>
@@ -397,7 +393,6 @@
             </div>  
         </div>
         <script>
-            // Update toggle buttons and hidden input on click (add transaction)
             var toggleButtons = document.querySelectorAll('.toggle-button');
             var hiddenInput = document.getElementById('transaction-type');
 
@@ -421,7 +416,6 @@
                         optionButtons.forEach(btn => btn.classList.remove('active'));
                         this.classList.add('active');
 
-                        // Show the corresponding container
                         containers.forEach(container => {
                             container.style.display = 'none';
                         });
@@ -439,6 +433,19 @@
                 }
             });
         </script>
-        <script src="script.js"></script>
+        
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    var selectAllCheckboxOutside = document.getElementById('select_all_outside');
+    selectAllCheckboxOutside.addEventListener('change', function () {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="transaction_ids[]"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckboxOutside.checked;
+        });
+    });
+});
+</script>
+
+</script>
     </body>
     </html>
