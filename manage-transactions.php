@@ -189,6 +189,29 @@
             .filter-group:not(:last-child) {
                 margin-right: 20px;
             }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                overflow: hidden;
+            }
+
+            table th {
+                text-align: left;
+                background-color: #D2D2D2;
+            }
+
+            table tr:nth-child(odd) {
+                background-color: #F2F2F2;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #fff;
+            }
+
+            table th, table td {
+                padding: 10px;
+            }
         </style>
     </head>
     <body>
