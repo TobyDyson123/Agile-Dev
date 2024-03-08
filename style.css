@@ -6,6 +6,10 @@ body {
     margin: 0; 
 }
 
+button {
+    font-family: varela round, sans-serif !important;
+}
+
 .btn-primary {
     padding: 10px 20px;
     background: #4971FF;
@@ -15,7 +19,6 @@ body {
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
-    font-family: varela round, sans-serif !important;
 }
 
 .btn-primary:hover {

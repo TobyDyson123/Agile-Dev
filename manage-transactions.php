@@ -1,5 +1,3 @@
-
-
 <?php
     session_start(); // Start the session.
 
@@ -43,23 +41,100 @@
     }
     $stmt->close();
 
-    $sql = "SELECT t.transactionID, t.type, IF(t.categoryID IS NOT NULL, c.title, cc.title) AS category, t.comment, t.amount, t.date FROM Transaction as t LEFT JOIN Category AS c ON c.categoryID = t.categoryID LEFT JOIN CustomCategory AS cc ON cc.customCategoryID = t.customCategoryID WHERE t.userID = ?";
+    // Initialize filter variables with defaults or values from GET request
+    $transactionType = $_GET['transactionType'] ?? 'all';
+    $category = $_GET['category'] ?? 'all';
+    $month = $_GET['month'] ?? 'all';
+
+    // Start building the SQL query
+    $sql = "SELECT t.transactionID, t.type, 
+            IF(t.categoryID IS NOT NULL, c.title, cc.title) AS category, 
+            t.comment, t.amount, 
+            DATE_FORMAT(t.date, '%d/%m/%Y') AS formatted_date 
+            FROM Transaction t 
+            LEFT JOIN Category c ON t.categoryID = c.categoryID 
+            LEFT JOIN CustomCategory cc ON t.customCategoryID = cc.customCategoryID 
+            WHERE t.userID = ?";
+
+    // Prepare the initial parameters array and types
+    $params = [$userId]; // $userId needs to be defined and contain the logged-in user's ID
+    $types = 'i'; // 'i' for integer type of userID
+
+    // Apply transaction type filter
+    if ($transactionType !== 'all') {
+        $sql .= " AND t.type = ?";
+        $params[] = $transactionType;
+        $types .= 's'; // 's' for string type of transactionType
+    }
+
+    // Apply category filter
+    if ($category !== 'All') {
+        $sql .= " AND (c.title = ? OR cc.title = ?)";
+        $params[] = $category;
+        $params[] = $category;
+        $types .= 'ss'; // Adding two 's' types for category
+    }
+
+    // Apply month filter
+    if ($month !== 'All') {
+        $monthNum = date('n', strtotime("$month 1")); // Converts month name to month number
+        $sql .= " AND MONTH(t.date) = ?";
+        $params[] = $monthNum;
+        $types .= 'i'; // 'i' for integer type of month
+    }
+
+    // Prepare the statement
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
+
+    // Bind parameters dynamically
+    $bind_names[] = $types;
+    for ($i = 0; $i < count($params); $i++) {
+        $bind_name = 'bind' . $i;
+        $$bind_name = $params[$i];
+        $bind_names[] = &$$bind_name;
+    }
+
+    // Call 'bind_param' dynamically
+    call_user_func_array([$stmt, 'bind_param'], $bind_names);
+
+    // Execute the statement
     $stmt->execute();
     $result = $stmt->get_result();
-    $table = '<table><tr><th>Select</th><th>Type</th><th>Category</th><th>Comment</th><th>Amount</th><th>Date</th></tr>';
+    $deleteTable = '<table><tr><th style="width: 10%">Select</th><th style="width: 10%">Type</th><th style="width: 25%">Category</th><th style="width: 25%">Comment</th><th style="width: 15%">Amount</th><th style="width: 15%">Date</th></tr>';
+    $editTable = '<table><tr><th style="width: 10%">Edit</th><th style="width: 10%">Type</th><th style="width: 25%">Category</th><th style="width: 25%">Comment</th><th style="width: 15%">Amount</th><th style="width: 15%">Date</th></tr>';
+
     while ($row = $result->fetch_assoc()) {
-        $table .= '<tr>';
-        $table .= '<td><input type="checkbox" name="transaction_ids[]" value="' . htmlspecialchars($row['transactionID']) . '"></td>';
-        $table .= '<td>' . htmlspecialchars($row['type']) . '</td>';
-        $table .= '<td>' . htmlspecialchars($row['category']) . '</td>';
-        $table .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
-        $table .= '<td>' . htmlspecialchars($row['amount']) . '</td>';
-        $table .= '<td>' . htmlspecialchars($row['date']) . '</td>';
-        $table .= '</tr>';
+        // Capitalize the first letter of the type
+        $type = ucfirst($row['type']);
+
+        // Format the amount as money (assuming it's in GBP)
+        $amount = '£' . number_format($row['amount'], 2);
+
+        // Format the date as DD/MM/YY
+        $date = date('d/m/y', strtotime($row['formatted_date']));
+
+        $deleteTable .= '<tr>';
+        $deleteTable .= '<td><input type="checkbox" name="transaction_ids[]" value="' . htmlspecialchars($row['transactionID']) . '"></td>';
+        $deleteTable .= '<td>' . htmlspecialchars($type) . '</td>';
+        $deleteTable .= '<td>' . htmlspecialchars($row['category']) . '</td>';
+        $deleteTable .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
+        $deleteTable .= '<td>' . htmlspecialchars($amount) . '</td>';
+        $deleteTable .= '<td>' . htmlspecialchars($date) . '</td>';
+        $deleteTable .= '</tr>';
+
+        $editTable .= '<tr>';
+        $editTable .= '<td><input type="radio" name="transaction_id" value="' . htmlspecialchars($row['transactionID']) . '"></td>';
+        $editTable .= '<td>' . htmlspecialchars($type) . '</td>';
+        $editTable .= '<td>' . htmlspecialchars($row['category']) . '</td>';
+        $editTable .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
+        $editTable .= '<td>' . htmlspecialchars($amount) . '</td>';
+        $editTable .= '<td>' . htmlspecialchars($date) . '</td>';
+        $editTable .= '</tr>';
     }
-    $table .= '</table>';
+
+    $deleteTable .= '</table>';
+    $editTable .= '</table>';
+
     $stmt->close();
     $conn->close();
 ?>
@@ -188,7 +263,6 @@
             table {
                 width: 100%;
                 border-collapse: collapse;
-                overflow: hidden;
             }
 
             table th {
@@ -206,6 +280,39 @@
 
             table th, table td {
                 padding: 10px;
+            }
+
+            .btn-danger {
+                padding: 10px 30px;
+                font-size: 16px;
+                font-weight: bold;
+                /* display: block; */
+                background-color: #FF0000;
+                border-radius: 20px;
+                border: none;
+                color: white;
+                cursor: pointer;
+            }
+
+            .table-actions {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .table-actions input[type="checkbox"] {
+                margin-right: 30px;
+            }
+
+            .table-actions label {
+                margin-right: 10px;
+            }
+
+            #resetFiltersButton {
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0);
+                color: #FF0000;
+                margin-left: 10px;
             }
         </style>
     </head>
@@ -286,10 +393,10 @@
                     <!-- Delete Transaction -->
                     <div class="manage-option-container" id="deleteTransactionContainer">
                         <h2>Delete Transaction</h2>
-                        <form action="" method="get" class="filter-section">
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get" class="filter-section">
                             <div class="filter-group">
                                 <label for="transactionType">Transaction Type</label>
-                                <select id="transactionType">
+                                <select id="transactionType" name="transactionType">
                                     <option value="all">All</option>
                                     <option value="in">In</option>
                                     <option value="out">Out</option>
@@ -298,7 +405,7 @@
                                     
                             <div class="filter-group">
                                 <label for="category">Category</label>
-                                <select id="category">
+                                <select id="category" name="category">
                                     <option>All</option>
                                     <?php foreach($categories as $category): ?>
                                         <option value="<?php echo htmlspecialchars($category['title']); ?>">
@@ -310,7 +417,7 @@
 
                             <div class="filter-group">
                                 <label for="month">Month</label>
-                                <select id="month">
+                                <select id="month" name="month">
                                     <option>All</option>
                                     <option>January</option>
                                     <option>February</option>
@@ -327,14 +434,16 @@
                                 </select>
                             </div>
 
-                            <button type="button" class="btn-primary" id="filterButton">Filter</button>
+                            <button type="submit" class="btn-primary" id="filterButton">Filter</button>
+                            <button type="submit" class="btn-primary" id="resetFiltersButton">Reset Filters</button>
                         </form>
                         <h3>Transactions</h3>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                        <button type="submit" class="btn btn-danger" name="delete_transactions">Delete Selected</button>
-                            <input type="checkbox" id="select_all_outside" /><label for="select_all_outside">Select All</label> 
-                            <?php echo $table; ?>
-                           
+                            <div class="table-actions">
+                                <label for="select_all_outside">Select All</label><input type="checkbox" id="select_all_outside"></input>
+                                <button type="submit" class="btn-danger" name="delete_transactions">Delete Selected</button>
+                            </div>
+                            <?php echo $deleteTable; ?>
                         </form>                       
                     </div>
 
@@ -386,7 +495,7 @@
                         </form>
                         <h3>Transactions</h3>
                         <form action="edit-transaction.php" method="post">
-                        
+                            <?php echo $editTable; ?>
                         </form>
                     </div>
                 </div>
@@ -405,16 +514,25 @@
             });
 
             document.addEventListener('DOMContentLoaded', function() {
-                const optionIndicator = document.createElement('div');
-                document.querySelector('.transaction-options').appendChild(optionIndicator);
-
                 const optionButtons = document.querySelectorAll('.transaction-option');
                 const containers = document.querySelectorAll('.manage-option-container');
+                const LAST_ACTIVE_OPTION = 'lastActiveOption';
 
-                optionButtons.forEach((button, index) => {
+                // Function to save the active option to local storage
+                function saveActiveOption(option) {
+                    localStorage.setItem(LAST_ACTIVE_OPTION, option);
+                }
+
+                // Function to get the active option from local storage
+                function getSavedActiveOption() {
+                    return localStorage.getItem(LAST_ACTIVE_OPTION);
+                }
+
+                optionButtons.forEach((button) => {
                     button.addEventListener('click', function() {
                         optionButtons.forEach(btn => btn.classList.remove('active'));
                         this.classList.add('active');
+                        saveActiveOption(this.dataset.target); // Save the current active option
 
                         containers.forEach(container => {
                             container.style.display = 'none';
@@ -427,25 +545,62 @@
                     });
                 });
 
-                // Initialize the first option as active
-                if (optionButtons.length > 0) {
-                    optionButtons[0].click();
+                // Load the saved option or default to the first one
+                const savedOption = getSavedActiveOption();
+                const defaultOption = optionButtons[0].dataset.target;
+                const optionToActivate = savedOption || defaultOption;
+                const buttonToActivate = Array.from(optionButtons).find(button => button.dataset.target === optionToActivate);
+                buttonToActivate.click();
+
+                // Select DOM elements for filters
+                const transactionTypeSelect = document.getElementById('transactionType');
+                const categorySelect = document.getElementById('category');
+                const monthSelect = document.getElementById('month');
+
+                // Save the current state of filters to local storage
+                function saveFilterStates() {
+                    localStorage.setItem('filterTransactionType', transactionTypeSelect.value);
+                    localStorage.setItem('filterCategory', categorySelect.value);
+                    localStorage.setItem('filterMonth', monthSelect.value);
                 }
+
+                // Load the saved filter states or default to 'All'
+                function loadFilterStates() {
+                    transactionTypeSelect.value = localStorage.getItem('filterTransactionType') || 'all';
+                    categorySelect.value = localStorage.getItem('filterCategory') || 'All';
+                    monthSelect.value = localStorage.getItem('filterMonth') || 'All';
+                }
+
+                // Reset filters to their default states
+                function resetFilters() {
+                    localStorage.removeItem('filterTransactionType');
+                    localStorage.removeItem('filterCategory');
+                    localStorage.removeItem('filterMonth');
+                    loadFilterStates(); // Reset select elements to their default values
+                }
+
+                // Event listener for the Filter button
+                document.getElementById('filterButton').addEventListener('click', function() {
+                    saveFilterStates(); // Save state when Filter button is clicked
+                    // Add logic to filter transactions based on the selected options
+                });
+
+                // Event listener for the Reset Filters button
+                document.getElementById('resetFiltersButton').addEventListener('click', resetFilters);
+
+                loadFilterStates(); // Load filter states when the page loads
+            });
+
+            // Select all checkboxes
+            document.addEventListener('DOMContentLoaded', function () {
+                var selectAllCheckboxOutside = document.getElementById('select_all_outside');
+                selectAllCheckboxOutside.addEventListener('change', function () {
+                    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="transaction_ids[]"]');
+                    checkboxes.forEach((checkbox) => {
+                        checkbox.checked = selectAllCheckboxOutside.checked;
+                    });
+                });
             });
         </script>
-        
-        <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var selectAllCheckboxOutside = document.getElementById('select_all_outside');
-    selectAllCheckboxOutside.addEventListener('change', function () {
-        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="transaction_ids[]"]');
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = selectAllCheckboxOutside.checked;
-        });
-    });
-});
-</script>
-
-</script>
     </body>
     </html>
