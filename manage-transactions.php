@@ -316,6 +316,13 @@
                 color: #FF0000;
                 margin-left: 10px;
             }
+            
+            #resetFiltersButtonEdit {
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0);
+                color: #FF0000;
+                margin-left: 10px;
+            }
         </style>
     </head>
     <body>
@@ -494,6 +501,7 @@
                             </div>
 
                             <button type="button" class="btn-primary" id="filterButton">Filter</button>
+                            <button type="submit" class="btn-primary" id="resetFiltersButtonEdit">Reset Filters</button>
                         </form>
                         <h3>Transactions</h3>
                         <form action="edit-transaction.php" method="post">
