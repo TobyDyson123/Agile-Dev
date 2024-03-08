@@ -18,6 +18,56 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addTransaction'])) {
+        // Retrieve form data
+        $transactionType = $_POST['transactionType'] ?? '';
+        $categoryName = $_POST['category'] ?? '';
+        $amount = $_POST['amount'] ?? 0.00;
+        $comment = $_POST['comment'] ?? '';
+        $date = date('Y-m-d'); 
+    
+        // Fetch the categoryID from the Category table
+        $categorySql = "SELECT categoryID FROM Category WHERE title = ?";
+        $categoryId = null;
+    
+        if ($categoryStmt = $conn->prepare($categorySql)) {
+            $categoryStmt->bind_param("s", $categoryName);
+            if ($categoryStmt->execute()) {
+                $categoryStmt->bind_result($categoryId);
+                $categoryStmt->fetch();
+                $categoryStmt->close();
+            } else {
+                echo "<p>Error: Could not execute the query: $categoryStmt->error </p>";
+            }
+        } else {
+            echo "<p>Error: Could not prepare the query: $conn->error </p>";
+        }
+    
+        if ($categoryId) {
+            // Prepare an SQL query to insert the transaction
+            $insertSql = "INSERT INTO Transaction (userID, categoryID, type, amount, comment, date) VALUES (?, ?, ?, ?, ?, ?)";
+    
+            if ($stmt = $conn->prepare($insertSql)) {
+                // Bind variables to the prepared statement as parameters
+                $stmt->bind_param("iissss", $userId, $categoryId, $transactionType, $amount, $comment, $date);
+    
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    
+                } else {
+                    echo "<p>Error: Could not execute the query: $stmt->error </p>";
+                }
+    
+                // Close statement
+                $stmt->close();
+            } else {
+                echo "<p>Error: Could not prepare the query: $conn->error </p>";
+            }
+        } else {
+            echo "<p>Error: Category not found.</p>";
+        }
+    }
+
     if (isset($_POST['delete_transactions']) && !empty($_POST['transaction_ids'])) {
         $transactionIds = $_POST['transaction_ids'];
         $placeholders = implode(',', array_fill(0, count($transactionIds), '?'));
@@ -134,8 +184,14 @@
         $editTable .= '</tr>';
     }
 
-    $deleteTable .= '</table>';
-    $editTable .= '</table>';
+    if ($result->num_rows == 0) {
+        $noResultsMessage = "<tr><td colspan='6' style='text-align:center;'>No transactions found.</td></tr>";
+    } else {
+        $noResultsMessage = ""; // No need to display a message if there are results
+    }
+
+    $deleteTable .= $noResultsMessage . '</table>';
+    $editTable .= $noResultsMessage . '</table>';   
 
     $stmt->close();
     $conn->close();
@@ -363,7 +419,7 @@
                     <!-- Add Transaction -->
                     <div class="manage-option-container" id="addTransactionContainer">
                         <h2>Add Transaction</h2>
-                        <form action="add-transaction.php" method="post" id="addTransactionForm">
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="addTransactionForm">
                             <div class="form-group">
                                 <label>Transaction Type</label>
                                 <div class="toggle-buttons">
@@ -395,7 +451,7 @@
                                 <input type="text" id="comment" name="comment">
                             </div>
 
-                            <button type="submit" class="btn-primary">Add Transaction</button>
+                            <button type="submit" name="addTransaction" class="btn-primary">Add Transaction</button>
                         </form>
                     </div>
 
