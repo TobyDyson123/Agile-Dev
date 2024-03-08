@@ -27,21 +27,30 @@
     $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
 
     // Start building the SQL query
-    $sql = "SELECT Transaction.*, Category.title, Category.colour, Category.icon
-            FROM Transaction 
-            LEFT JOIN Category ON Transaction.categoryID = Category.categoryID
-            WHERE Transaction.userID = ?";
+    $sql = "SELECT 
+                t.*,
+                COALESCE(c.title, cc.title) AS title,
+                COALESCE(c.colour, cc.colour) AS colour,
+                c.icon
+            FROM 
+                Transaction AS t 
+            LEFT JOIN 
+                Category AS c ON t.categoryID = c.categoryID
+            LEFT JOIN 
+                CustomCategory AS cc ON t.customCategoryID = cc.customCategoryID
+            WHERE 
+                t.userID = ?";
 
     // Initialize parameters array with the userID
     $params = array($userId);
 
     if (!empty($transactionType) && in_array($transactionType, ['in', 'out'])) {
-        $sql .= " AND Transaction.type = ?";
+        $sql .= " AND t.type = ?";
         $params[] = $transactionType;
     }
 
     if (!empty($categoryFilter) && $categoryFilter != 'All') {
-        $sql .= " AND Category.title = ?";
+        $sql .= " AND COALESCE(c.title, cc.title) = ?";
         $params[] = $categoryFilter;
     }
 
@@ -56,12 +65,12 @@
         $queryYear = $selectedMonthNum <= $currentMonth ? $currentYear : $currentYear - 1;
 
         // Append the month and year condition to the SQL query
-        $sql .= " AND MONTH(Transaction.date) = ? AND YEAR(Transaction.date) = ?";
+        $sql .= " AND MONTH(t.date) = ? AND YEAR(t.date) = ?";
         $params[] = $selectedMonthNum;
         $params[] = $queryYear;
     }
 
-    $sql .= " ORDER BY Transaction.date DESC;";
+    $sql .= " ORDER BY t.date DESC;";
 
     $stmt = $conn->prepare($sql);
     $types = str_repeat("s", count($params)); // s for string types
@@ -368,7 +377,7 @@
                                 <?php foreach ($transactions as $transaction): ?>
                                     <div class="transaction-item">
                                         <div class="transaction-icon" style="background-color: <?php echo htmlspecialchars($transaction['colour']); ?>">
-                                            <i class="<?php echo htmlspecialchars($transaction['icon']); ?>"></i>
+                                            <i class="<?php echo htmlspecialchars($transaction['icon']) ? htmlspecialchars($transaction['icon']) : 'fas fa-question'; ?>"></i>
                                         </div>
                                         <div class="transaction-details">
                                             <h3><?php echo htmlspecialchars($transaction['title']);?></h3>
