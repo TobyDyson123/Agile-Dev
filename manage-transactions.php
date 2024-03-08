@@ -379,6 +379,13 @@
                 color: #FF0000;
                 margin-left: 10px;
             }
+
+            .hidden {
+                display: none;
+            }
+
+            #customCategoryColor {
+            }
         </style>
     </head>
     <body>
@@ -438,7 +445,20 @@
                                             <?php echo htmlspecialchars($category['title']); ?>
                                         </option>
                                     <?php endforeach; ?>
+                                    <option value="-CREATE">- CREATE CUSTOM CATEGORY -</option>
                                 </select>
+                            </div>
+
+                            <!-- Custom Category Fields -->
+                            <div id="customCategoryFields" class="hidden">
+                                <div class="form-group">
+                                    <label for="customCategoryTitle">Custom Category Title</label>
+                                    <input type="text" id="customCategoryTitle" name="customCategoryTitle">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customCategoryColor">Custom Category Color</label>
+                                    <input type="color" id="customCategoryColor" name="customCategoryColor">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -665,6 +685,17 @@
                         checkbox.checked = selectAllCheckboxOutside.checked;
                     });
                 });
+            });
+
+            const categorySelect = document.getElementById('category');
+            const customCategoryFields = document.getElementById('customCategoryFields');
+
+            categorySelect.addEventListener('change', () => {
+                if (categorySelect.value === '-CREATE') {
+                    customCategoryFields.classList.remove('hidden');
+                } else {
+                    customCategoryFields.classList.add('hidden');
+                }
             });
         </script>
         <script src="script.js"></script>
