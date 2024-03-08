@@ -61,6 +61,8 @@
         $params[] = $queryYear;
     }
 
+    $sql .= " ORDER BY Transaction.date DESC;";
+
     $stmt = $conn->prepare($sql);
     $types = str_repeat("s", count($params)); // s for string types
     $stmt->bind_param($types, ...$params);

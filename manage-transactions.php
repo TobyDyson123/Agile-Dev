@@ -42,9 +42,9 @@
     $stmt->close();
 
     // Initialize filter variables with defaults or values from GET request
-    $transactionType = $_GET['transactionType'] ?? 'all';
-    $category = $_GET['category'] ?? 'all';
-    $month = $_GET['month'] ?? 'all';
+    $transactionType = isset($_GET['transactionType']) && $_GET['transactionType'] !== 'all' ? $_GET['transactionType'] : null;
+    $category = isset($_GET['category']) && $_GET['category'] !== 'All' ? $_GET['category'] : null;
+    $month = isset($_GET['month']) && $_GET['month'] !== 'All' ? $_GET['month'] : null;
 
     // Start building the SQL query
     $sql = "SELECT t.transactionID, t.type, 
@@ -61,14 +61,14 @@
     $types = 'i'; // 'i' for integer type of userID
 
     // Apply transaction type filter
-    if ($transactionType !== 'all') {
+    if ($transactionType) {
         $sql .= " AND t.type = ?";
         $params[] = $transactionType;
         $types .= 's'; // 's' for string type of transactionType
     }
 
     // Apply category filter
-    if ($category !== 'All') {
+    if ($category) {
         $sql .= " AND (c.title = ? OR cc.title = ?)";
         $params[] = $category;
         $params[] = $category;
@@ -76,12 +76,14 @@
     }
 
     // Apply month filter
-    if ($month !== 'All') {
+    if ($month) {
         $monthNum = date('n', strtotime("$month 1")); // Converts month name to month number
         $sql .= " AND MONTH(t.date) = ?";
         $params[] = $monthNum;
         $types .= 'i'; // 'i' for integer type of month
     }
+
+    $sql .= " ORDER BY t.date DESC;";
 
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -582,7 +584,6 @@
                 // Event listener for the Filter button
                 document.getElementById('filterButton').addEventListener('click', function() {
                     saveFilterStates(); // Save state when Filter button is clicked
-                    // Add logic to filter transactions based on the selected options
                 });
 
                 // Event listener for the Reset Filters button
