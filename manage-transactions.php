@@ -491,7 +491,7 @@
                                     <div class="color-picker-container">
                                         <input type="color" id="customCategoryColor" name="customCategoryColor">
                                         <div id="customCategoryExample">
-                                            <span>Example:</span><i class="fas fa-question" id="exampleIcon"></i>
+                                            <span>Preview:</span><i class="fas fa-question" id="exampleIcon"></i>
                                         </div>
                                     </div>
                                 </div>
