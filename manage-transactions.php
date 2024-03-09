@@ -385,6 +385,37 @@
             }
 
             #customCategoryColor {
+                padding: 0px;
+                width: 60px;
+                height: 60px;
+            }
+
+            #customCategoryExample {
+                display: flex;
+                align-items: center;
+                margin-left: 100px;
+            }
+
+            #customCategoryExample i {
+                font-size: 20px;
+                background-color: aquamarine;
+                padding: 10px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #customCategoryExample span {
+                margin-right: 10px;
+            }
+
+            .color-picker-container {
+                display: flex;
+                align-items: center;
             }
         </style>
     </head>
@@ -457,7 +488,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="customCategoryColor">Custom Category Color</label>
-                                    <input type="color" id="customCategoryColor" name="customCategoryColor">
+                                    <div class="color-picker-container">
+                                        <input type="color" id="customCategoryColor" name="customCategoryColor">
+                                        <div id="customCategoryExample">
+                                            <span>Example:</span><i class="fas fa-question" id="exampleIcon"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -696,6 +732,14 @@
                 } else {
                     customCategoryFields.classList.add('hidden');
                 }
+            });
+
+            // Colour picker example update
+            const colorPicker = document.getElementById('customCategoryColor');
+            const exampleIcon = document.getElementById('exampleIcon');
+
+            colorPicker.addEventListener('input', function() {
+                exampleIcon.style.backgroundColor = colorPicker.value;
             });
         </script>
         <script src="script.js"></script>
