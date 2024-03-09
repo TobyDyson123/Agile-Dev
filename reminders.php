@@ -49,9 +49,9 @@
             </button>
             <div class="sidebar-content">
                 <a href="profile.php"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
-                <a href="transactions.php" class="active"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
+                <a href="transactions.php"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
                 <a href="insights.php"><i class="fas fa-chart-bar"></i> <span>Insights</span></a>
-                <a href="reminders.php"><i class="fas fa-bell"></i> <span>Reminders</span></a>
+                <a href="reminders.php" class="active"><i class="fas fa-bell"></i> <span>Reminders</span></a>
             </div>
             <div class="logout-section">
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
