@@ -35,6 +35,19 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome CDN -->
         <style>
+
+            .form-container {
+                background-color: rgba(242, 242, 242, 1);
+                border-radius:25px;
+                padding:30px 50px;
+            }
+            .transactionN-container {
+                border-bottom: 2px solid black;
+            }
+            .budgetR-container {
+                border-bottom: 2px solid black;
+            }
+           
             
         </style>
     </head>
@@ -64,7 +77,18 @@
             </div>
             <div class="content-container">
                 <div class="main-content">
-                    <p>beans</p>
+                <h2>Reminder settings</h2>
+                    <div class="form-container">
+                        <div class="transactionN-container">
+                        <h2>Transaction Notifications</h2>
+                        </div>
+                        <div class="budgetR-container">
+                        <h2>Budget Reminders</h2>
+                        </div>
+                        <div class="spendingR-container">
+                        <h2>Spending Reminders</h2>
+                        </div>
+                    </div>
                 </div>
             </div>  
         </div>        
