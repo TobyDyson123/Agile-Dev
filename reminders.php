@@ -41,14 +41,75 @@
                 border-radius:25px;
                 padding:30px 50px;
             }
-            .transactionN-container {
+
+            .option-container {
+                padding: 20px 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .option-container:not(:last-child) {
                 border-bottom: 2px solid black;
             }
-            .budgetR-container {
-                border-bottom: 2px solid black;
+
+            .option-container i {
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #757575;
+                color: white;
+                border-radius: 50%;
+                padding: 10px;
+                width: 25px;
+                height: 25px;
             }
-           
-            
+
+            .option-container .toggle {
+                margin-left: auto;
+            }
+
+            .tooltip-container .tooltip {
+                background-color: #424242; 
+                color: white; 
+                padding: 8px 16px; 
+                border-radius: 6px; 
+                font-size: 16px; 
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+                position: absolute;
+                z-index: 100; 
+                white-space: nowrap; 
+                transition: opacity 0.3s; 
+                visibility: hidden; 
+                opacity: 0; 
+                bottom: 130%;
+                left: 50%;
+                transform: translateX(-50%);
+                display: block;
+            }
+
+            .tooltip-container .tooltip::after {
+                content: " ";
+                position: absolute;
+                top: 100%; /* At the bottom of the tooltip */
+                left: 51%;
+                transform: translateX(-50%);
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #424242 transparent transparent transparent;
+            }
+
+            .tooltip-container {
+                position: relative;
+                margin-left: 10px;
+            }
+
+            .tooltip-container:hover .tooltip {
+                visibility: visible; 
+                opacity: 1; 
+            }
+
         </style>
     </head>
     <body>
@@ -79,14 +140,29 @@
                 <div class="main-content">
                 <h2>Reminder settings</h2>
                     <div class="form-container">
-                        <div class="transactionN-container">
-                        <h2>Transaction Notifications</h2>
+                        <div id="transactionN" class="option-container">
+                            <h3>Transaction Notifications</h3>
+                            <div class="tooltip-container">
+                                <i class="fas fa-question"></i>
+                                <div class="tooltip">Get notified when a transaction is added</div>
+                            </div>
+                            <div class="toggle">(o-)</div>
                         </div>
-                        <div class="budgetR-container">
-                        <h2>Budget Reminders</h2>
+                        <div id="budgetR" class="option-container">
+                            <h3>Budget Reminders</h3>
+                            <div class="tooltip-container">
+                                <i class="fas fa-question"></i>
+                                <div class="tooltip">Get notified when reaching your monthly budget</div>
+                            </div>
+                            <div class="toggle">(o-)</div>
                         </div>
-                        <div class="spendingR-container">
-                        <h2>Spending Reminders</h2>
+                        <div id="remindersR" class="option-container">
+                            <h3>Spending Reminders</h3>
+                            <div class="tooltip-container">
+                                <i class="fas fa-question"></i>
+                                <div class="tooltip">Get notified when spending goals are exceeded</div>
+                            </div>
+                            <div class="toggle">(o-)</div>
                         </div>
                     </div>
                 </div>
