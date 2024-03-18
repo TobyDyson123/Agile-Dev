@@ -46,6 +46,7 @@
                 opacity: 0;
                 transition: opacity 0.3s;
                 pointer-events: none;
+                z-index: 999;
             }
 
             .legend-container {
@@ -82,7 +83,39 @@
             }
 
             .filter-container {
-                margin-bottom: 20px;
+                background-color: #424242;
+                width: fit-content;
+                margin: 20px auto;
+                padding: 10px 20px;
+                border-radius: 25px;
+                color: white;
+            }
+
+            .filter-container input {
+                margin-right: 10px;
+                font-size: 20px;
+                border-radius: 25px;
+                padding: 5px;
+            }
+
+            .filter-container button {
+                font-size: 20px;
+                border-radius: 25px;
+                padding: 5px 10px;
+                border: none;
+                cursor: pointer;
+            }
+
+            #filter-btn {
+                background-color: #3a61f2;
+                color: white;
+                padding: 5px 20px;
+                margin-right: 5px;
+            }
+
+            #reset-btn {
+                background-color: #f44336;
+                color: white;
             }
 
             .chart-container {
@@ -104,6 +137,10 @@
                 justify-content: space-around;
             }
 
+            #total-expenditure-small {
+                display: none;
+            }
+
             @media screen and (max-width: 900px) {
                 .chart-wrapper {
                     flex-direction: column;
@@ -111,6 +148,14 @@
 
                 .legend-container {
                     margin-top: 20px;
+                }
+
+                #total-expenditure-large {
+                    display: none;
+                }
+
+                #total-expenditure-small {
+                    display: block;
                 }
             }
         </style>
@@ -145,18 +190,24 @@
                     <div class="chart-container">
                         <h2>Expenditure</h2>
                         <div class="chart-wrapper">
+                            <div id="total-expenditure-small" class="total-expenditure">
+                                <!-- The total expenditure will be inserted here -->
+                            </div>
                             <div class="legend-container">
                                 <!-- Legend items will be dynamically inserted here by JavaScript -->
                             </div>
                         </div>
-                        <div id="total-expenditure" class="total-expenditure">
+                        <div id="total-expenditure-large" class="total-expenditure">
                             <!-- The total expenditure will be inserted here -->
                         </div>
                     </div>
                     <div class="filter-container">
+                        <label for="start-date">From:</label>
                         <input type="date" id="start-date" name="start">
+                        <label for="end-date">To:</label>
                         <input type="date" id="end-date" name="end">
                         <button id="filter-btn">Filter</button>
+                        <button id="reset-btn">Reset</button>
                     </div>
                 </div>
             </div>  
@@ -195,7 +246,8 @@
                             .attr('fill', d => d.data.colour)
                             .on('mouseover', function(event, d) {
                                 tooltip.style('opacity', 1);
-                                tooltip.html(`Category: ${d.data.title}<br>Expenditure: $${d.data.total_expenditure}`)
+                                tooltip.style('visibility', 'visible');
+                                tooltip.html(`Category: ${d.data.title}<br>Expenditure: £${d.data.total_expenditure}`)
                                     .style('left', (event.pageX + 15) + 'px')
                                     .style('top', (event.pageY - 28) + 'px');
                             })
@@ -205,6 +257,7 @@
                             })
                             .on('mouseout', function() {
                                 tooltip.style('opacity', 0);
+                                tooltip.style('visibility', 'hidden');
                             });
 
                         // Calculate the total expenditure
@@ -212,7 +265,8 @@
                         const formattedTotal = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(totalExpenditure);
 
                         // Display the total expenditure
-                        d3.select('#total-expenditure').text(`Total Expenditure: ${formattedTotal}`);
+                        d3.select('#total-expenditure-large').text(`Total Expenditure: ${formattedTotal}`);
+                        d3.select('#total-expenditure-small').text(`Total Expenditure: ${formattedTotal}`);
                         
                         // Create the legend
                         createLegend(data);
@@ -246,6 +300,18 @@
                     const endDate = document.getElementById('end-date').value;
                     // Fetch the data and update the chart
                     fetchDataAndUpdate(startDate, endDate);
+                });
+
+                // Event listener for the reset button
+                document.getElementById('reset-btn').addEventListener('click', () => {
+                    // Clear the date inputs
+                    document.getElementById('start-date').value = '';
+                    document.getElementById('end-date').value = '';
+                    
+                    // Fetch the data and update the chart without filters
+                    const initialStartDate = '1970-01-01'; // Adjust if needed
+                    const initialEndDate = new Date().toISOString().split('T')[0]; // Today's date
+                    fetchDataAndUpdate(initialStartDate, initialEndDate);
                 });
 
                 // Initial fetch with no filters

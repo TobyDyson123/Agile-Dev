@@ -6,7 +6,7 @@ body {
     margin: 0; 
 }
 
-button {
+button, input {
     font-family: varela round, sans-serif !important;
 }
 
