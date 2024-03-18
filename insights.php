@@ -19,7 +19,24 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+
+    // Prepare the SQL query to fetch categories and custom categories
+    $sqlCategories = "
+        SELECT title FROM Category
+        UNION ALL
+        SELECT title FROM CustomCategory WHERE userID = ?
+    ";
+    $stmt = $conn->prepare($sqlCategories);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $resultCategories = $stmt->get_result();
+
+    $categories = [];
+    while($row = $resultCategories->fetch_assoc()) {
+        $categories[] = $row;
+    }
+
+    $stmt->close();
     $conn->close();
     ?>
 
@@ -264,6 +281,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Bar Graph Container -->
+                    <div class="chart-container">
+                        <h2>Monthly Category Overview</h2>
+                        <div id="barGraph-container" style="overflow-x: auto; width: 100%;">
+                            <svg id="barGraph"></svg>
+                        </div>
+                        <div class="filter-container">
+                            <select id="category-selector">
+                                <!-- Dynamically populated options -->
+                                <?php foreach($categories as $category): ?>
+                                    <option value="<?php echo htmlspecialchars($category['title']); ?>">
+                                        <?php echo htmlspecialchars($category['title']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button onclick="updateBarGraph()">Show Statistics</button>
+                        </div>
+                    </div>
                 </div>
             </div>  
         </div>
@@ -459,7 +495,39 @@
                     drawLineGraph(formattedData);
                 })
                 .catch(error => console.error('Error:', error));
-                    });
+
+                // Update bar graph based on selected category
+                function updateBarGraph() {
+                    const selectedCategoryId = document.getElementById('category-selector').value;
+                    // Fetch data for the selected category and then call drawBarGraph(data)
+                }
+
+                // Draw bar graph
+                function drawBarGraph(data) {
+                    // Clear the previous bar graph
+                    d3.select('#barGraph').selectAll("*").remove();
+
+                    const svg = d3.select("#barGraph");
+                    const margin = {top: 20, right: 20, bottom: 30, left: 40};
+                    const width = +svg.attr("width") - margin.left - margin.right;
+                    const height = +svg.attr("height") - margin.top - margin.bottom;
+
+                    // Set up your scales and axes here
+                    const x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+                    const y = d3.scaleLinear().rangeRound([height, 0]);
+
+                    // Set up your domains based on the data
+                    x.domain(data.map(d => d.month));
+                    y.domain([0, d3.max(data, d => Math.max(d.totalIns, d.totalOuts))]);
+
+                    // Append g element for the bar graph
+                    const g = svg.append("g")
+                        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                    // Create bars for total ins and total outs here
+                    // ...
+                }
+            });
         </script>
     </body>
     </html>
