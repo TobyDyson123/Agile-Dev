@@ -49,10 +49,11 @@
             }
 
             .legend-container {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(4, 1fr);
                 padding: 10px;
+                gap: 20px;
             }
 
             .legend-item {
@@ -73,7 +74,45 @@
                 color: #333;
             }
 
+            .total-expenditure {
+                margin-top: 20px;
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+            }
 
+            .filter-container {
+                margin-bottom: 20px;
+            }
+
+            .chart-container {
+                background-color: #f2f2f2;
+                border-radius: 25px;
+                padding: 20px;
+            }
+
+            .chart-container h2 {
+                text-align: center;
+                margin-top: 0;
+                padding-top: 20px;
+            }
+
+            .chart-wrapper {
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            @media screen and (max-width: 900px) {
+                .chart-wrapper {
+                    flex-direction: column;
+                }
+
+                .legend-container {
+                    margin-top: 20px;
+                }
+            }
         </style>
         <script src="https://d3js.org/d3.v6.min.js"></script>
     </head>
@@ -103,9 +142,21 @@
             </div>
             <div class="content-container">
                 <div class="main-content">
-                    <p>beans</p>
-                    <div class="legend-container">
-                        <!-- Legend items will be dynamically inserted here by JavaScript -->
+                    <div class="chart-container">
+                        <h2>Expenditure</h2>
+                        <div class="chart-wrapper">
+                            <div class="legend-container">
+                                <!-- Legend items will be dynamically inserted here by JavaScript -->
+                            </div>
+                        </div>
+                        <div id="total-expenditure" class="total-expenditure">
+                            <!-- The total expenditure will be inserted here -->
+                        </div>
+                    </div>
+                    <div class="filter-container">
+                        <input type="date" id="start-date" name="start">
+                        <input type="date" id="end-date" name="end">
+                        <button id="filter-btn">Filter</button>
                     </div>
                 </div>
             </div>  
@@ -113,66 +164,94 @@
         <div id="tooltip" style="opacity: 0; position: absolute; pointer-events: none; background-color: white; border: 1px solid; border-radius: 5px; padding: 10px; transition: opacity 0.3s;"></div>        
         <script src="script.js"></script>
         <script>
-            function createLegend(data) {
-                const legendContainer = d3.select('.legend-container');
-                legendContainer.html(''); // Clear any existing legend items
-
-                data.forEach(category => {
-                    const legendItem = legendContainer.append('div')
-                        .attr('class', 'legend-item');
-
-                    legendItem.append('div')
-                        .attr('class', 'legend-color-box')
-                        .style('background-color', category.colour);
-
-                    legendItem.append('div')
-                        .attr('class', 'legend-text')
-                        .text(category.title);
-                });
-            }
-
             document.addEventListener("DOMContentLoaded", function() {
-                fetch('data.php')
-                .then(response => response.json())
-                .then(data => {
-                    const pie = d3.pie().value(d => d.total_expenditure);
-                    const arcData = pie(data);
+                // Function to fetch data and update the chart and legend
+                const fetchDataAndUpdate = (startDate, endDate) => {
+                    fetch(`data.php?start=${startDate}&end=${endDate}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const pie = d3.pie().value(d => d.total_expenditure);
+                        const arcData = pie(data);
 
-                    const outerRadius = 150;
-                    const innerRadius = 0;
-                    const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+                        const outerRadius = 150;
+                        const innerRadius = 0;
+                        const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-                    const svg = d3.select('.main-content').append('svg')
-                        .attr('width', 400)
-                        .attr('height', 400)
-                        .append('g')
-                        .attr('transform', 'translate(200,200)');
+                        // Clear the previous content
+                        d3.select('.chart-wrapper svg').remove();
+                        const svg = d3.select('.chart-wrapper').insert('svg', ':first-child')
+                            .attr('width', 300)
+                            .attr('height', 300)
+                            .append('g')
+                            .attr('transform', 'translate(150,150)');
 
-                    const tooltip = d3.select('#tooltip');
+                        const tooltip = d3.select('#tooltip');
 
-                    svg.selectAll('path')
-                        .data(arcData)
-                        .enter()
-                        .append('path')
-                        .attr('d', arc)
-                        .attr('fill', d => d.data.colour)  // Set the fill color using the colour attribute from your data
-                        .on('mouseover', function(event, d) {
-                            tooltip.style('opacity', 1);
-                            tooltip.html(`Category: ${d.data.title}<br>Expenditure: $${d.data.total_expenditure}`)
-                                .style('left', (event.pageX + 15) + 'px')
-                                .style('top', (event.pageY - 28) + 'px');
-                        })
-                        .on('mousemove', function(event) {
-                            tooltip.style('left', (event.pageX + 15) + 'px')
-                                .style('top', (event.pageY - 28) + 'px');
-                        })
-                        .on('mouseout', function() {
-                            tooltip.style('opacity', 0);
-                        });
-                    
-                    createLegend(data);
-                })
-                .catch(error => console.error('Error:', error));
+                        svg.selectAll('path')
+                            .data(arcData)
+                            .enter()
+                            .append('path')
+                            .attr('d', arc)
+                            .attr('fill', d => d.data.colour)
+                            .on('mouseover', function(event, d) {
+                                tooltip.style('opacity', 1);
+                                tooltip.html(`Category: ${d.data.title}<br>Expenditure: $${d.data.total_expenditure}`)
+                                    .style('left', (event.pageX + 15) + 'px')
+                                    .style('top', (event.pageY - 28) + 'px');
+                            })
+                            .on('mousemove', function(event) {
+                                tooltip.style('left', (event.pageX + 15) + 'px')
+                                    .style('top', (event.pageY - 28) + 'px');
+                            })
+                            .on('mouseout', function() {
+                                tooltip.style('opacity', 0);
+                            });
+
+                        // Calculate the total expenditure
+                        const totalExpenditure = data.reduce((acc, category) => acc + parseFloat(category.total_expenditure), 0);
+                        const formattedTotal = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(totalExpenditure);
+
+                        // Display the total expenditure
+                        d3.select('#total-expenditure').text(`Total Expenditure: ${formattedTotal}`);
+                        
+                        // Create the legend
+                        createLegend(data);
+                    })
+                    .catch(error => console.error('Error:', error));
+                };
+
+                // Function to create the legend
+                function createLegend(data) {
+                    const legendContainer = d3.select('.legend-container');
+                    legendContainer.html(''); // Clear any existing legend items
+
+                    data.forEach(category => {
+                        const legendItem = legendContainer.append('div')
+                            .attr('class', 'legend-item');
+
+                        legendItem.append('div')
+                            .attr('class', 'legend-color-box')
+                            .style('background-color', category.colour);
+
+                        legendItem.append('div')
+                            .attr('class', 'legend-text')
+                            .text(category.title);
+                    });
+                }
+
+                // Event listener for the filter button
+                document.getElementById('filter-btn').addEventListener('click', () => {
+                    // Get the date values
+                    const startDate = document.getElementById('start-date').value;
+                    const endDate = document.getElementById('end-date').value;
+                    // Fetch the data and update the chart
+                    fetchDataAndUpdate(startDate, endDate);
+                });
+
+                // Initial fetch with no filters
+                const initialStartDate = '1970-01-01'; // Adjust if needed
+                const initialEndDate = new Date().toISOString().split('T')[0]; // Today's date
+                fetchDataAndUpdate(initialStartDate, initialEndDate);
             });
 
         </script>
