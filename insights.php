@@ -124,6 +124,10 @@
                 padding: 20px;
             }
 
+            .chart-container:not(:last-child) {
+                margin-bottom: 40px;
+            }
+
             .chart-container h2 {
                 text-align: center;
                 margin-top: 0;
@@ -141,7 +145,49 @@
                 display: none;
             }
 
-            @media screen and (max-width: 900px) {
+            #lineGraph-container svg {
+                min-width: 960px; /* Set to the natural width of the SVG */
+                width: 100%;
+                height: 500px;
+            }
+
+            @media screen and (max-width: 1250px) {
+                .chart-wrapper {
+                    flex-direction: column;
+                }
+
+                .legend-container {
+                    margin-top: 20px;
+                }
+
+                #total-expenditure-large {
+                    display: none;
+                }
+
+                #total-expenditure-small {
+                    display: block;
+                }
+            }
+
+            @media screen and (max-width: 1100px) {
+                .chart-wrapper {
+                    flex-direction: row;
+                }
+
+                .legend-container {
+                    margin-top: 0px;
+                }
+
+                #total-expenditure-large {
+                    display: block;
+                }
+
+                #total-expenditure-small {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 1000px) {
                 .chart-wrapper {
                     flex-direction: column;
                 }
@@ -200,14 +246,23 @@
                         <div id="total-expenditure-large" class="total-expenditure">
                             <!-- The total expenditure will be inserted here -->
                         </div>
+                        <div class="filter-container">
+                            <label for="start-date">From:</label>
+                            <input type="date" id="start-date" name="start">
+                            <label for="end-date">To:</label>
+                            <input type="date" id="end-date" name="end">
+                            <button id="filter-btn">Filter</button>
+                            <button id="reset-btn">Reset</button>
+                        </div>
                     </div>
-                    <div class="filter-container">
-                        <label for="start-date">From:</label>
-                        <input type="date" id="start-date" name="start">
-                        <label for="end-date">To:</label>
-                        <input type="date" id="end-date" name="end">
-                        <button id="filter-btn">Filter</button>
-                        <button id="reset-btn">Reset</button>
+
+                    <div class="chart-container">
+                        <div class="line-chart-container">
+                            <h2>Monthly Net Spend</h2>
+                            <div id="lineGraph-container" style="overflow-x: auto; width: 100%;">
+                                <svg id="lineGraph"></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>  
@@ -247,18 +302,38 @@
                             .on('mouseover', function(event, d) {
                                 tooltip.style('opacity', 1);
                                 tooltip.style('visibility', 'visible');
-                                tooltip.html(`Category: ${d.data.title}<br>Expenditure: £${d.data.total_expenditure}`)
-                                    .style('left', (event.pageX + 15) + 'px')
-                                    .style('top', (event.pageY - 28) + 'px');
+                                tooltip.html(`Category: ${d.data.title}<br>Expenditure: £${d.data.total_expenditure}`);
+                                adjustTooltipPosition(event);
                             })
-                            .on('mousemove', function(event) {
-                                tooltip.style('left', (event.pageX + 15) + 'px')
-                                    .style('top', (event.pageY - 28) + 'px');
-                            })
+                            .on('mousemove', adjustTooltipPosition)
                             .on('mouseout', function() {
                                 tooltip.style('opacity', 0);
                                 tooltip.style('visibility', 'hidden');
                             });
+
+                        function adjustTooltipPosition(event) {
+                            let x = event.pageX + 15;
+                            let y = event.pageY - 28;
+                            const tooltipWidth = tooltip.node().offsetWidth;
+                            const tooltipHeight = tooltip.node().offsetHeight;
+                            const windowWidth = window.innerWidth;
+                            const windowHeight = window.innerHeight;
+
+                            // Adjust horizontal position to avoid going offscreen
+                            if (x + tooltipWidth > windowWidth) {
+                                x = windowWidth - tooltipWidth - 20; // 20px padding from the edge
+                            }
+
+                            // Adjust vertical position to avoid going offscreen
+                            if (y + tooltipHeight > windowHeight) {
+                                y = windowHeight - tooltipHeight - 20; // 20px padding from the bottom
+                            }
+
+                            // Apply the position adjustments
+                            tooltip.style('left', `${x}px`);
+                            tooltip.style('top', `${y}px`);
+                        }
+
 
                         // Calculate the total expenditure
                         const totalExpenditure = data.reduce((acc, category) => acc + parseFloat(category.total_expenditure), 0);
@@ -318,8 +393,73 @@
                 const initialStartDate = '1970-01-01'; // Adjust if needed
                 const initialEndDate = new Date().toISOString().split('T')[0]; // Today's date
                 fetchDataAndUpdate(initialStartDate, initialEndDate);
-            });
 
+                // Line chart
+                const drawLineGraph = (data) => {
+                    const svg = d3.select("#lineGraph");
+                    const svgWidth = 960, svgHeight = 500;
+                    const margin = {top: 20, right: 20, bottom: 30, left: 50},
+                        width = svgWidth - margin.left - margin.right,
+                        height = svgHeight - margin.top - margin.bottom;
+                    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+                    // Find the minimum and maximum net spend to set the y-axis domain
+                    const netSpendMin = d3.min(data, d => d.netSpend);
+                    const netSpendMax = d3.max(data, d => d.netSpend);
+
+                    const x = d3.scaleTime()
+                        .rangeRound([0, width])
+                        .domain(d3.extent(data, d => d.month));
+
+                    const y = d3.scaleLinear()
+                        .rangeRound([height, 0])
+                        .domain([netSpendMin, netSpendMax]);
+
+                    // Calculate where the x-axis should be positioned based on the y-scale
+                    const xAxisTranslate = y(0) < 0 ? 0 : y(0) > height ? height : y(0);
+
+                    g.append("g")
+                        .attr("transform", `translate(0,${xAxisTranslate})`)
+                        .call(d3.axisBottom(x));
+
+                    g.append("g")
+                        .call(d3.axisLeft(y))
+                        .append("text")
+                        .attr("fill", "#000")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 6)
+                        .attr("dy", "0.71em")
+                        .attr("text-anchor", "end")
+                        .text("Net Spend (£)");
+
+                    const line = d3.line()
+                        .x(d => x(d.month))
+                        .y(d => y(d.netSpend));
+
+                    g.append("path")
+                        .datum(data)
+                        .attr("fill", "none")
+                        .attr("stroke", "steelblue")
+                        .attr("stroke-linejoin", "round")
+                        .attr("stroke-linecap", "round")
+                        .attr("stroke-width", 1.5)
+                        .attr("d", line);
+                };
+
+                fetch('fetch_financial_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Process and format the data if necessary
+                    const formattedData = data.map(item => ({
+                        ...item,
+                        month: new Date(item.year, item.month - 1, 1)
+                    }));
+
+                    // Draw the line graph with the formatted data
+                    drawLineGraph(formattedData);
+                })
+                .catch(error => console.error('Error:', error));
+                    });
         </script>
     </body>
     </html>

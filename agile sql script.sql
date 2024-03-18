@@ -90,6 +90,9 @@ INSERT INTO Category (title, colour, icon) VALUES ('Entertainment', '#F0BE68', '
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 5.00, '2024-01-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'out', 5.00, '2023-01-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'in', 5.00, '2024-02-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'in', 5.00, '2024-02-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'out', 5.00, '2024-02-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'out', 5.00, '2024-02-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 4, "Comment", 'out', 5.00, '2023-02-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'in', 5.00, '2024-03-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'out', 5.00, '2023-03-01');
@@ -101,6 +104,6 @@ INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'out', 5.00, '2023-07-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'in', 5.00, '2023-06-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 7, "Comment", 'out', 5.00, '2023-05-01');
-INSERT INTO Transaction (userID, customCategoryID, comment, type, amount, date) VALUES (1, 1, "Sausage Roll", 'in', 100000.00, '2023-04-01');
+INSERT INTO Transaction (userID, customCategoryID, comment, type, amount, date) VALUES (1, 1, "Sausage Roll", 'out', 10.00, '2023-04-01');
 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');
