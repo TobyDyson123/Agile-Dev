@@ -11,6 +11,7 @@
     $dbUsername = 'root'; // or your database username
     $dbPassword = ''; // or your database password
     $dbName = 'agile'; // your database name
+    $userId = $_SESSION["userID"];
 
     // Create connection
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
@@ -168,6 +169,19 @@
                 height: 500px;
             }
 
+            #barGraph-container svg {
+                min-width: 960px; /* Set to the natural width of the SVG */
+                width: 100%;
+                height: 520px;
+            }
+
+            #category-selector {
+                font-size: 20px;
+                padding: 5px;
+                border-radius: 25px;
+                margin-right: 10px;
+            }
+
             @media screen and (max-width: 1250px) {
                 .chart-wrapper {
                     flex-direction: column;
@@ -297,7 +311,7 @@
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <button onclick="updateBarGraph()">Show Statistics</button>
+                            <button id="category-btn" onclick="handleCategoryChange()">Show Statistics</button>
                         </div>
                     </div>
                 </div>
@@ -496,37 +510,85 @@
                 })
                 .catch(error => console.error('Error:', error));
 
-                // Update bar graph based on selected category
-                function updateBarGraph() {
-                    const selectedCategoryId = document.getElementById('category-selector').value;
-                    // Fetch data for the selected category and then call drawBarGraph(data)
+                // Function to handle the category selection and button click
+                function handleCategoryChange() {
+                    // Get the selected category
+                    const selectedCategory = document.getElementById('category-selector').value;
+
+                    // Fetch and display the bar graph for the selected category
+                    updateBarGraph(selectedCategory);
                 }
+
+                // Update bar graph based on selected category
+                function updateBarGraph(category) {
+                    fetch(`fetch_categories.php?category=${encodeURIComponent(category)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            drawBarGraph(data);
+                        })
+                        .catch(error => console.error('Error fetching category data:', error));
+                }
+
+                document.getElementById('category-btn').addEventListener('click', handleCategoryChange);
 
                 // Draw bar graph
                 function drawBarGraph(data) {
                     // Clear the previous bar graph
                     d3.select('#barGraph').selectAll("*").remove();
-
                     const svg = d3.select("#barGraph");
-                    const margin = {top: 20, right: 20, bottom: 30, left: 40};
-                    const width = +svg.attr("width") - margin.left - margin.right;
-                    const height = +svg.attr("height") - margin.top - margin.bottom;
+                    const svgWidth = 960, svgHeight = 500;
+                    const margin = {top: 20, right: 20, bottom: 30, left: 50},
+                        width = svgWidth - margin.left - margin.right,
+                        height = svgHeight - margin.top - margin.bottom;
+                    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-                    // Set up your scales and axes here
                     const x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
                     const y = d3.scaleLinear().rangeRound([height, 0]);
 
                     // Set up your domains based on the data
-                    x.domain(data.map(d => d.month));
-                    y.domain([0, d3.max(data, d => Math.max(d.totalIns, d.totalOuts))]);
+                    x.domain(data.map(d => `${d.year}-${d.month}`));
+                    y.domain([0, d3.max(data, d => Math.max(d.totalIncome, d.totalOutcome))]);
 
                     // Append g element for the bar graph
-                    const g = svg.append("g")
-                        .attr("transform", `translate(${margin.left},${margin.top})`);
+                    g.append("g")
+                        .attr("transform", `translate(0,${height})`)
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                        .style("text-anchor", "end")
+                        .attr("dx", "-.8em")
+                        .attr("dy", ".15em")
+                        .attr("transform", "rotate(-65)");
 
-                    // Create bars for total ins and total outs here
-                    // ...
-                }
+                    g.append("g")
+                        .call(d3.axisLeft(y).ticks(10, "$"));
+
+                    // Create bars for total ins
+                    g.selectAll(".bar.income")
+                        .data(data)
+                        .enter()
+                        .append("rect")
+                        .attr("class", "bar income")
+                        .attr("x", d => x(`${d.year}-${d.month}`))
+                        .attr("y", d => y(d.totalIncome))
+                        .attr("width", x.bandwidth() / 2)
+                        .attr("height", d => height - y(d.totalIncome))
+                        .attr("fill", "green");
+
+                    // Create bars for total outs
+                    g.selectAll(".bar.outcome")
+                        .data(data)
+                        .enter()
+                        .append("rect")
+                        .attr("class", "bar outcome")
+                        .attr("x", d => x(`${d.year}-${d.month}`) + x.bandwidth() / 2)
+                        .attr("y", d => y(d.totalOutcome))
+                        .attr("width", x.bandwidth() / 2)
+                        .attr("height", d => height - y(d.totalOutcome))
+                        .attr("fill", "red");
+                    }
+
+                // Call updateBarGraph once to show initial data
+                updateBarGraph();
             });
         </script>
     </body>
