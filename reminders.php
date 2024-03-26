@@ -191,10 +191,64 @@
                 visibility: visible; 
                 opacity: 1; 
             }
-
+            
             .option-container button {
                 width: fit-content;
                 font-size: 20px;
+            }
+                
+            .option-heading-wrapper {
+                display: flex;
+                align-items: center;
+            }
+            .option-heading-wrapper span {
+                display: none;
+                font-size: 16px;
+                color: #666;
+                font-style: italic;
+            }
+
+            @media screen and (max-width: 1000px) {
+                .option-container .toggle {
+                    margin-left: 0;
+                    margin-bottom: 20px;
+                }
+
+                .option-title-container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .tooltip-container {
+                    display: none;
+                }
+
+                .option-title-container span {
+                    display: block;
+                }
+
+                .option-heading-wrapper {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .option-title-container h3 {
+                    margin-bottom: 5px;
+                }
+
+                .option-container button {
+                    margin-top: 20px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                .form-container {
+                    padding: 20px;
+                }
+
+                .main-content h2 {
+                    text-align: center;
+                }
             }
 
         </style>
@@ -229,10 +283,13 @@
                     <div class="form-container">
                         <div id="transactionN" class="option-container">
                             <div class="option-title-container">
-                                <h3>Transaction Notifications</h3>
-                                <div class="tooltip-container">
-                                    <i class="fas fa-question"></i>
-                                    <div class="tooltip">Get notified when a transaction is added</div>
+                                <div class="option-heading-wrapper">
+                                    <h3>Transaction Notifications</h3>
+                                    <span>Get notified when a transaction is added</span>
+                                    <div class="tooltip-container">
+                                        <i class="fas fa-question"></i>
+                                        <div class="tooltip">Get notified when a transaction is added</div>
+                                    </div>
                                 </div>
                                 <div class="toggle">
                                     <button type="button" id="transaction-off-button" class="transaction toggle-button" data-type="off">Off</button>
@@ -242,10 +299,13 @@
                         </div>
                         <div id="budgetR" class="option-container">
                             <div class="option-title-container">
-                                <h3>Monthly Budget Reminders</h3>
-                                <div class="tooltip-container">
-                                    <i class="fas fa-question"></i>
-                                    <div class="tooltip">Get notified when reaching your monthly budget</div>
+                                <div class="option-heading-wrapper">
+                                    <h3>Monthly Budget Reminders</h3>
+                                    <span>Get notified when reaching your monthly budget</span>
+                                    <div class="tooltip-container">
+                                        <i class="fas fa-question"></i>
+                                        <div class="tooltip">Get notified when reaching your monthly budget</div>
+                                    </div>
                                 </div>
                                 <div class="toggle">
                                     <button type="button" id="budget-off-button" class="budget toggle-button" data-type="off">Off</button>
@@ -257,10 +317,13 @@
                         </div>
                         <div id="remindersR" class="option-container">
                             <div class="option-title-container">
-                                <h3>Monthly Spending Reminders</h3>
-                                <div class="tooltip-container">
-                                    <i class="fas fa-question"></i>
-                                    <div class="tooltip">Get notified when spending goals are exceeded</div>
+                                <div class="option-heading-wrapper">
+                                    <h3>Monthly Spending Reminders</h3>
+                                    <span>Get notified when spending goals are exceeded</span>
+                                    <div class="tooltip-container">
+                                        <i class="fas fa-question"></i>
+                                        <div class="tooltip">Get notified when spending goals are exceeded</div>
+                                    </div>
                                 </div>
                                 <div class="toggle">
                                     <button type="button" id="spending-off-button" class="spending toggle-button active" data-type="off">Off</button>
