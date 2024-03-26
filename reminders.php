@@ -192,6 +192,10 @@
                 opacity: 1; 
             }
 
+            .option-container button {
+                width: fit-content;
+            }
+
         </style>
     </head>
     <body>
@@ -248,7 +252,7 @@
                                 </div>
                             </div>
                             <input type="number" id="budget-amount" placeholder="Enter your monthly budget">
-                            <button type="button" id="update-budget-amount">Update Budget</button>
+                            <button type="button" class="btn-primary" id="update-budget-amount">Update Budget</button>
                         </div>
                         <div id="remindersR" class="option-container">
                             <div class="option-title-container">
@@ -272,7 +276,7 @@
                                 <?php endforeach; ?>
                             </select>
                             <input type="number" id="spending-amount" placeholder="Enter your spending goal">
-                            <button type="button" id="update-spending-amount">Update Goal</button>
+                            <button type="button" class="btn-primary" id="update-spending-amount">Update Goal</button>
                         </div>
                     </div>
                 </div>
