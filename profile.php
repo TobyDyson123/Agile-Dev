@@ -20,6 +20,24 @@
         die("Connection failed: " . $conn->connect_error);
     }
     
+    // Fetch user details
+    $userID = $_SESSION["userID"];
+    $userQuery = "SELECT username, password, emailAddress FROM User WHERE userID = ?";
+    $stmt = $conn->prepare($userQuery);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $userResult = $stmt->get_result();
+    $userData = $userResult->fetch_assoc();
+
+    // Fetch custom categories
+    $categoriesQuery = "SELECT title, colour FROM CustomCategory WHERE userID = ?";
+    $stmt = $conn->prepare($categoriesQuery);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $categoriesResult = $stmt->get_result();
+    $customCategories = $categoriesResult->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
     $conn->close();
     ?>
 
@@ -64,7 +82,25 @@
             </div>
             <div class="content-container">
                 <div class="main-content">
-                    <p>beans</p>
+                    <div class="user-details">
+                        <h2>User Details</h2>
+                        <p><strong>Username:</strong> <?php echo htmlspecialchars($userData['username']); ?></p>
+                        <p><strong>Password:</strong> <?php echo htmlspecialchars($userData['password']); ?></p>
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($userData['emailAddress']); ?></p>
+                        <button>Delete Account</button>
+                    </div>
+
+                    <div class="custom-categories">
+                        <h2>Custom Categories</h2>
+                        <?php foreach ($customCategories as $category): ?>
+                            <div class="category">
+                                <p><?php echo htmlspecialchars($category['title']); ?></p>
+                                <!-- You can use the color for styling or an icon -->
+                                <!-- Additional elements like edit and delete buttons go here -->
+                            </div>
+                        <?php endforeach; ?>
+                        <button>Add New Category</button>
+                    </div>
                 </div>
             </div>  
         </div>        

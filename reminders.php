@@ -11,6 +11,7 @@
     $dbUsername = 'root'; // or your database username
     $dbPassword = ''; // or your database password
     $dbName = 'agile'; // your database name
+    $userId = $_SESSION["userID"];
 
     // Create connection
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
@@ -19,7 +20,24 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+
+    // Prepare the SQL query to fetch categories and custom categories
+    $sqlCategories = "
+        SELECT title FROM Category
+        UNION ALL
+        SELECT title FROM CustomCategory WHERE userID = ?
+    ";
+    $stmt = $conn->prepare($sqlCategories);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $resultCategories = $stmt->get_result();
+
+    $categories = [];
+    while($row = $resultCategories->fetch_assoc()) {
+        $categories[] = $row;
+    }
+
+    $stmt->close();
     $conn->close();
     ?>
 
@@ -44,6 +62,20 @@
 
             .option-container {
                 padding: 20px 0;
+            }
+
+            .option-container input, .option-container select {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                border: 1px solid #AAAAAA;
+                box-sizing: border-box;
+                margin-top: 10px;
+                font-size: 20px;
+            }
+
+            .option-title-container {
                 display: flex;
                 align-items: center;
             }
@@ -141,33 +173,84 @@
                 <h2>Reminder settings</h2>
                     <div class="form-container">
                         <div id="transactionN" class="option-container">
-                            <h3>Transaction Notifications</h3>
-                            <div class="tooltip-container">
-                                <i class="fas fa-question"></i>
-                                <div class="tooltip">Get notified when a transaction is added</div>
+                            <div class="option-title-container">
+                                <h3>Transaction Notifications</h3>
+                                <div class="tooltip-container">
+                                    <i class="fas fa-question"></i>
+                                    <div class="tooltip">Get notified when a transaction is added</div>
+                                </div>
+                                <div class="toggle">
+                                    <button type="button" id="transaction-off-button" class="transaction toggle-button active" data-type="off">Off</button>
+                                    <button type="button" id="transaction-on-button" class="transaction toggle-button" data-type="on">On</button>
+                                </div>
                             </div>
-                            <div class="toggle">(o-)</div>
                         </div>
                         <div id="budgetR" class="option-container">
-                            <h3>Budget Reminders</h3>
-                            <div class="tooltip-container">
-                                <i class="fas fa-question"></i>
-                                <div class="tooltip">Get notified when reaching your monthly budget</div>
+                            <div class="option-title-container">
+                                <h3>Budget Reminders</h3>
+                                <div class="tooltip-container">
+                                    <i class="fas fa-question"></i>
+                                    <div class="tooltip">Get notified when reaching your monthly budget</div>
+                                </div>
+                                <div class="toggle">
+                                    <button type="button" id="budget-off-button" class="budget toggle-button active" data-type="off">Off</button>
+                                    <button type="button" id="budget-on-button" class="budget toggle-button" data-type="on">On</button>
+                                </div>
                             </div>
-                            <div class="toggle">(o-)</div>
+                            <input type="number" id="budget-amount" placeholder="Enter your monthly budget">
                         </div>
                         <div id="remindersR" class="option-container">
-                            <h3>Spending Reminders</h3>
-                            <div class="tooltip-container">
-                                <i class="fas fa-question"></i>
-                                <div class="tooltip">Get notified when spending goals are exceeded</div>
+                            <div class="option-title-container">
+                                <h3>Spending Reminders</h3>
+                                <div class="tooltip-container">
+                                    <i class="fas fa-question"></i>
+                                    <div class="tooltip">Get notified when a reminder is due</div>
+                                </div>
+                                <div class="toggle">
+                                    <button type="button" id="spending-off-button" class="spending toggle-button active" data-type="off">Off</button>
+                                    <button type="button" id="spending-on-button" class="spending toggle-button" data-type="on">On</button>
+                                </div>
                             </div>
-                            <div class="toggle">(o-)</div>
+                            <select id="category-selector">
+                                <!-- Dynamically populated options -->
+                                <?php foreach($categories as $category): ?>
+                                    <option value="<?php echo htmlspecialchars($category['title']); ?>">
+                                        <?php echo htmlspecialchars($category['title']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <input type="number" id="budget-amount" placeholder="Enter your monthly budget">
                         </div>
                     </div>
                 </div>
             </div>  
-        </div>        
+        </div>
+        <script>
+            // Update toggle buttons and hidden input on click
+            var toggleButtons = document.querySelectorAll('.toggle-button');
+            var transactionToggleButtons = document.querySelectorAll('.transaction');
+            var budgetToggleButtons = document.querySelectorAll('.budget');
+            var spendingToggleButtons = document.querySelectorAll('.spending');
+
+            transactionToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    transactionToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                });
+            });
+            budgetToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    budgetToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                });
+            });
+            spendingToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    spendingToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                });
+            });
+        </script>    
         <script src="script.js"></script>
     </body>
     </html>
