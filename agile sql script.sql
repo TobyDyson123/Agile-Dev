@@ -153,5 +153,7 @@ INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES
 INSERT INTO Transaction (userID, customCategoryID, comment, type, amount, date) VALUES (1, 1, "Sausage Roll", 'out', 10.00, '2023-04-01');
 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');
+INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'More Category', '#518511');
+INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Another Category', '#818A11');
 
-SELECT * FROM spendinggoals
+SELECT * FROM User
