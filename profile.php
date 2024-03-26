@@ -57,12 +57,15 @@
                 background-color: #fff; /* or any color you prefer */
                 border-radius: 10px;
                 padding: 20px;
-                margin-bottom: 20px;
             }
 
             .user-details p, .custom-categories .category {
                 display: flex;
                 align-items: center;
+            }
+
+            .user-details p {
+                margin: 15px 0;
             }
 
             .user-details button, .custom-categories button {
@@ -88,6 +91,7 @@
             .delete-button {
                 background-color: #FF0000 !important; /* Red color for the delete button */
                 color: white;
+                margin-top: 10px;
             }
 
             .icon-button {
@@ -137,6 +141,7 @@
                 display: grid; 
                 grid-template-columns: 1fr 1fr;
                 gap: 10px 30px;
+                margin-top: 15px;
             }
 
             .category-buttons {
