@@ -38,6 +38,56 @@
     }
 
     $stmt->close();
+
+    // Fetch transaction notes setting
+    $sqlTransactionNotes = "SELECT isOn FROM TransactionNotes WHERE userID = ?";
+    $stmt = $conn->prepare($sqlTransactionNotes);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $resultTransactionNotes = $stmt->get_result();
+
+    $transactionIsOn = 'off';
+    if($row = $resultTransactionNotes->fetch_assoc()) {
+        $transactionIsOn = $row['isOn'] ? 'on' : 'off';
+    }
+
+    $stmt->close();
+
+    // Fetch budget notes setting
+    $sqlTransactionNotes = "SELECT isOn FROM BudgetReminder WHERE userID = ?";
+    $stmt = $conn->prepare($sqlTransactionNotes);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $resultTransactionNotes = $stmt->get_result();
+
+    $budgetIsOn = 'off';
+    if($row = $resultTransactionNotes->fetch_assoc()) {
+        $budgetIsOn = $row['isOn'] ? 'on' : 'off';
+    }
+
+    $stmt->close();
+
+    // Fetch spending goals setting for categories and custom categories
+    $sqlSpendingGoals = "
+        SELECT c.title, IFNULL(s.isOn, 0) as isOn
+        FROM Category c
+        LEFT JOIN SpendingGoals s ON c.categoryID = s.categoryID AND s.userID = ?
+        UNION ALL
+        SELECT cc.title, IFNULL(s.isOn, 0) as isOn
+        FROM CustomCategory cc
+        LEFT JOIN SpendingGoals s ON cc.customCategoryID = s.customCategoryID AND s.userID = ?
+        ";
+    $stmt = $conn->prepare($sqlSpendingGoals);
+    $stmt->bind_param("ii", $userId, $userId);
+    $stmt->execute();
+    $resultSpendingGoals = $stmt->get_result();
+
+    $spendingGoals = [];
+    while($row = $resultSpendingGoals->fetch_assoc()) {
+        $spendingGoals[$row['title']] = $row['isOn'] ? 'on' : 'off';
+    }
+
+    $stmt->close();
     $conn->close();
     ?>
 
@@ -180,7 +230,7 @@
                                     <div class="tooltip">Get notified when a transaction is added</div>
                                 </div>
                                 <div class="toggle">
-                                    <button type="button" id="transaction-off-button" class="transaction toggle-button active" data-type="off">Off</button>
+                                    <button type="button" id="transaction-off-button" class="transaction toggle-button" data-type="off">Off</button>
                                     <button type="button" id="transaction-on-button" class="transaction toggle-button" data-type="on">On</button>
                                 </div>
                             </div>
@@ -193,11 +243,12 @@
                                     <div class="tooltip">Get notified when reaching your monthly budget</div>
                                 </div>
                                 <div class="toggle">
-                                    <button type="button" id="budget-off-button" class="budget toggle-button active" data-type="off">Off</button>
+                                    <button type="button" id="budget-off-button" class="budget toggle-button" data-type="off">Off</button>
                                     <button type="button" id="budget-on-button" class="budget toggle-button" data-type="on">On</button>
                                 </div>
                             </div>
                             <input type="number" id="budget-amount" placeholder="Enter your monthly budget">
+                            <button type="button" id="update-budget-amount">Update Budget</button>
                         </div>
                         <div id="remindersR" class="option-container">
                             <div class="option-title-container">
@@ -211,21 +262,70 @@
                                     <button type="button" id="spending-on-button" class="spending toggle-button" data-type="on">On</button>
                                 </div>
                             </div>
-                            <select id="category-selector">
+                            <select id="category-selector" onchange="updateSpendingToggle(this.value)">
                                 <!-- Dynamically populated options -->
                                 <?php foreach($categories as $category): ?>
-                                    <option value="<?php echo htmlspecialchars($category['title']); ?>">
+                                    <option value="<?php echo htmlspecialchars($category['title']); ?>"
+                                            data-is-on="<?php echo $spendingGoals[$category['title']]; ?>">
                                         <?php echo htmlspecialchars($category['title']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="number" id="budget-amount" placeholder="Enter your monthly budget">
+                            <input type="number" id="spending-amount" placeholder="Enter your spending goal">
+                            <button type="button" id="update-spending-amount">Update Goal</button>
                         </div>
                     </div>
                 </div>
             </div>  
         </div>
         <script>
+            function updateSpendingToggle(categoryTitle) {
+                // Find the selected category's isOn status
+                var option = document.querySelector('#category-selector option[value="' + categoryTitle + '"]');
+                var isOnStatus = option.getAttribute('data-is-on');
+
+                // Update the active class based on the isOn status
+                var spendingButtonOn = document.getElementById('spending-on-button');
+                var spendingButtonOff = document.getElementById('spending-off-button');
+
+                if(isOnStatus === 'on') {
+                    spendingButtonOn.classList.add('active');
+                    spendingButtonOff.classList.remove('active');
+                } else {
+                    spendingButtonOff.classList.add('active');
+                    spendingButtonOn.classList.remove('active');
+                }
+            }
+
+            // Set the active class of transaction remidners based on the database value
+            window.onload = function() {
+                var transactionIsOn = "<?php echo $transactionIsOn; ?>";
+                var budgetIsOn = "<?php echo $budgetIsOn; ?>";
+                var transactionButtonOn = document.getElementById('transaction-on-button');
+                var transactionButtonOff = document.getElementById('transaction-off-button');
+                var budgetButtonOn = document.getElementById('budget-on-button');
+                var budgetButtonOff = document.getElementById('budget-off-button');
+
+                if(transactionIsOn === 'on') {
+                    transactionButtonOn.classList.add('active');
+                    transactionButtonOff.classList.remove('active');
+                } else {
+                    transactionButtonOff.classList.add('active');
+                    transactionButtonOn.classList.remove('active');
+                }
+
+                if(budgetIsOn === 'on') {
+                    budgetButtonOn.classList.add('active');
+                    budgetButtonOff.classList.remove('active');
+                } else {
+                    budgetButtonOff.classList.add('active');
+                    budgetButtonOn.classList.remove('active');
+                }
+
+                // Update spending toggle buttons based on the selected category
+                updateSpendingToggle(document.getElementById('category-selector').value);
+            };
+
             // Update toggle buttons and hidden input on click
             var toggleButtons = document.querySelectorAll('.toggle-button');
             var transactionToggleButtons = document.querySelectorAll('.transaction');
@@ -249,6 +349,92 @@
                     spendingToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
                     button.classList.add('active');
                 });
+            });
+
+            // Update toggle buttons and hidden input on click for transaction reminders
+            transactionToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var isOnValue = button.getAttribute('data-type') === 'on' ? 1 : 0; // Convert 'on'/'off' to 1/0
+                    transactionToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                    
+                    // Perform an AJAX request to update the setting in the database
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_transaction_reminder.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        // Handle the response here
+                        console.log(this.responseText);
+                    };
+                    xhr.send('transactionIsOn=' + isOnValue);
+                });
+            });
+
+            // Update toggle buttons and hidden input on click for budget reminders
+            budgetToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var isOnValue = button.getAttribute('data-type') === 'on' ? 1 : 0; // Convert 'on'/'off' to 1/0
+                    budgetToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                    
+                    // Perform an AJAX request to update the setting in the database
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_budget_reminder.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        // Handle the response here
+                        console.log(this.responseText);
+                    };
+                    xhr.send('budgetIsOn=' + isOnValue);
+                });
+            });
+            
+            // Update the spending goal when a toggle button is clicked
+            spendingToggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var categoryTitle = document.getElementById('category-selector').value;
+                    var isOnValue = button.getAttribute('data-type') === 'on' ? 1 : 0;
+                    spendingToggleButtons.forEach(function(btn) { btn.classList.remove('active'); });
+                    button.classList.add('active');
+                    
+                    // Perform an AJAX request to update the setting in the database
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_spending_goal.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        // Handle the response here
+                        console.log(this.responseText);
+                        // Update the option data attribute
+                        var option = document.querySelector('#category-selector option[value="' + categoryTitle + '"]');
+                        option.setAttribute('data-is-on', button.getAttribute('data-type'));
+                    };
+                    xhr.send('categoryTitle=' + encodeURIComponent(categoryTitle) + '&isOn=' + isOnValue);
+                });
+            });
+
+            document.getElementById('update-budget-amount').addEventListener('click', function() {
+                var monthlyBudget = document.getElementById('budget-amount').value;
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'update_budget_amount.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    console.log(this.responseText);
+                };
+                xhr.send('monthlyBudget=' + monthlyBudget);
+            });
+
+            document.getElementById('update-spending-amount').addEventListener('click', function() {
+                var categoryTitle = document.getElementById('category-selector').value;
+                var spendingAmount = document.getElementById('spending-amount').value;
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'update_spending_goal_amount.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    console.log(this.responseText);
+                };
+                xhr.send('categoryTitle=' + encodeURIComponent(categoryTitle) + '&spendingAmount=' + spendingAmount);
             });
         </script>    
         <script src="script.js"></script>

@@ -55,7 +55,7 @@ CREATE TABLE SpendingGoals (
     userID INT NOT NULL,
     categoryID INT,
     customCategoryID INT,
-    isOn BOOLEAN NOT NULL,
+    isOn TINYINT(1) NOT NULL DEFAULT 0,
     goalAmount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID),
     FOREIGN KEY (categoryID) REFERENCES Category(categoryID),
@@ -65,7 +65,7 @@ CREATE TABLE SpendingGoals (
 CREATE TABLE BudgetReminder (
     budgetReminderID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
-	isOn BOOLEAN NOT NULL,
+	isOn TINYINT(1) NOT NULL DEFAULT 0,
     monthlyBudget DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
@@ -73,9 +73,55 @@ CREATE TABLE BudgetReminder (
 CREATE TABLE TransactionNotes (
     transactionNotesID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT NOT NULL,
-    isOn BOOLEAN NOT NULL,
+    isOn TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
+
+DELIMITER $$
+
+CREATE TRIGGER NewTransactionNotes
+AFTER INSERT ON User FOR EACH ROW
+BEGIN
+    INSERT INTO TransactionNotes (userID) VALUES (NEW.userID);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER NewBudgetReminder
+AFTER INSERT ON User FOR EACH ROW
+BEGIN
+    INSERT INTO BudgetReminder (userID) VALUES (NEW.userID);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER NewSpendingGoals
+AFTER INSERT ON User FOR EACH ROW
+BEGIN
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 1);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 2);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 3);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 4);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 5);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 6);
+    INSERT INTO SpendingGoals (userID, categoryID) VALUES (NEW.userID, 7);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER NewCustomCategorySpendingGoals
+AFTER INSERT ON CustomCategory FOR EACH ROW
+BEGIN
+    INSERT INTO SpendingGoals (userID, customCategoryID) VALUES (NEW.userID, NEW.customCategoryID);
+END$$
+
+DELIMITER ;
 
 INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass', 'test@email.com');
 
@@ -107,3 +153,5 @@ INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES
 INSERT INTO Transaction (userID, customCategoryID, comment, type, amount, date) VALUES (1, 1, "Sausage Roll", 'out', 10.00, '2023-04-01');
 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', '#371a41');
+
+SELECT * FROM spendinggoals
