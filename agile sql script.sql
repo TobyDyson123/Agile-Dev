@@ -123,7 +123,7 @@ END$$
 
 DELIMITER ;
 
-INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass', 'test@email.com');
+INSERT INTO User(username, password, emailAddress) VALUES ('testname', 'testpass', 'yifomon921@sentrau.com');
 
 INSERT INTO Category (title, colour, icon) VALUES ('Utilities', '#F38F98', 'fas fa-lightbulb');
 INSERT INTO Category (title, colour, icon) VALUES ('Leisure', '#9D8A8B', 'fas fa-smile');

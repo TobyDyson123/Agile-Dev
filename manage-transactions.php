@@ -66,6 +66,54 @@
         } else {
             echo "<p>Error: Category not found.</p>";
         }
+
+        // // After successfully adding a transaction, check if the user has notifications enabled
+        // if ($stmt->execute()) {
+        //     // Now check if the user wants transaction notifications
+        //     $notificationSql = "SELECT isOn FROM TransactionNotes WHERE userID = ?";
+        //     if ($notificationStmt = $conn->prepare($notificationSql)) {
+        //         $notificationStmt->bind_param("i", $userId);
+        //         if ($notificationStmt->execute()) {
+        //             $notificationStmt->bind_result($isOn);
+        //             if ($notificationStmt->fetch() && $isOn) {
+        //                 // User wants notifications, fetch their email address
+        //                 $emailSql = "SELECT emailAddress FROM User WHERE userID = ?";
+        //                 if ($emailStmt = $conn->prepare($emailSql)) {
+        //                     $emailStmt->bind_param("i", $userId);
+        //                     if ($emailStmt->execute()) {
+        //                         $emailStmt->bind_result($emailAddress);
+        //                         if ($emailStmt->fetch()) {
+        //                             // We have the email, now send the notification
+        //                             sendTransactionEmail($emailAddress, $transactionType, $categoryName, $amount, $comment, $date);
+        //                         }
+        //                     }
+        //                     $emailStmt->close();
+        //                 }
+        //             }
+        //         }
+        //         $notificationStmt->close();
+        //     }
+        // }
+
+        // $stmt->close();
+
+        // // Function to send the transaction email
+        // function sendTransactionEmail($to, $transactionType, $categoryName, $amount, $comment, $date) {
+        //     $subject = "New Transaction Added";
+        //     $message = "Hello,\n\nA new $transactionType transaction has been added to your account.\n\n"
+        //             . "Details:\n"
+        //             . "Category: $categoryName\n"
+        //             . "Amount: $amount\n"
+        //             . "Comment: $comment\n"
+        //             . "Date: $date\n\n"
+        //             . "This is an automated notification. Please do not reply.";
+
+        //     $headers = "From: no-reply@yourdomain.com\r\n";
+        //     $headers .= "Reply-To: no-reply@yourdomain.com\r\n";
+        //     $headers .= "X-Mailer: PHP/" . phpversion();
+
+        //     mail($to, $subject, $message, $headers);
+        // }
     }
 
     if (isset($_POST['delete_transactions']) && !empty($_POST['transaction_ids'])) {

@@ -194,6 +194,7 @@
 
             .option-container button {
                 width: fit-content;
+                font-size: 20px;
             }
 
         </style>
@@ -241,7 +242,7 @@
                         </div>
                         <div id="budgetR" class="option-container">
                             <div class="option-title-container">
-                                <h3>Budget Reminders</h3>
+                                <h3>Monthly Budget Reminders</h3>
                                 <div class="tooltip-container">
                                     <i class="fas fa-question"></i>
                                     <div class="tooltip">Get notified when reaching your monthly budget</div>
@@ -256,10 +257,10 @@
                         </div>
                         <div id="remindersR" class="option-container">
                             <div class="option-title-container">
-                                <h3>Spending Reminders</h3>
+                                <h3>Monthly Spending Reminders</h3>
                                 <div class="tooltip-container">
                                     <i class="fas fa-question"></i>
-                                    <div class="tooltip">Get notified when a reminder is due</div>
+                                    <div class="tooltip">Get notified when spending goals are exceeded</div>
                                 </div>
                                 <div class="toggle">
                                     <button type="button" id="spending-off-button" class="spending toggle-button active" data-type="off">Off</button>
