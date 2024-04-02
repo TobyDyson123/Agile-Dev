@@ -1,0 +1,110 @@
+{
+  "id": "59f922b3-dcfd-4763-b4ec-a7ece2224e4a",
+  "version": "2.0",
+  "name": "Agile",
+  "url": "http://localhost/Agile-Dev/index.html",
+  "tests": [{
+    "id": "1267b127-b752-4e42-9769-deafed749d4c",
+    "name": "User can log in",
+    "commands": [{
+      "id": "e19654e7-99a3-40af-88db-61cc1c07466c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eda01fae-29d2-424f-9bd9-e4c8bf806ff4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1342x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "578071c0-a08d-42b7-910c-346d4e54c25c",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ba476973-b843-43f9-8ca9-b21bc982c49b",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "7c6d2050-dc50-4b24-8fe5-fe7564d4d26d",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "efb23796-fd5e-45e2-adab-efbc11f899cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "e66c4869-b077-41e0-afb6-add73e1901c1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b44ede23-cad1-4d4f-b091-ef5d5c0996c6",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "1caacc32-62cd-458e-a76a-bd1c3be5cbf1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["1267b127-b752-4e42-9769-deafed749d4c"]
+  }],
+  "urls": ["http://localhost/Agile-Dev/index.html"],
+  "plugins": []
+}
