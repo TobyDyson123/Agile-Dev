@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if ($mypassword == $row['password']) { 
             // Password is correct, so start a new session
-            $_SESSION['login_user'] = $myusername; // store the username
-            $_SESSION['userID'] = $row['userID']; // store the userID
+            $_SESSION['login_user'] = $myusername; 
+            $_SESSION['userID'] = $row['userID'];
             // Redirect user to transactions.php
             header("location: transactions.php");
             exit;
