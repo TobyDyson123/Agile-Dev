@@ -7,10 +7,10 @@
         exit;
     }
 
-    $dbHost = 'localhost'; // or your database host
-    $dbUsername = 'root'; // or your database username
-    $dbPassword = ''; // or your database password
-    $dbName = 'agile'; // your database name
+    $dbHost = 'localhost'; 
+    $dbUsername = 'root';
+    $dbPassword = ''; 
+    $dbName = 'agile'; 
 
     // Create connection
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
@@ -54,7 +54,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome CDN -->
         <style>
             .user-details, .custom-categories {
-                background-color: #fff; /* or any color you prefer */
+                background-color: #fff;
                 border-radius: 10px;
                 padding: 20px;
             }
@@ -79,17 +79,17 @@
 
             .user-details button {
                 margin-left: auto;
-                background-color: #666; /* Red color for the delete button */
+                background-color: #666; 
                 color: white;
             }
 
             .custom-categories button {
-                background-color: #007BFF; /* Blue color for the add button */
+                background-color: #007BFF; 
                 color: white;
             }
 
             .delete-button {
-                background-color: #FF0000 !important; /* Red color for the delete button */
+                background-color: #FF0000 !important; 
                 color: white;
                 margin-top: 10px;
             }

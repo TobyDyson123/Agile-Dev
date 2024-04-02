@@ -1,10 +1,10 @@
 <?php
-session_start(); // Start the session.
+session_start(); 
 
-$dbHost = 'localhost'; // or your database host
-$dbUsername = 'root'; // or your database username
-$dbPassword = ''; // or your database password
-$dbName = 'agile'; // your database name
+$dbHost = 'localhost'; 
+$dbUsername = 'root'; 
+$dbPassword = ''; 
+$dbName = 'agile'; 
 
 // Create connection
 $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form
     $myusername = mysqli_real_escape_string($conn, $_POST['username']);
-    $mypassword = $_POST['password']; // Password as plain text; in development only.
+    $mypassword = $_POST['password']; 
 
     $sql = "SELECT userID, password FROM User WHERE username = '$myusername'";
     $result = $conn->query($sql);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         // output data of each row
         $row = $result->fetch_assoc();
-        if ($mypassword == $row['password']) { // Directly comparing the plaintext passwords.
+        if ($mypassword == $row['password']) { 
             // Password is correct, so start a new session
             $_SESSION['login_user'] = $myusername; // store the username
             $_SESSION['userID'] = $row['userID']; // store the userID
