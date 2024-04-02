@@ -30,7 +30,7 @@
     $userData = $userResult->fetch_assoc();
 
     // Fetch custom categories
-    $categoriesQuery = "SELECT title, colour FROM CustomCategory WHERE userID = ?";
+    $categoriesQuery = "SELECT title, colour, customCategoryID FROM CustomCategory WHERE userID = ?";
     $stmt = $conn->prepare($categoriesQuery);
     $stmt->bind_param("i", $userID);
     $stmt->execute();
@@ -155,7 +155,7 @@
                 font-size: 20px;
             }
 
-            #delete-category {
+            .delete-category {
                 color: #FF0000 !important;
             }
 
@@ -330,7 +330,7 @@
                                     <?php echo htmlspecialchars($category['title']); ?>
                                     <div class="category-buttons">
                                         <button class="icon-button" id="edit-category"><i class="fas fa-edit"></i></button>
-                                        <button class="icon-button" id="delete-category"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="icon-button delete-category" data-category-id="<?php echo $category['customCategoryID']; ?>"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -340,6 +340,52 @@
             </div>  
         </div>       
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // Function to handle the category deletion
+                function deleteCategory(categoryId, categoryElement) {
+                    // AJAX call to server-side PHP script for deletion
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "delete_custom_category.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                            try {
+                                var response = JSON.parse(this.responseText);
+                                // Rest of the success code...
+                            } catch (e) {
+                                console.error("Parsing error:", e);
+                                console.error(this.responseText);
+                                // Handle parsing error here
+                            }
+
+                            if (response.success) {
+                                // Remove the category element from the UI
+                                categoryElement.remove();
+                                alert(response.message);
+                            } else {
+                                alert(response.message);
+                            }
+                        }
+                    };
+                    xhr.send("categoryId=" + encodeURIComponent(categoryId));
+                }
+
+                // Attach event listeners to all delete buttons
+                console.log(document.querySelectorAll('.delete-category'));
+
+                document.querySelectorAll('.delete-category').forEach(function(button, index) {
+                    console.log('Attaching event listener to delete button', index);
+                    button.addEventListener('click', function() {
+                        var categoryId = this.getAttribute('data-category-id');
+                        var categoryElement = this.closest('.category');
+                        if (confirm('Are you sure you want to delete this category?')) {
+                            deleteCategory(categoryId, categoryElement);
+                        }
+                    });
+                });
+            });
+
             var usernameModal = document.getElementById("usernameModal");
             var passwordModal = document.getElementById("passwordModal");
             var emailModal = document.getElementById("emailModal");
@@ -428,83 +474,83 @@
                 }
             };
 
-            // Handle the form submission for password change
-            document.getElementById('passwordForm').onsubmit = function(e) {
-                e.preventDefault();
-                var newUsername = document.getElementById('newPassword').value;
-                var reNewUsername = document.getElementById('reNewPassword').value;
+            // // Handle the form submission for password change
+            // document.getElementById('passwordForm').onsubmit = function(e) {
+            //     e.preventDefault();
+            //     var newUsername = document.getElementById('newPassword').value;
+            //     var reNewUsername = document.getElementById('reNewPassword').value;
 
-                // Validate the new passwords match and are not empty
-                if(newPassword && newPassword === reNewPassword) {
-                    // Proceed with the AJAX call to update the password
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "update_password.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //     // Validate the new passwords match and are not empty
+            //     if(newPassword && newPassword === reNewPassword) {
+            //         // Proceed with the AJAX call to update the password
+            //         var xhr = new XMLHttpRequest();
+            //         xhr.open("POST", "update_password.php", true);
+            //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                    xhr.onreadystatechange = function() {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            var response = JSON.parse(this.responseText);
+            //         xhr.onreadystatechange = function() {
+            //             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            //                 var response = JSON.parse(this.responseText);
 
-                            if(response.success) {
-                                // Update UI with the new password or close the modal
-                                document.getElementById("passwordModal").style.display = "none";
-                                // Update the password display on the page
-                                var passwordDisplay = document.querySelector('.details-wrapper > p > strong').nextSibling;
-                                if (passwordDisplay.nodeType === Node.TEXT_NODE) {
-                                    passwordDisplay.nodeValue = ` ${newPassword}`;
-                                }
-                            } else {
-                                // Handle failure
-                                alert("Password update failed: " + response.message);
-                            }
-                        }
-                    };
+            //                 if(response.success) {
+            //                     // Update UI with the new password or close the modal
+            //                     document.getElementById("passwordModal").style.display = "none";
+            //                     // Update the password display on the page
+            //                     var passwordDisplay = document.querySelector('.details-wrapper > p > strong').nextSibling;
+            //                     if (passwordDisplay.nodeType === Node.TEXT_NODE) {
+            //                         passwordDisplay.nodeValue = ` ${newPassword}`;
+            //                     }
+            //                 } else {
+            //                     // Handle failure
+            //                     alert("Password update failed: " + response.message);
+            //                 }
+            //             }
+            //         };
 
-                    xhr.send("newPassword=" + encodeURIComponent(newPassword));
-                } else {
-                    // Passwords do not match or are empty, handle the validation error
-                    alert("The passwords do not match or are empty.");
-                }
-            };
+            //         xhr.send("newPassword=" + encodeURIComponent(newPassword));
+            //     } else {
+            //         // Passwords do not match or are empty, handle the validation error
+            //         alert("The passwords do not match or are empty.");
+            //     }
+            // };
 
-            // Handle the form submission for email change
-            document.getElementById('emailForm').onsubmit = function(e) {
-                e.preventDefault();
-                var newEmail = document.getElementById('newEmail').value;
-                var reNewEmail = document.getElementById('reNewEmail').value;
+            // // Handle the form submission for email change
+            // document.getElementById('emailForm').onsubmit = function(e) {
+            //     e.preventDefault();
+            //     var newEmail = document.getElementById('newEmail').value;
+            //     var reNewEmail = document.getElementById('reNewEmail').value;
 
-                // Validate the new emails match and are not empty
-                if(newEmail && newEmail === reNewEmail) {
-                    // Proceed with the AJAX call to update the email
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "update_email.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //     // Validate the new emails match and are not empty
+            //     if(newEmail && newEmail === reNewEmail) {
+            //         // Proceed with the AJAX call to update the email
+            //         var xhr = new XMLHttpRequest();
+            //         xhr.open("POST", "update_email.php", true);
+            //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                    xhr.onreadystatechange = function() {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            var response = JSON.parse(this.responseText);
+            //         xhr.onreadystatechange = function() {
+            //             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            //                 var response = JSON.parse(this.responseText);
 
-                            if(response.success) {
-                                // Update UI with the new email or close the modal
-                                document.getElementById("emailModal").style.display = "none";
-                                // Update the email display on the page
-                                var emailDisplay = document.querySelector('.details-wrapper > p > strong').nextSibling;
-                                if (emailDisplay.nodeType === Node.TEXT_NODE) {
-                                    emailDisplay.nodeValue = ` ${newEmail}`;
-                                }
-                            } else {
-                                // Handle failure
-                                alert("Email update failed: " + response.message);
-                            }
-                        }
-                    };
+            //                 if(response.success) {
+            //                     // Update UI with the new email or close the modal
+            //                     document.getElementById("emailModal").style.display = "none";
+            //                     // Update the email display on the page
+            //                     var emailDisplay = document.querySelector('.details-wrapper > p > strong').nextSibling;
+            //                     if (emailDisplay.nodeType === Node.TEXT_NODE) {
+            //                         emailDisplay.nodeValue = ` ${newEmail}`;
+            //                     }
+            //                 } else {
+            //                     // Handle failure
+            //                     alert("Email update failed: " + response.message);
+            //                 }
+            //             }
+            //         };
 
-                    xhr.send("newEmail=" + encodeURIComponent(newEmail));
-                } else {
-                    // Emails do not match or are empty, handle the validation error
-                    alert("The emails do not match or are empty.");
-                }
-            };
+            //         xhr.send("newEmail=" + encodeURIComponent(newEmail));
+            //     } else {
+            //         // Emails do not match or are empty, handle the validation error
+            //         alert("The emails do not match or are empty.");
+            //     }
+            // };
 
         </script> 
         <script src="script.js"></script>
