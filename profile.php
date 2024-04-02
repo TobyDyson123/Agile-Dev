@@ -205,6 +205,23 @@
                 padding: 15px 40px;
             }
 
+            .modal-content label {
+                margin-bottom: 5px;
+            }
+
+            .modal-content input[type="color"] {
+                padding: 0;
+                width: 40px;
+                height: 40px;
+                display: block;
+                margin-top: 10px;
+            }
+
+            .color-picker-container {
+                display: flex;
+                align-items: center;
+            }
+
             /* The Close Button */
             .close {
                 color: #ff0000;
@@ -217,6 +234,29 @@
                 color: #ff9999;
                 text-decoration: none;
                 cursor: pointer;
+            }
+
+            #customCategoryExample span {
+                margin-right: 10px;
+            }
+
+            #customCategoryExample {
+                display: flex;
+                align-items: center;
+                margin-left: 100px;
+            }
+
+            #customCategoryExample i {
+                font-size: 20px;
+                background-color: aquamarine;
+                padding: 10px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
         </style>
@@ -295,6 +335,44 @@
             </div>
         </div>
 
+        <!-- Add Custom Category Modal -->
+        <div id="addCategoryModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="close-addCategory" class="close">&times;</span>
+                <h2>Add Custom Category</h2>
+                <form id="addCategoryForm">
+                    <label for="newAddCategory">Category Title</label>
+                    <input type="text" id="newAddCategory" name="newAddCategory" required>
+                    
+                    <label for="color">Colour</label>
+                    <div class="color-picker-container">
+                        <input type="color" id="color" name="color" required>
+                        <div id="customCategoryExample">
+                            <span>Preview:</span><i class="fas fa-question" id="exampleIcon"></i>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" type="submit">Create Category</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Custom Category Modal -->
+        <div id="editCategoryModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="close-editCategory" class="close">&times;</span>
+                <h2>Edit Category</h2>
+                <form id="editCategoryForm">
+                    <input type="hidden" id="editCategoryId" name="editCategoryId">
+                    <label for="editCategoryTitle">Category Title</label>
+                    <input type="text" id="editCategoryTitle" name="editCategoryTitle" required>
+                    <button class="btn-primary" type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
         <div class="content">
             <div class="title">
                 <h1>Profile</h1>
@@ -321,7 +399,7 @@
                     <div class="custom-categories">
                         <div class="custom-categories-header">
                             <h2>Custom Categories</h2>
-                            <button>Add New Category</button>
+                            <button id="add-category-btn">Add New Category</button>
                         </div>
                         <div class="categories-list">
                             <?php foreach ($customCategories as $category): ?>
@@ -329,7 +407,7 @@
                                     <span class="category-color" style="background-color: <?php echo htmlspecialchars($category['colour']); ?>"></span>
                                     <?php echo htmlspecialchars($category['title']); ?>
                                     <div class="category-buttons">
-                                        <button class="icon-button" id="edit-category"><i class="fas fa-edit"></i></button>
+                                        <button class="icon-button edit-category"><i class="fas fa-edit"></i></button>
                                         <button class="icon-button delete-category" data-category-id="<?php echo $category['customCategoryID']; ?>"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
@@ -372,10 +450,7 @@
                 }
 
                 // Attach event listeners to all delete buttons
-                console.log(document.querySelectorAll('.delete-category'));
-
                 document.querySelectorAll('.delete-category').forEach(function(button, index) {
-                    console.log('Attaching event listener to delete button', index);
                     button.addEventListener('click', function() {
                         var categoryId = this.getAttribute('data-category-id');
                         var categoryElement = this.closest('.category');
@@ -384,19 +459,47 @@
                         }
                     });
                 });
+
+                // Attach event listeners to all edit buttons
+                document.querySelectorAll('.edit-category').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        var categoryId = this.getAttribute('data-category-id');
+                        var categoryTitle = this.closest('.category').querySelector('span').nextSibling.textContent.trim();
+
+                        // Fill the modal with the current category's details
+                        document.getElementById('editCategoryId').value = categoryId;
+                        document.getElementById('editCategoryTitle').value = categoryTitle;
+
+                        // Show the modal
+                        editCategoryModal.style.display = "flex";
+                    });
+                });
+
+                // Colour picker example update
+                const colorPicker = document.getElementById('color');
+                const exampleIcon = document.getElementById('exampleIcon');
+
+                colorPicker.addEventListener('input', function() {
+                    exampleIcon.style.backgroundColor = colorPicker.value;
+                });
             });
 
             var usernameModal = document.getElementById("usernameModal");
             var passwordModal = document.getElementById("passwordModal");
             var emailModal = document.getElementById("emailModal");
+            var addCategoryModal = document.getElementById("addCategoryModal");
+            var editCategoryModal = document.getElementById("editCategoryModal");
 
             var usernameBtn = document.getElementById("username-edit-btn");
             var passwordBtn = document.getElementById("password-edit-btn");
             var emailBtn = document.getElementById("email-edit-btn");
+            var addCategoryBtn = document.getElementById("add-category-btn");
 
             var closeUsername = document.getElementById("close-username");            
             var closePassword = document.getElementById("close-password");            
-            var closeEmail = document.getElementById("close-email");            
+            var closeEmail = document.getElementById("close-email");
+            var closeAddCategory = document.getElementById("close-addCategory");
+            var closeEditCategory = document.getElementById("close-editCategory");       
 
             // When the user clicks the button, open the modal 
             usernameBtn.onclick = function() {
@@ -411,6 +514,11 @@
                 emailModal.style.display = "flex";
             }
 
+            addCategoryBtn.onclick = function() {
+                addCategoryModal.style.display = "flex";
+            }
+
+
             // When the user clicks on <span> (x), close the modal
             closeUsername.onclick = function() {
                 usernameModal.style.display = "none";
@@ -424,6 +532,14 @@
                 emailModal.style.display = "none";
             }
 
+            closeAddCategory.onclick = function() {
+                addCategoryModal.style.display = "none";
+            }
+
+            closeEditCategory.onclick = function() {
+                editCategoryModal.style.display = "none";
+            }
+
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function(event) {
                 if (event.target == usernameModal) {
@@ -432,6 +548,10 @@
                     passwordModal.style.display = "none";
                 } else if (event.target == emailModal) {
                     emailModal.style.display = "none";
+                } else if (event.target == addCategoryModal) {
+                    addCategoryModal.style.display = "none";
+                } else if (event.target == editCategoryModal) {
+                    editCategoryModal.style.display = "none";
                 }
             }
 
@@ -551,6 +671,71 @@
             //         alert("The emails do not match or are empty.");
             //     }
             // };
+
+            // Handle the form submission for adding a new category
+            document.getElementById('addCategoryForm').onsubmit = function(e) {
+                e.preventDefault();
+                var newCategoryTitle = document.getElementById('newAddCategory').value;
+                var newCategoryColor = document.getElementById('color').value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "add_custom_category.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        var response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            // Append the new category to the categories list in the UI
+                            var categoriesList = document.querySelector('.categories-list');
+                            var newCategoryHTML = `
+                                <div class="category">
+                                    <span class="category-color" style="background-color: ${response.newCategory.colour};"></span>
+                                    ${response.newCategory.title}
+                                    <div class="category-buttons">
+                                        <button class="icon-button" id="edit-category"><i class="fas fa-edit"></i></button>
+                                        <button class="icon-button delete-category" data-category-id="${response.newCategory.customCategoryID}"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                            categoriesList.innerHTML += newCategoryHTML;
+
+                            // Close the modal and reset the form
+                            addCategoryModal.style.display = "none";
+                            document.getElementById('addCategoryForm').reset();
+
+                            alert(response.message);
+                        } else {
+                            alert(response.message);
+                        }
+                    }
+                };
+                xhr.send(`title=${encodeURIComponent(newCategoryTitle)}&colour=${encodeURIComponent(newCategoryColor)}`);
+            };
+
+            // Handle the form submission for editing a category
+            document.getElementById('editCategoryForm').onsubmit = function(e) {
+                e.preventDefault();
+                var categoryId = document.getElementById('editCategoryId').value;
+                var newTitle = document.getElementById('editCategoryTitle').value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "update_custom_category.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        var response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            // Update UI accordingly...
+                            alert(response.message);
+                            // Reload or update the page content to reflect the changes
+                            window.location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }
+                };
+                xhr.send(`categoryId=${encodeURIComponent(categoryId)}&title=${encodeURIComponent(newTitle)}`);
+            };
 
         </script> 
         <script src="script.js"></script>
