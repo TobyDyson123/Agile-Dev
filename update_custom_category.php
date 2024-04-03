@@ -25,9 +25,13 @@ $stmt = $conn->prepare("UPDATE CustomCategory SET title = ? WHERE customCategory
 $stmt->bind_param("sii", $newTitle, $categoryId, $userId);
 
 if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Category updated successfully.']);
+    if ($stmt->affected_rows > 0) {
+        echo json_encode(['success' => true, 'message' => 'Category updated successfully.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'No rows updated.']);
+    }
 } else {
-    echo json_encode(['success' => false, 'message' => 'Error updating category.']);
+    echo json_encode(['success' => false, 'message' => 'Error updating category: ' . $stmt->error]);
 }
 
 $stmt->close();

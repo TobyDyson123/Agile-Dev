@@ -407,7 +407,7 @@
                                     <span class="category-color" style="background-color: <?php echo htmlspecialchars($category['colour']); ?>"></span>
                                     <?php echo htmlspecialchars($category['title']); ?>
                                     <div class="category-buttons">
-                                        <button class="icon-button edit-category"><i class="fas fa-edit"></i></button>
+                                        <button class="icon-button edit-category" data-category-id="<?php echo $category['customCategoryID']; ?>"><i class="fas fa-edit"></i></button>
                                         <button class="icon-button delete-category" data-category-id="<?php echo $category['customCategoryID']; ?>"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
@@ -481,6 +481,31 @@
 
                 colorPicker.addEventListener('input', function() {
                     exampleIcon.style.backgroundColor = colorPicker.value;
+                });
+
+                // Delete account button
+                document.querySelector('.delete-button').addEventListener('click', function() {
+                    var confirmation = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+                    if (confirmation) {
+                        // Proceed with AJAX call to a PHP script for account deletion
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "delete_account.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                                var response = JSON.parse(this.responseText);
+                                if(response.success) {
+                                    // Redirect to index.html
+                                    window.location.href = "index.html";
+                                } else {
+                                    alert("Error deleting account: " + response.message);
+                                }
+                            }
+                        };
+
+                        xhr.send("userID=" + encodeURIComponent(<?php echo json_encode($userID); ?>));
+                    }
                 });
             });
 
@@ -717,6 +742,8 @@
                 e.preventDefault();
                 var categoryId = document.getElementById('editCategoryId').value;
                 var newTitle = document.getElementById('editCategoryTitle').value;
+
+                console.log(categoryId, newTitle);
 
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "update_custom_category.php", true);
