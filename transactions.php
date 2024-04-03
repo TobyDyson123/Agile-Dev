@@ -27,19 +27,7 @@
     $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
 
     // Start building the SQL query
-    $sql = "SELECT 
-                t.*,
-                COALESCE(c.title, cc.title) AS title,
-                COALESCE(c.colour, cc.colour) AS colour,
-                c.icon
-            FROM 
-                Transaction AS t 
-            LEFT JOIN 
-                Category AS c ON t.categoryID = c.categoryID
-            LEFT JOIN 
-                CustomCategory AS cc ON t.customCategoryID = cc.customCategoryID
-            WHERE 
-                t.userID = ?";
+    $sql = "SELECT t.*, COALESCE(c.title, cc.title) AS title, COALESCE(c.colour, cc.colour) AS colour, c.icon FROM Transaction AS t LEFT JOIN Category AS c ON t.categoryID = c.categoryID LEFT JOIN CustomCategory AS cc ON t.customCategoryID = cc.customCategoryID WHERE t.userID = ?";
 
     // Initialize parameters array with the userID
     $params = array($userId);

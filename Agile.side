@@ -96,6 +96,150 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "71cd482c-7e8d-4d37-bcfe-7e22b775a903",
+    "name": "User can filter transactions",
+    "commands": [{
+      "id": "8eeeb4bc-1bda-4886-b13d-7160879ce7d8",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5b36c6f1-fed9-48e5-8a71-8189a2521acb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4b9424d-6746-4743-b5db-e0067eb9da69",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8f122c8-eaa4-456e-8236-09e1807abbb2",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "5240fd1c-e025-4c0a-a441-d67a0394c3ef",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ebc1e189-2f22-4593-b1f2-c63afe8e8712",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "d2f1f95b-ed31-445d-a57e-09c567d899ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d9426d2-048a-4694-8554-a29665251216",
+      "comment": "",
+      "command": "verifyNotText",
+      "target": "css=.transaction-item:nth-child(1) h3",
+      "targets": [
+        ["css=.transaction-item:nth-child(1) h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Shopping')]", "xpath:innerText"]
+      ],
+      "value": "Utilities"
+    }, {
+      "id": "db2386c8-b043-47d7-a533-cd089648b991",
+      "comment": "",
+      "command": "click",
+      "target": "id=filter",
+      "targets": [
+        ["id=filter", "id"],
+        ["css=#filter", "css:finder"],
+        ["xpath=//i[@id='filter']", "xpath:attributes"],
+        ["xpath=//h2/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4bf5d189-5bf4-4ae2-a9e5-df0c42b6560b",
+      "comment": "",
+      "command": "click",
+      "target": "id=category-filter",
+      "targets": [
+        ["id=category-filter", "id"],
+        ["name=category", "name"],
+        ["css=#category-filter", "css:finder"],
+        ["xpath=//select[@id='category-filter']", "xpath:attributes"],
+        ["xpath=//div[@id='filter-overlay']/div/form/div[2]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "35c143f5-e6fa-4ae9-9fee-d871521c12e5",
+      "comment": "",
+      "command": "click",
+      "target": "id=apply-filter",
+      "targets": [
+        ["id=apply-filter", "id"],
+        ["css=#apply-filter", "css:finder"],
+        ["xpath=//button[@id='apply-filter']", "xpath:attributes"],
+        ["xpath=//div[@id='filter-overlay']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Apply Filters')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b3ad9617-7783-4622-8c23-3d7b7fea8993",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.transaction-item:nth-child(1) h3",
+      "targets": [
+        ["css=.transaction-item:nth-child(1) h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Utilities')]", "xpath:innerText"]
+      ],
+      "value": "Utilities"
+    }]
   }],
   "suites": [{
     "id": "1caacc32-62cd-458e-a76a-bd1c3be5cbf1",
