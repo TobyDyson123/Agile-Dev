@@ -223,7 +223,7 @@
         $deleteTable .= '</tr>';
 
         $editTable .= '<tr>';
-        $editTable .= '<td><input type="radio" name="transaction_id" value="' . htmlspecialchars($row['transactionID']) . '"></td>';
+        $editTable .= '<td><button class="icon-button edit-transaction" data-transaction-id="' . $row['transactionID'] . '"><i class="fas fa-edit"></i></button></td>';
         $editTable .= '<td>' . htmlspecialchars($type) . '</td>';
         $editTable .= '<td>' . htmlspecialchars($row['category']) . '</td>';
         $editTable .= '<td>' . htmlspecialchars($row['comment']) . '</td>';
@@ -388,6 +388,11 @@
                 padding: 10px;
             }
 
+            table button {
+                background-color: rgba(0,0,0,0);
+                border: none;
+            }
+
             .btn-danger {
                 padding: 10px 30px;
                 font-size: 16px;
@@ -464,6 +469,70 @@
             .color-picker-container {
                 display: flex;
                 align-items: center;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */ 
+                z-index: 9999; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 0px auto;
+                padding: 50px;
+                border: 1px solid #888;
+                border-radius: 25px;
+                width: 60%; /* Could be more or less, depending on screen size */
+            }
+
+            .modal-content h2 {
+                text-align: center;
+            }
+
+            .modal-content input {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                border: 1px solid #AAAAAA;
+                box-sizing: border-box;
+                margin-top: 0;
+            }
+
+            .modal-content button {
+                font-size: 20px;
+                font-weight: bold;
+                padding: 15px 40px;
+            }
+
+            .modal-content label {
+                margin-bottom: 5px;
+            }
+
+             /* The Close Button */
+             .close {
+                color: #ff0000;
+                float: left;
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            .close:hover, .close:focus {
+                color: #ff9999;
+                text-decoration: none;
+                cursor: pointer;
             }
         </style>
     </head>
@@ -617,6 +686,49 @@
                     </div>
 
                     <!-- Edit Transaction -->
+
+                    <!-- Edit Transaction Modal -->
+                    <div id="editTransactionModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Edit Transaction</h2>
+                            <form id="editTransactionForm">
+                                <input type="hidden" id="editTransactionId" name="transactionId">
+                                
+                                <div class="form-group">
+                                    <label for="editType">Transaction Type</label>
+                                    <select id="editType" name="type">
+                                        <option value="in">In</option>
+                                        <option value="out">Out</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="editCategory">Category</label>
+                                    <select id="editCategory" name="category">
+                                        <?php foreach($categories as $category): ?>
+                                            <option value="<?php echo htmlspecialchars($category['title']); ?>">
+                                                <?php echo htmlspecialchars($category['title']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editAmount">Amount</label>
+                                    <input type="number" id="editAmount" name="amount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editComment">Comment</label>
+                                    <input type="text" id="editComment" name="comment">
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Update Transaction</button>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="manage-option-container" id="editTransactionContainer">
                         <h2>Edit Transaction</h2>
                         <form action="" method="get" class="filter-section">
@@ -664,9 +776,9 @@
                             <button type="submit" class="btn-primary" id="resetFiltersButtonEdit">Reset Filters</button>
                         </form>
                         <h3>Transactions</h3>
-                        <form action="edit-transaction.php" method="post">
+                        <!-- <form action="edit-transaction.php" method="post"> -->
                             <?php echo $editTable; ?>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>  
@@ -788,6 +900,71 @@
 
             colorPicker.addEventListener('input', function() {
                 exampleIcon.style.backgroundColor = colorPicker.value;
+            });
+
+            // Modal functionality
+            document.querySelectorAll('.edit-transaction').forEach(button => {
+                button.addEventListener('click', function() {
+                    const transactionId = this.dataset.transactionId;
+                    // Fetch transaction details using transactionId
+                    fetch(`get_transaction_details.php?transactionId=${transactionId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate form fields with the transaction data
+                        document.getElementById('editTransactionId').value = data.transactionID;
+                        document.getElementById('editType').value = data.type;
+                        document.getElementById('editCategory').value = data.category;
+                        document.getElementById('editAmount').value = data.amount;
+                        document.getElementById('editComment').value = data.comment;
+
+                        // Show the modal
+                        document.getElementById('editTransactionModal').style.display = 'flex';
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+
+            // Close the modal
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('editTransactionModal').style.display = 'none';
+            });
+
+            // Handle form submission
+            document.getElementById('editTransactionForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const transactionId = document.getElementById('editTransactionId').value;
+                const type = document.getElementById('editType').value;
+                const category = document.getElementById('editCategory').value;
+                const amount = document.getElementById('editAmount').value;
+                const comment = document.getElementById('editComment').value;
+
+                // Prepare the form data
+                const formData = new URLSearchParams();
+                formData.append('transactionId', transactionId);
+                formData.append('type', type);
+                formData.append('category', category);
+                formData.append('amount', amount);
+                formData.append('comment', comment);
+
+                // Update transaction details using a POST request
+                fetch('update_transaction.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Close modal and optionally refresh the page or update UI accordingly
+                        document.getElementById('editTransactionModal').style.display = 'none';
+                        location.reload(); // Or update the UI to reflect the changes
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             });
         </script>
         <script src="script.js"></script>

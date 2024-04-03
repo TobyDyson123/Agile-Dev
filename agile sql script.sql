@@ -156,4 +156,4 @@ INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Custom Category', 
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'More Category', '#518511');
 INSERT INTO CustomCategory(userID, title, colour) VALUES (1, 'Another Category', '#818A11');
 
-SELECT * FROM User
+SELECT t.transactionID, COALESCE(c.title, cc.title) AS category, t.amount, t.comment, t.type FROM Transaction AS t LEFT JOIN Category AS c ON t.categoryID = c.categoryID LEFT JOIN CustomCategory AS cc ON t.customCategoryID = cc.customCategoryID WHERE t.userID = 1;
