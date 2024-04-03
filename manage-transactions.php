@@ -501,7 +501,7 @@
                 text-align: center;
             }
 
-            .modal-content input {
+            .modal-content input, .modal-content select {
                 width: 100%;
                 padding: 10px;
                 margin: 10px 0;
@@ -509,6 +509,7 @@
                 border: 1px solid #AAAAAA;
                 box-sizing: border-box;
                 margin-top: 0;
+                font-size: 20px;
             }
 
             .modal-content button {
@@ -870,6 +871,54 @@
                 document.getElementById('resetFiltersButton').addEventListener('click', resetFilters);
 
                 loadFilterStates(); // Load filter states when the page loads
+
+                document.getElementById('filterButton').addEventListener('click', function() {
+                    const transactionType = document.getElementById('transactionType').value;
+                    const category = document.getElementById('category').value;
+                    const month = document.getElementById('month').value;
+
+                    console.log("beans");
+
+                    // Assuming you have a PHP endpoint that returns filtered transactions
+                    // You'll need to adjust this URL to match your actual endpoint
+                    const fetchURL = `fetch_filtered_transactions.php?type=${transactionType}&category=${category}&month=${month}`;
+
+                    fetch(fetchURL)
+                    .then(response => response.json())
+                    .then(transactions => {
+                        const transactionsTable = document.querySelector('#editTransactionContainer table tbody');
+                        transactionsTable.innerHTML = ''; // Clear current transactions
+
+                        // Populate the table with the filtered transactions
+                        transactions.forEach(transaction => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><button class="icon-button edit-transaction" data-transaction-id="${transaction.transactionID}"><i class="fas fa-edit"></i></button></td>
+                                <td>${transaction.type}</td>
+                                <td>${transaction.category}</td>
+                                <td>${transaction.comment}</td>
+                                <td>${transaction.amount}</td>
+                                <td>${transaction.date}</td>
+                            `;
+                            transactionsTable.appendChild(row);
+                        });
+
+                        // Reattach event listeners to edit buttons if necessary
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+
+                // Optional: Add functionality to reset filters to their default state
+                document.getElementById('resetFiltersButtonEdit').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Reset filters here
+                    document.getElementById('transactionType').value = 'all';
+                    document.getElementById('category').value = 'All';
+                    document.getElementById('month').value = 'All';
+
+                    // Optionally, trigger the filter button click event to refresh the transactions list
+                    document.getElementById('filterButton').click();
+                });
             });
 
             // Select all checkboxes

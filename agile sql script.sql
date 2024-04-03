@@ -134,7 +134,15 @@ INSERT INTO Category (title, colour, icon) VALUES ('Debt', '#B354D1', 'fas fa-cr
 INSERT INTO Category (title, colour, icon) VALUES ('Entertainment', '#F0BE68', 'fas fa-film');
 
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 5.00, '2024-01-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 8.00, '2024-01-10');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 3.00, '2024-02-27');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 4.00, '2024-02-13');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 4.00, '2023-11-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 6.00, '2023-11-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 3.00, '2023-10-10');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'in', 2.00, '2023-10-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'out', 5.00, '2023-01-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'in', 7.00, '2023-01-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'in', 5.00, '2024-02-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'in', 5.00, '2024-02-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'out', 5.00, '2024-02-01');
@@ -144,7 +152,10 @@ INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 6, "Comment", 'out', 5.00, '2023-03-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 7, "Comment", 'in', 5.00, '2023-12-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 1, "Comment", 'out', 5.00, '2023-11-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'in', 6.00, '2023-11-02');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'out', 3.00, '2023-11-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'in', 5.00, '2023-10-01');
+INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 2, "Comment", 'out', 2.00, '2023-10-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 3, "Comment", 'out', 5.00, '2023-09-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 4, "Comment", 'in', 5.00, '2023-08-01');
 INSERT INTO Transaction (userID, categoryID, comment, type, amount, date) VALUES (1, 5, "Comment", 'out', 5.00, '2023-07-01');
