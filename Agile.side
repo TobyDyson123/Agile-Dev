@@ -240,6 +240,2638 @@
       ],
       "value": "Utilities"
     }]
+  }, {
+    "id": "deff2e57-b5a0-456b-a483-d1970b01ee81",
+    "name": "User can select range for total expenditure",
+    "commands": [{
+      "id": "47058699-52d3-48eb-9c4a-55476c3308b1",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "84ef2e6a-1b7d-4be0-a120-f00abb470718",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4265d661-e83a-4188-9c06-203d806ece5e",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03964867-276e-48b6-91dc-3d066106ee72",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "2e0d9e76-5906-4f53-9283-c0ee0efeef44",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "08c778ca-1353-4338-855f-fe5f7fd420e5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ebfdbbae-4753-4961-9eeb-b4d6a2d95889",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(3) > span",
+      "targets": [
+        ["css=a:nth-child(3) > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4973b4a7-8f03-4bce-a6f3-7aa4d5d5d649",
+      "comment": "",
+      "command": "click",
+      "target": "id=start-date",
+      "targets": [
+        ["id=start-date", "id"],
+        ["name=start", "name"],
+        ["css=#start-date", "css:finder"],
+        ["xpath=//input[@id='start-date']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "72029a06-6d3a-4db6-a2e1-f733831591b9",
+      "comment": "",
+      "command": "type",
+      "target": "id=start-date",
+      "targets": [
+        ["id=start-date", "id"],
+        ["name=start", "name"],
+        ["css=#start-date", "css:finder"],
+        ["xpath=//input[@id='start-date']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2023-09-01"
+    }, {
+      "id": "56dd7ad6-1e68-4629-a6a2-8e01f0827a72",
+      "comment": "",
+      "command": "click",
+      "target": "id=end-date",
+      "targets": [
+        ["id=end-date", "id"],
+        ["name=end", "name"],
+        ["css=#end-date", "css:finder"],
+        ["xpath=//input[@id='end-date']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e633eea7-3871-4a1a-af8c-1923764efedd",
+      "comment": "",
+      "command": "type",
+      "target": "id=end-date",
+      "targets": [
+        ["id=end-date", "id"],
+        ["name=end", "name"],
+        ["css=#end-date", "css:finder"],
+        ["xpath=//input[@id='end-date']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "2024-01-01"
+    }, {
+      "id": "1e592022-2fec-4d15-9607-7d27a2e1839d",
+      "comment": "",
+      "command": "click",
+      "target": "id=total-expenditure-large",
+      "targets": [
+        ["id=total-expenditure-large", "id"],
+        ["css=#total-expenditure-large", "css:finder"],
+        ["xpath=//div[@id='total-expenditure-large']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "25668b98-fe71-4b2d-aab0-e6ad04301286",
+      "comment": "",
+      "command": "click",
+      "target": "id=filter-btn",
+      "targets": [
+        ["id=filter-btn", "id"],
+        ["css=#filter-btn", "css:finder"],
+        ["xpath=//button[@id='filter-btn']", "xpath:attributes"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "acb19512-7674-4213-ab74-779e3b808847",
+      "comment": "",
+      "command": "click",
+      "target": "id=total-expenditure-large",
+      "targets": [
+        ["id=total-expenditure-large", "id"],
+        ["css=#total-expenditure-large", "css:finder"],
+        ["xpath=//div[@id='total-expenditure-large']", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5d40d84a-331b-46f4-a3ea-d6a1c686c239",
+    "name": "User can change their name",
+    "commands": [{
+      "id": "549f8a49-6d59-47bd-adcc-48a3243cc968",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a33b9baa-d05f-4395-ac26-b308b09d2d9d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "59df2146-0808-42a0-85e4-fc02eb45f1a7",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ecf1f0c0-c42b-469d-9139-54e94b7d6c90",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "0087a205-8f11-4c1f-8fdb-535acb51b04b",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "516e8717-ffc1-4615-810d-ba7997092471",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "00a03f20-35c1-4458-8df8-c0a103d9370e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-content > a:nth-child(1) > span",
+      "targets": [
+        ["css=.sidebar-content > a:nth-child(1) > span", "css:finder"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1d49dc3-c6aa-4c99-9d54-bd63435beda0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.details-wrapper:nth-child(2) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(2) > p", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12485b30-6e7f-4164-a34e-5c1046b8b672",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.details-wrapper:nth-child(2) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(2) > p", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": "Username:\\ntestname"
+    }, {
+      "id": "141806ad-45ff-4a15-9ac1-d77ba69c5c46",
+      "comment": "",
+      "command": "click",
+      "target": "css=#username-edit-btn > .fas",
+      "targets": [
+        ["css=#username-edit-btn > .fas", "css:finder"],
+        ["xpath=//button[@id='username-edit-btn']/i", "xpath:idRelative"],
+        ["xpath=//div/div/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae05a3b8-e12f-41a2-84a0-1d948910d233",
+      "comment": "",
+      "command": "click",
+      "target": "id=newUsername",
+      "targets": [
+        ["id=newUsername", "id"],
+        ["name=newUsername", "name"],
+        ["css=#newUsername", "css:finder"],
+        ["xpath=//input[@id='newUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2be030b-93ec-4a22-b3fb-e5a957c08f1e",
+      "comment": "",
+      "command": "type",
+      "target": "id=newUsername",
+      "targets": [
+        ["id=newUsername", "id"],
+        ["name=newUsername", "name"],
+        ["css=#newUsername", "css:finder"],
+        ["xpath=//input[@id='newUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "afa04dee-8673-477b-b02d-ff0e11263df1",
+      "comment": "",
+      "command": "click",
+      "target": "id=reNewUsername",
+      "targets": [
+        ["id=reNewUsername", "id"],
+        ["name=reNewUsername", "name"],
+        ["css=#reNewUsername", "css:finder"],
+        ["xpath=//input[@id='reNewUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "970b33e7-9e84-4b72-b3dd-1c46b135b576",
+      "comment": "",
+      "command": "type",
+      "target": "id=reNewUsername",
+      "targets": [
+        ["id=reNewUsername", "id"],
+        ["name=reNewUsername", "name"],
+        ["css=#reNewUsername", "css:finder"],
+        ["xpath=//input[@id='reNewUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "794f4363-943f-4d12-bea0-1af92a261d97",
+      "comment": "",
+      "command": "click",
+      "target": "css=#usernameForm > .btn-primary",
+      "targets": [
+        ["css=#usernameForm > .btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit Username')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6eeb3f0b-d053-45f1-847c-07970b2140b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.details-wrapper:nth-child(2) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(2) > p", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a5437b8-ca97-4fce-9738-b68293e1a150",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.details-wrapper:nth-child(2) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(2) > p", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": "Username:\\ntest"
+    }, {
+      "id": "c04d7349-9ad4-4236-8c98-876147b54619",
+      "comment": "",
+      "command": "click",
+      "target": "css=.details-wrapper:nth-child(3)",
+      "targets": [
+        ["css=.details-wrapper:nth-child(3)", "css:finder"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "93b280e6-5d4f-40b5-b197-5952ffe4b879",
+      "comment": "",
+      "command": "click",
+      "target": "css=#username-edit-btn > .fas",
+      "targets": [
+        ["css=#username-edit-btn > .fas", "css:finder"],
+        ["xpath=//button[@id='username-edit-btn']/i", "xpath:idRelative"],
+        ["xpath=//div/div/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "549f8308-72f6-4652-ab9b-b5c78ed8a306",
+      "comment": "",
+      "command": "click",
+      "target": "id=newUsername",
+      "targets": [
+        ["id=newUsername", "id"],
+        ["name=newUsername", "name"],
+        ["css=#newUsername", "css:finder"],
+        ["xpath=//input[@id='newUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7807910-2ab6-4bc6-84f5-20c4f8aab4db",
+      "comment": "",
+      "command": "type",
+      "target": "id=newUsername",
+      "targets": [
+        ["id=newUsername", "id"],
+        ["name=newUsername", "name"],
+        ["css=#newUsername", "css:finder"],
+        ["xpath=//input[@id='newUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "fdf8e2be-3450-42da-a956-99c823f26196",
+      "comment": "",
+      "command": "click",
+      "target": "id=reNewUsername",
+      "targets": [
+        ["id=reNewUsername", "id"],
+        ["name=reNewUsername", "name"],
+        ["css=#reNewUsername", "css:finder"],
+        ["xpath=//input[@id='reNewUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d698fc69-c5ed-4845-a8a4-3d7ca479900d",
+      "comment": "",
+      "command": "type",
+      "target": "id=reNewUsername",
+      "targets": [
+        ["id=reNewUsername", "id"],
+        ["name=reNewUsername", "name"],
+        ["css=#reNewUsername", "css:finder"],
+        ["xpath=//input[@id='reNewUsername']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "b3501e7c-a8c4-4c96-84f0-41a576c26c0f",
+      "comment": "",
+      "command": "click",
+      "target": "css=#usernameForm > .btn-primary",
+      "targets": [
+        ["css=#usernameForm > .btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='usernameForm']/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit Username')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "0735996a-9ada-4d38-9986-f2b49d5f0350",
+    "name": "User can add a transaction",
+    "commands": [{
+      "id": "a8e6503d-ce89-4546-a8d3-c19ec2dedb31",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6a4bf994-fdf6-4972-900b-02a2468376a2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bab17dd2-6db4-467c-9736-5974972c1469",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4357894-b177-42f7-9ee7-3e951a7e557b",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "3723e71b-54f9-4199-9522-605c0e940f26",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "17fbdae5-2df9-4b2a-b93a-6f117ee9f10d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "07f4ae56-a4f7-444d-b76f-c79573a35262",
+      "comment": "",
+      "command": "click",
+      "target": "css=#edit-transaction > span",
+      "targets": [
+        ["css=#edit-transaction > span", "css:finder"],
+        ["xpath=//a[@id='edit-transaction']/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Manage Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c4edd9f-e868-4f23-a0a4-61d7560d4a2b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-plus",
+      "targets": [
+        ["css=.fa-plus", "css:finder"],
+        ["xpath=//div/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6831724-b457-46ab-823d-5c7c82dd32bb",
+      "comment": "",
+      "command": "click",
+      "target": "id=category",
+      "targets": [
+        ["id=category", "id"],
+        ["name=category", "name"],
+        ["css=.form-group > #category", "css:finder"],
+        ["xpath=//select[@id='category']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/div[2]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "638ffd29-c6b7-45d9-93b2-774e5df9473e",
+      "comment": "",
+      "command": "select",
+      "target": "id=category",
+      "targets": [],
+      "value": "label=Utilities"
+    }, {
+      "id": "a5f8d6b2-27ff-44e7-89b4-08a742d5ae3a",
+      "comment": "",
+      "command": "click",
+      "target": "id=amount",
+      "targets": [
+        ["id=amount", "id"],
+        ["name=amount", "name"],
+        ["css=#amount", "css:finder"],
+        ["xpath=//input[@id='amount']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a3f6df3-0220-4cbe-bc02-8581cd9b5970",
+      "comment": "",
+      "command": "type",
+      "target": "id=amount",
+      "targets": [
+        ["id=amount", "id"],
+        ["name=amount", "name"],
+        ["css=#amount", "css:finder"],
+        ["xpath=//input[@id='amount']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "71018dee-503f-44fc-9e32-db868ba1b432",
+      "comment": "",
+      "command": "click",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//input[@id='comment']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7af6bc83-e99e-4e4a-a48c-0ec989b7fd75",
+      "comment": "",
+      "command": "type",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//input[@id='comment']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "3ec42cbf-5114-4e02-82f0-c98035b282ff",
+      "comment": "",
+      "command": "click",
+      "target": "name=addTransaction",
+      "targets": [
+        ["name=addTransaction", "name"],
+        ["css=#addTransactionForm > .btn-primary", "css:finder"],
+        ["xpath=//button[@name='addTransaction']", "xpath:attributes"],
+        ["xpath=//form[@id='addTransactionForm']/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Add Transaction')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf2121af-1414-49e4-b355-dfed91b6e157",
+      "comment": "",
+      "command": "click",
+      "target": "id=backToTransactions",
+      "targets": [
+        ["id=backToTransactions", "id"],
+        ["linkText=< Back to Transaction History", "linkText"],
+        ["css=#backToTransactions", "css:finder"],
+        ["xpath=//a[contains(text(),'< Back to Transaction History')]", "xpath:link"],
+        ["xpath=//a[@id='backToTransactions']", "xpath:attributes"],
+        ["xpath=(//a[contains(@href, 'transactions.php')])[2]", "xpath:href"],
+        ["xpath=//div[2]/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'< Back to Transaction History')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "86ddc88a-0514-403f-bd7b-f9525a7ea554",
+      "comment": "",
+      "command": "click",
+      "target": "css=.transaction-item:nth-child(1) p",
+      "targets": [
+        ["css=.transaction-item:nth-child(1) p", "css:finder"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'test')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "18845ba8-4113-419e-b25d-eb8067b400c1",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.transaction-item:nth-child(1) p",
+      "targets": [
+        ["css=.transaction-item:nth-child(1) p", "css:finder"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'test')]", "xpath:innerText"]
+      ],
+      "value": "test"
+    }]
+  }, {
+    "id": "d5aee362-9ea2-4060-874d-641354d3e79b",
+    "name": "User can delete a transaction",
+    "commands": [{
+      "id": "2f9d4b81-71b4-4ecf-b9c8-227145644e05",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "554f0b18-0a59-4c3d-92e3-5534a7d5ef57",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "56e0b6bd-4848-468b-affe-69317cad6f7d",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53933538-42b7-42c0-9d76-107a3cf2b33d",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "0f3dba13-e3d2-47f5-9423-16d50610109b",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "85803658-113d-4065-8fcf-f92c7322c4ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "adaa8972-cb17-4eb7-b722-e5ba1b7aac2a",
+      "comment": "",
+      "command": "click",
+      "target": "id=edit-transaction",
+      "targets": [
+        ["id=edit-transaction", "id"],
+        ["linkText=Manage Transactions", "linkText"],
+        ["css=#edit-transaction", "css:finder"],
+        ["xpath=//a[@id='edit-transaction']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, 'manage-transactions.php')]", "xpath:href"],
+        ["xpath=//div[2]/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Manage Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "32a1617e-2776-4678-a0f0-4e46c247e679",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-minus",
+      "targets": [
+        ["css=.fa-minus", "css:finder"],
+        ["xpath=//div[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e34aafb-41a6-407c-af03-9b466d85d453",
+      "comment": "",
+      "command": "click",
+      "target": "name=transaction_ids[]",
+      "targets": [
+        ["name=transaction_ids[]", "name"],
+        ["css=tr:nth-child(2) input", "css:finder"],
+        ["xpath=//input[@name='transaction_ids[]']", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form[2]/table/tbody/tr[2]/td/input", "xpath:idRelative"],
+        ["xpath=//td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb97f2dd-e18c-4869-b2de-3c9df3fc1ef6",
+      "comment": "",
+      "command": "click",
+      "target": "name=delete_transactions",
+      "targets": [
+        ["name=delete_transactions", "name"],
+        ["css=.btn-danger", "css:finder"],
+        ["xpath=//button[@name='delete_transactions']", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form[2]/div/button", "xpath:idRelative"],
+        ["xpath=//form[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Delete Selected')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3606c1bb-e3b6-4efb-a6e5-0b36104f8c4c",
+    "name": "User can filter transactions to delete",
+    "commands": [{
+      "id": "dfff606d-431e-4d92-9986-8679f045200e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b15d5580-be77-41d7-956c-9f0130b146c3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1378x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7492687-549f-415d-b318-0dee2f5d54c6",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a29808b-e060-410b-b09f-a2a72e20f905",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "8f79f0e2-246d-4d9c-a0cd-1e0756f627b0",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "fdb29682-b7fa-48f6-9d60-0ca4f8488845",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "16362970-5cb2-485e-806b-b0f2165e8bac",
+      "comment": "",
+      "command": "click",
+      "target": "css=#edit-transaction > span",
+      "targets": [
+        ["css=#edit-transaction > span", "css:finder"],
+        ["xpath=//a[@id='edit-transaction']/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Manage Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc33106e-d1fd-4853-b789-015732b807ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.transaction-option:nth-child(2)",
+      "targets": [
+        ["css=.transaction-option:nth-child(2)", "css:finder"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7cfe80c-d3d2-444b-836f-a0008f5f21ec",
+      "comment": "",
+      "command": "click",
+      "target": "css=#deleteTransactionContainer #category",
+      "targets": [
+        ["css=#deleteTransactionContainer #category", "css:finder"],
+        ["xpath=(//select[@id='category'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[3]/form/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92a2de80-636e-4d71-b79d-071cdc31e849",
+      "comment": "",
+      "command": "select",
+      "target": "css=#deleteTransactionContainer #category",
+      "targets": [],
+      "value": "label=Utilities"
+    }, {
+      "id": "b29b9681-3ea2-4709-b685-326d61b01082",
+      "comment": "",
+      "command": "click",
+      "target": "id=filterButton",
+      "targets": [
+        ["id=filterButton", "id"],
+        ["css=#deleteTransactionContainer #filterButton", "css:finder"],
+        ["xpath=//button[@id='filterButton']", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form/button", "xpath:idRelative"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0807cbe7-6d1a-4cd6-b313-c3f126255510",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)",
+      "targets": [
+        ["css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form[2]/table/tbody/tr[2]/td[3]", "xpath:idRelative"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'Utilities')]", "xpath:innerText"]
+      ],
+      "value": "Utilities"
+    }]
+  }, {
+    "id": "a216e83d-1904-412c-bf21-54aa83fcddce",
+    "name": "User can filter transactions to delete and reset it",
+    "commands": [{
+      "id": "34bf02d0-0a4b-45c6-9143-becda238cfcc",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b8778898-40a3-418e-a064-60b10a089e78",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0fb2cf70-8a53-4387-a5e3-a86a2f8bc761",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "69daaa9a-c042-4f7f-80a5-36a716c7cc42",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "ceb899a7-068e-4484-b724-c8f223a19e3a",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "4e9cb37a-7d6e-426e-8664-895840b5e709",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "21ae0f15-3efb-4e0d-b6d0-3d1ddcbe3fda",
+      "comment": "",
+      "command": "click",
+      "target": "css=#edit-transaction > span",
+      "targets": [
+        ["css=#edit-transaction > span", "css:finder"],
+        ["xpath=//a[@id='edit-transaction']/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Manage Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af2bd0f8-0499-49c8-8cf7-bbae4ba021d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-minus",
+      "targets": [
+        ["css=.fa-minus", "css:finder"],
+        ["xpath=//div[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b83d5d9-18f3-4c88-8d9c-f2f2a6b47c19",
+      "comment": "",
+      "command": "click",
+      "target": "css=#deleteTransactionContainer #category",
+      "targets": [
+        ["css=#deleteTransactionContainer #category", "css:finder"],
+        ["xpath=(//select[@id='category'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[3]/form/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8427f431-d961-4e01-86f7-e814f2478f22",
+      "comment": "",
+      "command": "select",
+      "target": "css=#deleteTransactionContainer #category",
+      "targets": [],
+      "value": "label=Shopping"
+    }, {
+      "id": "5988bd4d-4c68-46ca-a865-bd9e7c35eed3",
+      "comment": "",
+      "command": "click",
+      "target": "id=filterButton",
+      "targets": [
+        ["id=filterButton", "id"],
+        ["css=#deleteTransactionContainer #filterButton", "css:finder"],
+        ["xpath=//button[@id='filterButton']", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form/button", "xpath:idRelative"],
+        ["xpath=//div[3]/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Filter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a66c2011-0c77-4a6e-afa0-f3e64c4836e1",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)",
+      "targets": [
+        ["css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form[2]/table/tbody/tr[2]/td[3]", "xpath:idRelative"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'Shopping')]", "xpath:innerText"]
+      ],
+      "value": "Shopping"
+    }, {
+      "id": "5a0282eb-ae3d-4ae2-a5f4-8453912db01b",
+      "comment": "",
+      "command": "click",
+      "target": "id=resetFiltersButton",
+      "targets": [
+        ["id=resetFiltersButton", "id"],
+        ["css=#resetFiltersButton", "css:finder"],
+        ["xpath=//button[@id='resetFiltersButton']", "xpath:attributes"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//form/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Reset Filters')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e0fa2fa0-d7e4-4201-95d8-9e4a8f5b971f",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)",
+      "targets": [
+        ["css=table:nth-child(2) tr:nth-child(2) > td:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='deleteTransactionContainer']/form[2]/table/tbody/tr[2]/td[3]", "xpath:idRelative"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'Shopping')]", "xpath:innerText"]
+      ],
+      "value": "Shopping"
+    }]
+  }, {
+    "id": "30f2fee7-d616-4b9c-a682-8691a605364a",
+    "name": "Check if the icons load for transactions",
+    "commands": [{
+      "id": "2b2f67f9-51cd-4a52-a030-90d45963b7ba",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "318c96c8-dd7e-4614-b982-403aa6a2dfac",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "44c0861e-9d7f-4fc4-9926-d3bf6c3076b7",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d0e07b8-0bfa-4624-8cb3-603b99947d4d",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "365bdfbb-1839-479d-8d68-52fb3fdcd782",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "15bab2ef-dd3b-4bea-9f63-678f14889811",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5567c17-e121-4403-823b-5f724d0d4290",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.transaction-item:nth-child(1) .fas",
+      "targets": [
+        ["css=.transaction-item:nth-child(1) .fas", "css:finder"],
+        ["xpath=//div/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a53a6a7c-f65c-4075-beaa-ebd8fd78e696",
+    "name": "Check that the pie chart has loaded",
+    "commands": [{
+      "id": "f9540f88-33a0-47f3-a905-6f556369b27b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c776d104-861f-487c-b49e-51e43eb882de",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e477df33-6ca1-4d17-9f17-1c0a68462f13",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c86f0aec-45c6-46fb-ad90-a9c85fe7f83c",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "20c0ed48-e1d6-4402-9c47-d0707411a733",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "9eeea858-7cbc-4241-8652-39141853f04a",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "e62b19a2-ef8d-4818-9f1a-d6a05ae56251",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(3) > span",
+      "targets": [
+        ["css=a:nth-child(3) > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4b26b729-59a4-425b-902a-7a78e730040f",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.active > span",
+      "targets": [
+        ["css=.active > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e9dc2e2e-76d8-4c4e-ae38-c49faeb3b5d8",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.active > span",
+      "targets": [
+        ["css=.active > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "72cdc31c-13d3-439f-ba30-7338e4ab13f4",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=path:nth-child(8)",
+      "targets": [
+        ["css=path:nth-child(8)", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "0168fe3d-2286-42bb-875b-3baea8497fbb",
+    "name": "Check that the line graph has loaded",
+    "commands": [{
+      "id": "f296627d-b825-4618-9dd2-0491bbe71397",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dd24060c-b97c-4136-a499-f6d7ca2a4a1a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1378x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "aac224fd-cef7-4354-84c4-c7b849372fe0",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3efd766d-07cc-45e7-9e15-cd31e820699e",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "49bb60f2-3f83-4e4a-8cfb-b1a87406a0de",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "cf888cad-48f8-490f-ac65-e18859609ef0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6439549-2714-4895-9e45-42d965fb1f65",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(3) > span",
+      "targets": [
+        ["css=a:nth-child(3) > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "25b6d0c4-26ea-4b91-a55e-b31af5d6dbc8",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=lineGraph",
+      "targets": [
+        ["id=lineGraph", "id"],
+        ["css=#lineGraph", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fe0958c0-2d4a-4d03-bc47-021f75f07b3e",
+    "name": "Check that the bar chart has loaded",
+    "commands": [{
+      "id": "baa1a3d4-6a3d-43c8-aed0-23a60454a607",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8673cc1a-df50-4f24-84d8-7e174dec11dd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "71defa9d-cdbc-4542-8900-587dbddcf30c",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7d27dd1-24b5-4fa3-ab53-08da8311c520",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "ccea2b26-2d93-4ca4-9c1d-d54a5a208f7b",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "22ee4246-ba8e-48de-8bb3-2ffb149a88fe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "06839850-8925-4cf4-954b-21b81dbbc12b",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(3) > span",
+      "targets": [
+        ["css=a:nth-child(3) > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7c2874db-6d4c-49ad-a562-5bcc9db4f331",
+      "comment": "",
+      "command": "click",
+      "target": "id=category-btn",
+      "targets": [
+        ["id=category-btn", "id"],
+        ["css=#category-btn", "css:finder"],
+        ["xpath=//button[@id='category-btn']", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Show Statistics')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1e5acbf-3e0b-4fe4-a5c6-174a2f439f3b",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.bar:nth-child(8)",
+      "targets": [
+        ["css=.bar:nth-child(8)", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "348d1d76-40e9-49bc-bee5-3715d8fc2974",
+    "name": "Check that the navbar takes you to the profile page",
+    "commands": [{
+      "id": "094cdbe0-bae9-47c4-bf1a-0970031c59de",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "159f0e2e-de46-418d-8e0f-0f4ce09a06d8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cd4885c6-9be3-4d54-b0ff-a9af9c8add80",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d6dd9a8e-e8e6-43e2-859e-cb49f75ed40d",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "0a38dc6b-1e75-4b0e-8ec7-19869528513f",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "8921e7db-9b11-4041-b679-8a5a62718083",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ebbd2bb4-81dc-405a-b668-38ba3b370cc2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-content > a:nth-child(1) > span",
+      "targets": [
+        ["css=.sidebar-content > a:nth-child(1) > span", "css:finder"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "067780be-e030-4bf6-8e2b-404d5b970215",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": "Profile"
+    }]
+  }, {
+    "id": "a3ff7230-4539-4901-ba33-2b6ffcc8df23",
+    "name": "Check that the navbar takes you to the transactions page",
+    "commands": [{
+      "id": "3fcee201-f0df-4658-8eec-67dcc247ef63",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1f6eb7bb-3a6d-417c-bed5-e0ac2025acb5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1378x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "978fe28d-47d7-4c97-aa0d-f0ab3a21166d",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5bc60f30-4654-481c-8d5f-eff670586038",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "81c67c3f-09f9-41ef-a5dc-b57fa08d1aae",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "688cf388-33d4-463e-9731-f0ebc9a4dd9b",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "2614321e-e07b-471f-aa8a-ef00c7f50975",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "75a808e3-6ad4-4a9f-8072-a81405082986",
+      "comment": "",
+      "command": "click",
+      "target": "css=.active > span",
+      "targets": [
+        ["css=.active > span", "css:finder"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Transactions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "88d0d37a-6ba2-4936-a4eb-94d8e9532237",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Transactions')]", "xpath:innerText"]
+      ],
+      "value": "Transactions"
+    }]
+  }, {
+    "id": "1e71f2c9-d6d8-49cc-8426-b0a198c783de",
+    "name": "Check that the navbar takes you to the insights page",
+    "commands": [{
+      "id": "078775ba-c6bf-44ee-8b75-f9b80cf4465b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b97251b3-b664-4746-8346-6457e7d5ca4c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9d9c45a2-a306-4c67-997f-f2d5051a0eff",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c060f2b-195f-4eb8-9c9a-78cf6be2c5c4",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "25c5ffaa-5445-40b3-9c75-af8472c11194",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1fc0f70d-7f0d-4737-97e5-ba54899f710a",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "b3cd70cb-45e4-4b19-b213-f973aac5b4e4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "edad03e0-7f93-48da-b173-bafccc03c421",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(3) > span",
+      "targets": [
+        ["css=a:nth-child(3) > span", "css:finder"],
+        ["xpath=//a[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "90fc2fb7-16fc-4a8d-af3b-72cf5da9a90b",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Insights')]", "xpath:innerText"]
+      ],
+      "value": "Insights"
+    }]
+  }, {
+    "id": "f1dcf2ae-bf3b-4226-91f3-44cfc03a04c8",
+    "name": "Check that the navbar takes you to the reminders page",
+    "commands": [{
+      "id": "c5117445-0ca5-495f-9271-e2d9b69506ec",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cb8f3e17-433a-4faa-ab46-009af31b61f0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1384x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2b08529-58eb-4e99-b0a3-71e0e12c4644",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "947f75e9-0d3c-460d-b9d4-5991a92fc0e7",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "9883264f-0e90-4254-a79d-042eec4c68ce",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4a98db9-aa3f-48ce-ac51-674dc4c06237",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "e65f5ec7-0eb8-4228-8cf0-c650550dbf77",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8ed47de-2ab0-4a3b-b4a8-a01cbb0abb47",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a01b3522-69f1-4be6-9717-124aea6264b6",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": "Reminders"
+    }]
+  }, {
+    "id": "36249809-7652-4db9-b788-2146e0d3f7e9",
+    "name": "User can log out",
+    "commands": [{
+      "id": "286269e3-02e8-4db7-aa08-345da8791a46",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "19d214ff-edaa-4ca3-b588-e7ba1e3f0337",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1880a655-51a2-47d8-b095-4fdd8948bab6",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bd752d7-be18-4d29-9532-40b6717879d7",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "6b9f98b0-2f35-49a8-bd84-9bae8ee745da",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "1c0b7320-8745-4e84-aaa1-d9f10c56a46b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "40b8b2fc-72e4-4f55-8459-5fd935817ca0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.logout-section span",
+      "targets": [
+        ["css=.logout-section span", "css:finder"],
+        ["xpath=//div[2]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "acf0c26d-822f-4190-b210-93abbd97522b",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=b",
+      "targets": [
+        ["css=b", "css:finder"],
+        ["xpath=//b", "xpath:position"],
+        ["xpath=//b[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": "Login"
+    }]
+  }, {
+    "id": "b72daa60-9d54-494e-9d79-48a0fd1fd6cd",
+    "name": "Check if the user can toggle transaction notifications",
+    "commands": [{
+      "id": "6b2c30b1-212f-4e74-978d-e56f8e628f72",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "baa2ff83-2a7a-4637-a3e0-0cac5aaa06e3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b8c92564-e545-412e-8b32-0ead80910137",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d184a7bc-651b-4a66-be64-37e1f862a736",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "02fbf072-49c5-42a4-94c2-af3282f75f5b",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79c05438-c6d1-4b13-94b8-08df0a84a205",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "25f2c24e-d259-4972-925f-abf9aa18e3c3",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "9ad8d0ad-80e3-4a5f-9a36-414a8909f503",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c4d8d0a-6324-4543-990d-65968fabd78e",
+      "comment": "",
+      "command": "click",
+      "target": "id=transaction-on-button",
+      "targets": [
+        ["id=transaction-on-button", "id"],
+        ["css=#transaction-on-button", "css:finder"],
+        ["xpath=//button[@id='transaction-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='transactionN']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'On')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5752891-35b1-424a-a219-ac76a200eece",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=transaction-on-button",
+      "targets": [
+        ["id=transaction-on-button", "id"],
+        ["css=#transaction-on-button", "css:finder"],
+        ["xpath=//button[@id='transaction-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='transactionN']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'On')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c20a81d0-2ba4-4528-9c30-5f032c041f8c",
+    "name": "Check if the user can toggle monthly budget reminders",
+    "commands": [{
+      "id": "312f4eba-cb42-4230-8105-fc32a5e593bb",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c648555c-6e1e-4a7d-8788-e1aebc93d508",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e947e536-07c4-4211-9ffc-365b1a8b7f15",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be715a6a-0178-44cd-a57e-80b54e4b07ae",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "93a60cf4-fc89-48f7-b5ee-e744e07c260e",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f94576a7-5abb-46bc-b003-b589d20e6c40",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "a84f0159-15a6-44b0-9e92-64d628f73f07",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "faabe409-0b20-402b-bf7f-b874d2a5f078",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c8dbf5d-0f75-4e5f-8dd5-41febb3432a0",
+      "comment": "",
+      "command": "click",
+      "target": "id=budget-on-button",
+      "targets": [
+        ["id=budget-on-button", "id"],
+        ["css=#budget-on-button", "css:finder"],
+        ["xpath=//button[@id='budget-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='budgetR']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0b812b30-6dc8-42e3-9e1b-2b3c0cf22e0f",
+      "comment": "",
+      "command": "click",
+      "target": "id=budget-off-button",
+      "targets": [
+        ["id=budget-off-button", "id"],
+        ["css=#budget-off-button", "css:finder"],
+        ["xpath=//button[@id='budget-off-button']", "xpath:attributes"],
+        ["xpath=//div[@id='budgetR']/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2e55213-6151-459a-a57b-be956442ee5c",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=budget-on-button",
+      "targets": [
+        ["id=budget-on-button", "id"],
+        ["css=#budget-on-button", "css:finder"],
+        ["xpath=//button[@id='budget-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='budgetR']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bcad079d-42cd-4836-bf38-7e26562173ae",
+    "name": "Check if the user can toggle monthly spending goals",
+    "commands": [{
+      "id": "c68fdfd0-da2f-4a91-b28c-e65483a8e872",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b17a38af-3215-4728-a44b-9bb770f55c7e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1378x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "59ac671e-e274-45f9-b295-190bd9f0ba61",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f33c83e-68c8-4ef3-9ff8-4744fa939584",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "488b4db7-6a8c-4f5a-b506-00a1e23c1f0a",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2fc27001-be51-42f6-83a7-e5e520512fd8",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "70ce1d2e-b715-425c-8181-bc47b5fd9fdf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d39e4874-e89b-46e4-a77e-dbc1c5e30b8f",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8120e6e-5913-4114-9591-57521c71f82e",
+      "comment": "",
+      "command": "click",
+      "target": "id=spending-on-button",
+      "targets": [
+        ["id=spending-on-button", "id"],
+        ["css=#spending-on-button", "css:finder"],
+        ["xpath=//button[@id='spending-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='remindersR']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "02d3d9f9-b806-42cd-9441-b36e29002a0d",
+      "comment": "",
+      "command": "click",
+      "target": "id=spending-off-button",
+      "targets": [
+        ["id=spending-off-button", "id"],
+        ["css=#spending-off-button", "css:finder"],
+        ["xpath=//button[@id='spending-off-button']", "xpath:attributes"],
+        ["xpath=//div[@id='remindersR']/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3233de40-f967-4de6-aac9-67e2532e9bf5",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=spending-on-button",
+      "targets": [
+        ["id=spending-on-button", "id"],
+        ["css=#spending-on-button", "css:finder"],
+        ["xpath=//button[@id='spending-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='remindersR']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fac6b041-d931-4a38-ab00-52db4550928a",
+    "name": "Check if toggles save state across pages",
+    "commands": [{
+      "id": "fdbeda61-6e58-4e5e-9d82-b8ecbed15dd6",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "26877055-4458-4d78-b3e2-148db92ae5cc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e4d1987f-6f38-412d-93ed-75d11531dfdf",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "78b13080-da01-49dd-a476-dc58c98ec274",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "e8aec850-31aa-4ff9-b9f5-7484c0b647b6",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8eca63f8-9277-485f-8bc8-8eb939e71431",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "2428166c-1d3f-420c-b4dc-7009507a9f3e",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "2644b788-4732-45be-8c9c-5a6218aa1a5b",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0333d94-0dd9-447a-a428-f3b9424c7b29",
+      "comment": "",
+      "command": "click",
+      "target": "id=transaction-on-button",
+      "targets": [
+        ["id=transaction-on-button", "id"],
+        ["css=#transaction-on-button", "css:finder"],
+        ["xpath=//button[@id='transaction-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='transactionN']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'On')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "72e1d03b-dce4-4782-bb74-05fd04b8e504",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Insights",
+      "targets": [
+        ["linkText=Insights", "linkText"],
+        ["css=a:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(@href, 'insights.php')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,' Insights')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c79a5be1-d392-44a3-be30-5fc4d6b1e523",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(4) > span",
+      "targets": [
+        ["css=a:nth-child(4) > span", "css:finder"],
+        ["xpath=//a[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Reminders')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b6f8976-1467-485e-821b-0806981064c6",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=transaction-on-button",
+      "targets": [
+        ["id=transaction-on-button", "id"],
+        ["css=#transaction-on-button", "css:finder"],
+        ["xpath=//button[@id='transaction-on-button']", "xpath:attributes"],
+        ["xpath=//div[@id='transactionN']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'On')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "33849c16-0a4e-43b9-a305-be172f0f71ab",
+      "comment": "",
+      "command": "click",
+      "target": "id=transaction-off-button",
+      "targets": [
+        ["id=transaction-off-button", "id"],
+        ["css=#transaction-off-button", "css:finder"],
+        ["xpath=//button[@id='transaction-off-button']", "xpath:attributes"],
+        ["xpath=//div[@id='transactionN']/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Off')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "111ec9a4-e0a4-4d22-96ad-2d667b4be744",
+    "name": "Check if user details are displayed on profile page",
+    "commands": [{
+      "id": "4fb4df02-e91b-486d-be31-9d3e9a538f52",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/Agile-Dev/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "238d435b-76ee-4595-a8d0-f01df184b3ca",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1374x792",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "16d50dc5-7de0-4cbc-ac97-4f9cb88bbcb7",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83043cab-5ae1-42d1-bfa1-54c0da11e0c5",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testname"
+    }, {
+      "id": "ef30140d-684a-4e11-aeeb-879598b4aa72",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "testpass"
+    }, {
+      "id": "90be58dc-f96e-4454-a6f9-515a44b646bd",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "192abe80-57a9-49a9-a191-d85b5986ade2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-content > a:nth-child(1) > span",
+      "targets": [
+        ["css=.sidebar-content > a:nth-child(1) > span", "css:finder"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Profile')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a1671f5-8d61-49f0-b036-6b32abaaf68a",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.details-wrapper:nth-child(2) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(2) > p", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": "Username:\\ntestname"
+    }, {
+      "id": "a8646fe3-c7ff-4979-b35f-d5f9be094cf3",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.details-wrapper:nth-child(3) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[2]/p", "xpath:position"]
+      ],
+      "value": "Password:\\ntestpass"
+    }, {
+      "id": "01f47246-a9f1-4a23-b3fd-e995f1b23aca",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.details-wrapper:nth-child(4) > p",
+      "targets": [
+        ["css=.details-wrapper:nth-child(4) > p", "css:finder"],
+        ["xpath=//div[3]/p", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "1caacc32-62cd-458e-a76a-bd1c3be5cbf1",
