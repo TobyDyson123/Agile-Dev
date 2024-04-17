@@ -1,1 +1,2 @@
-This is the readme file
+Agile.side for selenium tesing
+agile sql script.sql for database script
