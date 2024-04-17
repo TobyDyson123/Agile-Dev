@@ -7,10 +7,10 @@
         exit;
     }
 
-    $dbHost = 'localhost'; // or your database host
-    $dbUsername = 'root'; // or your database username
-    $dbPassword = ''; // or your database password
-    $dbName = 'agile'; // your database name
+    $dbHost = 'localhost';
+    $dbUsername = 'root'; 
+    $dbPassword = ''; 
+    $dbName = 'agile'; 
     $userId = $_SESSION["userID"];
 
     // Create connection
@@ -432,7 +432,6 @@
                     xhr.open('POST', 'update_transaction_reminder.php', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     xhr.onload = function() {
-                        // Handle the response here
                         console.log(this.responseText);
                     };
                     xhr.send('transactionIsOn=' + isOnValue);
@@ -451,7 +450,6 @@
                     xhr.open('POST', 'update_budget_reminder.php', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     xhr.onload = function() {
-                        // Handle the response here
                         console.log(this.responseText);
                     };
                     xhr.send('budgetIsOn=' + isOnValue);
@@ -471,7 +469,6 @@
                     xhr.open('POST', 'update_spending_goal.php', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     xhr.onload = function() {
-                        // Handle the response here
                         console.log(this.responseText);
                         // Update the option data attribute
                         var option = document.querySelector('#category-selector option[value="' + categoryTitle + '"]');

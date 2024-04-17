@@ -1007,9 +1007,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Close modal and optionally refresh the page or update UI accordingly
                         document.getElementById('editTransactionModal').style.display = 'none';
-                        location.reload(); // Or update the UI to reflect the changes
+                        location.reload();
                     } else {
                         alert(data.message);
                     }

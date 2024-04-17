@@ -183,7 +183,7 @@
                 padding: 50px;
                 border: 1px solid #888;
                 border-radius: 25px;
-                width: 60%; /* Could be more or less, depending on screen size */
+                width: 60%; 
             }
 
             .modal-content h2 {
@@ -431,11 +431,9 @@
                         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                             try {
                                 var response = JSON.parse(this.responseText);
-                                // Rest of the success code...
                             } catch (e) {
                                 console.error("Parsing error:", e);
                                 console.error(this.responseText);
-                                // Handle parsing error here
                             }
 
                             if (response.success) {
@@ -753,9 +751,7 @@
                     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                         var response = JSON.parse(this.responseText);
                         if (response.success) {
-                            // Update UI accordingly...
                             alert(response.message);
-                            // Reload or update the page content to reflect the changes
                             window.location.reload();
                         } else {
                             alert(response.message);

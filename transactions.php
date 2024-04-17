@@ -7,10 +7,10 @@
         exit;
     }
 
-    $dbHost = 'localhost'; // or your database host
-    $dbUsername = 'root'; // or your database username
-    $dbPassword = ''; // or your database password
-    $dbName = 'agile'; // your database name
+    $dbHost = 'localhost';
+    $dbUsername = 'root';
+    $dbPassword = ''; 
+    $dbName = 'agile'; 
 
     // Create connection
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
